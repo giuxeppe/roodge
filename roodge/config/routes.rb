@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'home/index'
   #GET /about
   get "about-us", to: "about#index", as: :about
+  get "home/home_logged", to: "home#home_logged"
 
   root "home#index"
 
