@@ -14,6 +14,88 @@
  *= require_self
  */
 
- h1 {
-    font-size: 30px;
- }
+body {
+    background-color: #000000; /* Sfondo nero */
+    color: #00FFFF; /* Scritte in celeste */
+}
+
+navbar navbar-expand-lg bg-body-tertiary
+
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link {
+    color: #FFFFFF; /* Colore celeste per navbar */
+}
+
+.navbar-dark .nav-link:hover {
+    color: #FFFFFF; /* Colore grigio scuro per hover */
+}
+
+.card {
+    background-color: #4a4a4a; /* Sfondo grigio scuro per i div */
+    color: #03eeff; /* Scritte in celeste */
+}
+
+.form-control {
+    background-color: #333; /* Sfondo scuro per i campi di input */
+    color: #03eeff; /* Testo celeste nei campi di input */
+    border: 1px solid #03eeff; /* Bordo celeste */
+}
+
+.form-control::placeholder {
+    color: #a1a1a1; /* Placeholder in grigio chiaro */
+}
+
+.form-control:focus {
+    border-color: #00FFFF; /* Bordo celeste quando in focus */
+    box-shadow: none; /* Rimuove l'ombra di Bootstrap */
+}
+
+.btn-dark {
+    background-color: #333; /* Sfondo scuro per il bottone */
+    color: #00FFFF; /* Testo celeste sul bottone */
+    border: 1px solid #00FFFF; /* Bordo celeste sul bottone */
+}
+
+.btn-dark:hover {
+    background-color: #00FFFF; /* Sfondo celeste al passaggio del mouse */
+    color: #333; /* Testo scuro al passaggio del mouse */
+}
+
+a {
+    color: #00FFFF; /* Colore celeste per i link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+a:hover {
+    color: #FFFFFF; /* Colore grigio scuro per hover sui link */
+}
+
+.tag {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 2px 8px;
+    border-radius: 7px;
+    font-size: 0.85em;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.list-group-item {
+    background-color: #4a4a4a; /* Sfondo grigio scuro per le room */
+    border: none; /* Rimuove i bordi */
+}
+
+.list-group-item:hover {
+    background-color: #5c5c5c; /* Sfondo leggermente più chiaro al passaggio del mouse */
+}
+
+.btn-dark {
+    background-color: #333; /* Sfondo scuro per il bottone */
+    color: #00FFFF; /* Testo celeste sul bottone */
+    border: 1px solid #00FFFF; /* Bordo celeste sul bottone */
+}
+
+.btn-dark:hover {
+    background-color: #00FFFF; /* Sfondo celeste al passaggio del mouse */
+    color: #333; /* Testo scuro al passaggio del mouse */
+}
