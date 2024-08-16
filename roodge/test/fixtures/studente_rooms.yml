@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  studente: MyString
+  room: MyString
+  approvazioni: 1
+
+two:
+  studente: MyString
+  room: MyString
+  approvazioni: 1
