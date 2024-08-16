@@ -37,6 +37,7 @@ navbar navbar-expand-lg bg-body-tertiary
 
 .info_user {
     color: white;
+    text-align: left;
 }
 
 .form-control {
