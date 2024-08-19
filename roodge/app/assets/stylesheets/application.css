@@ -104,3 +104,31 @@ a:hover {
     background-color: #00FFFF; /* Sfondo celeste al passaggio del mouse */
     color: #333; /* Testo scuro al passaggio del mouse */
 }
+
+.logo {
+    background-image: url(/assets/logo.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    width: 10%;
+    aspect-ratio: 1/1;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description-box {
+    width: 90%;
+    margin-left: 5%;
+    padding: 15px;
+    border: qpx solid white;
+    border-radius: 5%;
+    background-color: #4a4a4a;
+    color: white;
+    font-size: 20px;
+}
