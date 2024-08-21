@@ -35,7 +35,7 @@ navbar navbar-expand-lg bg-body-tertiary
     color: #03eeff; /* Scritte in celeste */
 }
 
-.info_user {
+.info-user {
     color: white;
     text-align: left;
 }
@@ -124,11 +124,38 @@ a:hover {
 
 .description-box {
     width: 90%;
-    margin-left: 5%;
     padding: 15px;
-    border: qpx solid white;
-    border-radius: 5%;
+    border-radius: 25px;
+    margin-left: 10px;
     background-color: #4a4a4a;
     color: white;
     font-size: 20px;
+}
+
+.registrazione-link-wrapper {
+    margin-top: 20px;
+}
+
+.registrazione-link {
+    font-size: 15px;
+    color: #00FFFF;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+.registrazione-link:hover {
+    color: #14b2b2;
+}
+
+.propic{
+    background-image: url(/assets/propic.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 90%;
+    aspect-ratio: 1/1;
 }
