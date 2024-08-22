@@ -159,3 +159,10 @@ a:hover {
     width: 90%;
     aspect-ratio: 1/1;
 }
+
+.separator {
+    border: none;
+    border-top: 1px solid #00FFFF;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
