@@ -56,3 +56,16 @@
         <% end %>
     </div>
 </div>
+
+<script type="text/javascript">
+  function toggleDocenteOptions() {
+    var role = document.getElementById("role").value;
+    var docenteOptions = document.getElementById("docente-options");
+
+    if (role === "d") {
+      docenteOptions.style.display = "block";
+    } else {
+      docenteOptions.style.display = "none";
+    }
+  }
+</script>

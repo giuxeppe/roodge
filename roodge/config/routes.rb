@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "registration", to: "home#registration"
   get "final_registration", to: "home#final_registration"
   get "home/final_registration", to: "home#final_registration"
-
+  get "info_professor", to: "home#info_professor"
   root "home#index"
 
   resources :registrations, only: [:new, :create] do

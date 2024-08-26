@@ -12,4 +12,7 @@ class HomeController < ApplicationController
 
   def final_registration
   end
+
+  def info_professor
+  end
 end
