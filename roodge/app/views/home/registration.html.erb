@@ -48,6 +48,35 @@
                         <option value="d">Docente</option>
                     </select>
                 </div>
+                <div id="docente-options" style="display: none;">
+                    <div class="col-md-6">
+                        <label for="option1" class="form-label">Opzione 1</label>
+                        <select class="form-control" id="option1" name="option1">
+                        <option value="" selected disabled>--Nessuna selezione--</option>
+                        <option value="1">Opzione A</option>
+                        <option value="2">Opzione B</option>
+                        <option value="3">Opzione C</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="option2" class="form-label">Opzione 2</label>
+                        <select class="form-control" id="option2" name="option2">
+                        <option value="" selected disabled>--Nessuna selezione--</option>
+                        <option value="1">Opzione A</option>
+                        <option value="2">Opzione B</option>
+                        <option value="3">Opzione C</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="option3" class="form-label">Opzione 3</label>
+                        <select class="form-control" id="option3" name="option3">
+                        <option value="" selected disabled>--Nessuna selezione--</option>
+                        <option value="1">Opzione A</option>
+                        <option value="2">Opzione B</option>
+                        <option value="3">Opzione C</option>
+                        </select>
+                    </div>
+                </div>
 
             </div>
             <div class="separator"></div>
@@ -59,3 +88,16 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+  function toggleDocenteOptions() {
+    var role = document.getElementById("role").value;
+    var docenteOptions = document.getElementById("docente-options");
+
+    if (role === "d") {
+      docenteOptions.style.display = "block";
+    } else {
+      docenteOptions.style.display = "none";
+    }
+  }
+</script>
