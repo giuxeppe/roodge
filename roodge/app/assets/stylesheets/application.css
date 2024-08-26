@@ -11,7 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require_self
+ *= require_self 
  */
 
 body {
@@ -33,6 +33,11 @@ navbar navbar-expand-lg bg-body-tertiary
 .card {
     background-color: #4a4a4a; /* Sfondo grigio scuro per i div */
     color: #03eeff; /* Scritte in celeste */
+}
+
+.info-user {
+    color: white;
+    text-align: left;
 }
 
 .form-control {
@@ -98,4 +103,66 @@ a:hover {
 .btn-dark:hover {
     background-color: #00FFFF; /* Sfondo celeste al passaggio del mouse */
     color: #333; /* Testo scuro al passaggio del mouse */
+}
+
+.logo {
+    background-image: url(/assets/logo.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    width: 10%;
+    aspect-ratio: 1/1;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description-box {
+    width: 90%;
+    padding: 15px;
+    border-radius: 25px;
+    margin-left: 10px;
+    background-color: #4a4a4a;
+    color: white;
+    font-size: 20px;
+}
+
+.registrazione-link-wrapper {
+    margin-top: 20px;
+}
+
+.registrazione-link {
+    font-size: 15px;
+    color: #00FFFF;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+.registrazione-link:hover {
+    color: #14b2b2;
+}
+
+.propic{
+    background-image: url(/assets/propic.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 90%;
+    aspect-ratio: 1/1;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #00FFFF;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
