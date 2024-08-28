@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_with model: @user, url: final_registration_path, local: true do |form| %>
+        <%= form_with model: @user, local: true do |form| %>
             <div class="row mb-3">
                 <div class="col-md-6">
                 <%= form.label :nome, "Nome", class: "form-label" %>
