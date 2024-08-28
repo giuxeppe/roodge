@@ -2,15 +2,21 @@
 
 <div class="card">
     <div class="card-body">
+<<<<<<< HEAD
         <form action="#" method="get" id="registrationForm">
+=======
+        <%= form_with model: @user, url: final_registration_path(@user), method: :patch, local: true, multipart: true do |form| %>
+>>>>>>> main
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="username" class="form-label">Username</label>  
-                    <input type="text" class="form-control" id="name" name="name" required>
+                <%= form.label :nome_utente, "Username", class: "form-label" %>
+                <%= form.text_field :nome_utente, class: "form-control", required: true %>
                 </div>
             </div>
+            
             <div class="row mb-3">
                 <div class="col-md-6">
+<<<<<<< HEAD
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required
                     pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[\*\-\/\+\!\$\%\&\?\^\#\@])[A-Za-z0-9\*\-\/\+\!\$\%\&\?\^\#\@]{4,}$" title="Inserire password forte">
@@ -32,13 +38,34 @@
                 <label for="bio" class="form-label">Bio</label>  
                 <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
             </div>
+=======
+                <%= form.label :password, "Password", class: "form-label" %>
+                <%= form.password_field :password, class: "form-control", required: true %>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                <%= form.label :propic, "Foto profilo", class: "form-label" %>
+                <%= form.file_field :propic, class: "form-control", required: true %>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-12">
+                <%= form.label :bio, "Bio", class: "form-label" %>
+                <%= form.text_area :bio, class: "form-control", rows: 5 %>
+                </div>
+            </div>
+            
+>>>>>>> main
             <div class="separator"></div>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <button type="submit" class="btn btn-dark w-100">Avanti</button>
+                <%= form.submit "Avanti", class: "btn btn-dark w-100" %>
                 </div>
             </div>
-        </form>
+        <% end %>
     </div>
 </div>
 

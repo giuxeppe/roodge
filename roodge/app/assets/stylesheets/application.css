@@ -32,12 +32,16 @@ navbar navbar-expand-lg bg-body-tertiary
 
 .card {
     background-color: #4a4a4a; /* Sfondo grigio scuro per i div */
-    color: #03eeff; /* Scritte in celeste */
+    color: #00FFFF; /* Scritte in celeste */
 }
 
 .info-user {
     color: white;
     text-align: left;
+}
+
+.info-user:hover {
+    text-decoration: underline;
 }
 
 .form-control {
@@ -139,13 +143,13 @@ a:hover {
 .registrazione-link {
     font-size: 15px;
     color: #00FFFF;
-    text-decoration: underline;
     transition: color 0.3s ease;
     text-align: center;
 }
 
 .registrazione-link:hover {
-    color: #14b2b2;
+    color: #00FFFF;
+    text-decoration: underline;
 }
 
 .propic{
@@ -165,4 +169,15 @@ a:hover {
     border-top: 1px solid #00FFFF;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.user-info {
+    color: white;
+    font-size: 25px;
+}
+
+.user-info-title {
+    color: #00FFFF;
+    font-size: 30px;
+    font-weight: bold;
 }
