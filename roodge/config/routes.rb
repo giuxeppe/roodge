@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "home/home_logged", to: "home#home_logged"
   get "registration", to: "home#registration"
   get "info_professor", to: "home#info_professor"
+  get "info_student", to: "home#info_student"
   root "home#index"
 
   resources :registrations, only: [:new, :create] do
