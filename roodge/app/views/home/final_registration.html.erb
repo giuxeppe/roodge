@@ -2,7 +2,11 @@
 
 <div class="card">
     <div class="card-body">
+<<<<<<< HEAD
+        <form action="#" method="get" id="registrationForm">
+=======
         <%= form_with model: @user, url: final_registration_path(@user), method: :patch, local: true, multipart: true do |form| %>
+>>>>>>> main
             <div class="row mb-3">
                 <div class="col-md-6">
                 <%= form.label :nome_utente, "Username", class: "form-label" %>
@@ -12,6 +16,29 @@
             
             <div class="row mb-3">
                 <div class="col-md-6">
+<<<<<<< HEAD
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required
+                    pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[\*\-\/\+\!\$\%\&\?\^\#\@])[A-Za-z0-9\*\-\/\+\!\$\%\&\?\^\#\@]{4,}$" title="Inserire password forte">
+                    <small id="passwordHelp" class="form-text text-muted">
+                        <b style="color:lightgray;">Password forte: almeno una lettera minuscola, una maiuscola, un numero e un simbolo tra @ ! - + / * ? # $ % & </b>
+                    </small>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="propic" class="form-label">Foto profilo</label>  
+                    <input type="file" class="form-control" id="propic" name="propic" required accept=".jpg,.jpeg,.png,.bmp">
+                    <small id="propicHelp" class="form-text text-muted">
+                        <b style="color:lightgray;"> Formato foto: .jpeg .jpg .png .bmp </b>
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="bio" class="form-label">Bio</label>  
+                <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
+            </div>
+=======
                 <%= form.label :password, "Password", class: "form-label" %>
                 <%= form.password_field :password, class: "form-control", required: true %>
                 </div>
@@ -31,6 +58,7 @@
                 </div>
             </div>
             
+>>>>>>> main
             <div class="separator"></div>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
@@ -40,3 +68,44 @@
         <% end %>
     </div>
 </div>
+
+<style>
+    input.invalid {
+        border-color: red;
+    }
+
+    input.invalid:focus {
+        box-shadow: 0 0 5px 1px red;
+    }
+
+    input.invalid::after {
+        content: attr(title);
+        color: red;
+        display: block;
+        margin-top: 5px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('input[required], input[pattern]');
+        const propicInput = document.getElementById('propic');
+        const propicError = document.getElementById('propic-error');
+
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.checkValidity()) {
+                    this.classList.add('invalid');
+                } else {
+                    this.classList.remove('invalid');
+                }
+            });
+
+            input.addEventListener('input', function() {
+                if (this.checkValidity()) {
+                    this.classList.remove('invalid');
+                }
+            });
+        });
+    });
+</script>

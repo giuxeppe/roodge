@@ -12,6 +12,9 @@ class HomeController < ApplicationController
 
   def final_registration
   end
+<<<<<<< HEAD
+end
+=======
 
   def info_professor
   end
@@ -19,3 +22,4 @@ class HomeController < ApplicationController
   def info_student
   end
 end
+>>>>>>> main
