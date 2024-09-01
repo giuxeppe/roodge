@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   get "info_student", to: "home#info_student"
   root "home#index"
 
-  resources :registrations, only: [:new, :create] do
+  resources :user, only: [:new, :create] do
     member do
-      get 'edit_final', to: 'home#final_registration'
-      patch 'update_final', to: 'registrations#update_final'
+      get 'final_registration', to: 'home#final_registration'
+      patch 'update_final', to: 'home#final_registration'
     end
   end
 

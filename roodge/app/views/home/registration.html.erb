@@ -38,12 +38,46 @@
             
             <div class="row mb-3">
                 <div class="col-md-6">
+                <%= form.label :ruolo, "Ruolo", class: "form-label" %>
+                <%= form.select :ruolo, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                </div>
+
+                <div class="col-md-6">
+                <%= form.label :propic, "Foto profilo", class: "form-label" %>
+                <%= form.file_field :propic, class: "form-control", required: true %>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
                 <%= form.label :mail, "Indirizzo email", class: "form-label" %>
                 <%= form.email_field :mail, class: "form-control", required: true %>
                 </div>
+            </div>
+
+            <div class="row mb-3">
                 <div class="col-md-6">
-                <%= form.label :ruolo, "Ruolo", class: "form-label" %>
-                <%= form.select :ruolo, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                <%= form.label :nome_utente, "Username", class: "form-label" %>
+                <%= form.text_field :nome_utente, class: "form-control", required: true %>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                <%= form.label :password, "Password", class: "form-label" %>
+                <%= form.password_field :password, class: "form-control", required: true %>
+                </div>
+
+                <div class="col-md-6">
+                <%= form.label :confirm_password, "Conferma Password", class: "form-label" %>
+                <%= form.password_field :confirm_password, class: "form-control", required: true %>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-12">
+                <%= form.label :bio, "Bio", class: "form-label" %>
+                <%= form.text_area :bio, class: "form-control", rows: 5 %>
                 </div>
             </div>
             

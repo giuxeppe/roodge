@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_with model: @user, url: final_registration_path(@user), method: :patch, local: true, multipart: true do |form| %>
+        <%= form_with model: @user, url: update_final_registration_path(@user), method: :patch, local: true, multipart: true do |form| %>
             <div class="row mb-3">
                 <div class="col-md-6">
                 <%= form.label :nome_utente, "Username", class: "form-label" %>

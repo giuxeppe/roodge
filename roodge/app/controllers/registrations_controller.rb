@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:registration_completed] = true
-      redirect_to edit_final_registration_path(@user)
+      redirect_to final_registration_path(@user)
     else
       render :new
     end
@@ -24,7 +24,7 @@ class RegistrationsController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_final_params)
       session[:registration_completed] = nil
-      redirect_to some_final_path, notice: "Registrazione completata!"
+      redirect_to root_path, notice: "Registrazione completata!"
     else
       render :edit_final
     end
@@ -42,7 +42,7 @@ class RegistrationsController < ApplicationController
 
   def ensure_registration_completed
     unless session[:registration_completed]
-      redirect_to new_registration_path, alert: "Per favore, completa prima la registrazione."
+      redirect_to registration_path, alert: "Per favore, completa prima la registrazione."
     end
   end
 end
