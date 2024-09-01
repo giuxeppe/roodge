@@ -2,91 +2,91 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_with model: @user, local: true do |form| %>
+        <%= form_with model: @user, url: registration_path, method: :post, local: true, multipart: true do |form| %>
+
             <div class="row mb-3">
                 <div class="col-md-6">
-<<<<<<< HEAD
-                    <label for="name" class="form-label">Nome</label>  
-                    <input type="text" class="form-control" id="name" name="name" required 
-                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Il nome può contenere solo lettere e spazi">
+                    <%= form.label :nome, "Nome", class: "form-label" %>  
+                    <%= form.text_field :nome, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il nome può contenere solo lettere e spazi" %>
                 </div>
                 <div class="col-md-6">
-                    <label for="surname" class="form-label">Cognome</label>  
-                    <input type="text" class="form-control" id="surname" name="surname" required 
-                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Il cognome può contenere solo lettere e spazi">
-=======
-                <%= form.label :nome, "Nome", class: "form-label" %>
-                <%= form.text_field :nome, class: "form-control", required: true %>
-                </div>
-                <div class="col-md-6">
-                <%= form.label :cognome, "Cognome", class: "form-label" %>
-                <%= form.text_field :cognome, class: "form-control", required: true %>
->>>>>>> main
+                    <%= form.label :cognome, "Cognome", class: "form-label" %>  
+                    <%= form.text_field :cognome, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il cognome può contenere solo lettere e spazi" %>
                 </div>
             </div>
             
             <div class="row mb-3">
                 <div class="col-md-6">
-<<<<<<< HEAD
-                    <label for="cf" class="form-label">Codice Fiscale</label>  
-                    <input type="text" class="form-control" id="cf" name="cf" required 
-                        pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]" title="Il codice fiscale deve seguire il formato corretto (es. ABCDEF12G34H567I)">
-=======
-                <%= form.label :cf, "Codice Fiscale", class: "form-label" %>
-                <%= form.text_field :cf, class: "form-control", required: true, pattern: "[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]" %>
->>>>>>> main
+                    <%= form.label :cf, "Codice Fiscale", class: "form-label" %>  
+                    <%= form.text_field :cf, class: "form-control", required: true, pattern: "[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]", title: "Il codice fiscale deve seguire il formato corretto (es. ABCDEF12G34H567I)" %>
                 </div>
                 <div class="col-md-6">
-                <%= form.label :data_nascita, "Data di nascita", class: "form-label" %>
-                <%= form.date_field :data_nascita, class: "form-control", required: true %>
+                    <%= form.label :data_nascita, "Data di nascita", class: "form-label" %>
+                    <%= form.date_field :data_nascita, class: "form-control", required: true %>
                 </div>
             </div>
             
             <div class="row mb-3">
                 <div class="col-md-6">
-<<<<<<< HEAD
-                    <label for="city_birth" class="form-label">Città di nascita</label>  
-                    <input type="text" class="form-control" id="city_birth" name="city_birth" required 
-                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="La città di nascita può contenere solo lettere e spazi">
-=======
-                <%= form.label :citta_nascita, "Città di nascita", class: "form-label" %>
-                <%= form.text_field :citta_nascita, class: "form-control", required: true %>
->>>>>>> main
+                    <%= form.label :citta_nascita, "Città di nascita", class: "form-label" %>  
+                    <%= form.text_field :citta_nascita, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "La città di nascita può contenere solo lettere e spazi" %>
                 </div>
                 <div class="col-md-6">
-                <%= form.label :indirizzo_residenza, "Indirizzo di residenza", class: "form-label" %>
-                <%= form.text_field :indirizzo_residenza, class: "form-control", required: true %>
+                    <%= form.label :indirizzo_residenza, "Indirizzo di residenza", class: "form-label" %>
+                    <%= form.text_field :indirizzo_residenza, class: "form-control", required: true %>
                 </div>
             </div>
             
             <div class="row mb-3">
                 <div class="col-md-6">
-<<<<<<< HEAD
-                    <label for="mail" class="form-label">Indirizzo email</label>  
-                    <input type="email" class="form-control" id="mail" name="mail" required 
-                        pattern="[A-Za-z0-9\.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}" title="La mail deve contenere il carattere @ e non può avere altri simboli al di fuori del .">
-=======
-                <%= form.label :mail, "Indirizzo email", class: "form-label" %>
-                <%= form.email_field :mail, class: "form-control", required: true %>
->>>>>>> main
+                    <%= form.label :mail, "Indirizzo email", class: "form-label" %>  
+                    <%= form.email_field :mail, class: "form-control", required: true, pattern: "[A-Za-z0-9\.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}", title: "La mail deve contenere il carattere @ e non può avere altri simboli al di fuori del ." %>
                 </div>
                 <div class="col-md-6">
-                <%= form.label :ruolo, "Ruolo", class: "form-label" %>
-                <%= form.select :ruolo, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                    <%= form.label :ruolo, "Ruolo", class: "form-label" %>
+                    <%= form.select :ruolo, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
                 </div>
             </div>
-            
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <%= form.label :nome_utente, "Username", class: "form-label" %>
+                    <%= form.text_field :nome_utente, class: "form-control", required: true %>
+                </div>
+                <div class="col-md-6">
+                    <%= form.label :password, "Password", class: "form-label" %>
+                    <%= form.password_field :password, class: "form-control", required: true, 
+                        pattern: "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[\\?\\!\\$\\%\\&\\/\\+\\-\\#\\=]).{4,}$", title: "Inserire password forte" %>
+                    <small id="passwordHelp" class="form-text text-muted">
+                        <b style="color:lightgray;">Password forte: almeno una lettera minuscola, una maiuscola, un numero e un simbolo tra ? ! $ % & / + - # =</b>
+                    </small>
+                </div>
+            </div>
+        
+            <div class="row mb-3">
+                <%= form.label :propic, "Foto profilo", class: "form-label" %>  
+                <%= form.file_field :propic, class: "form-control", required: true, accept: ".jpg,.jpeg,.png,.bmp" %>
+                <small id="propicHelp" class="form-text text-muted">
+                    <b style="color:lightgray;"> Formato foto: .jpeg .jpg .png .bmp </b>
+                </small>
+            </div>
+        
+            <div class="col-md-12">
+                <%= form.label :bio, "Bio", class: "form-label" %>  
+                <%= form.text_area :bio, class: "form-control", rows: 5 %>
+            </div>
+        
             <div class="separator"></div>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                <%= form.submit "Avanti", class: "btn btn-dark w-100" %>
+                    <%= form.submit "Avanti", class: "btn btn-dark w-100" %>
                 </div>
             </div>
-        <% end %>
+        <% end %>        
     </div>
 </div>
 
-<<<<<<< HEAD
+
 <style>
     input.invalid {
         border-color: red;
@@ -107,6 +107,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const inputs = document.querySelectorAll('input[required], input[pattern]');
+        const propicInput = document.getElementById('propic');
 
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
@@ -125,17 +126,3 @@
         });
     });
 </script>
-=======
-<script type="text/javascript">
-  function toggleDocenteOptions() {
-    var role = document.getElementById("role").value;
-    var docenteOptions = document.getElementById("docente-options");
-
-    if (role === "d") {
-      docenteOptions.style.display = "block";
-    } else {
-      docenteOptions.style.display = "none";
-    }
-  }
-</script>
->>>>>>> main
