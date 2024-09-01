@@ -127,13 +127,36 @@ a:hover {
 }
 
 .description-box {
-    width: 90%;
+    width: 100%;
     padding: 15px;
     border-radius: 25px;
-    margin-left: 10px;
     background-color: #4a4a4a;
     color: white;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.text-content {
+    margin-left: 20px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.description-box .col-2 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.description-box .col-9 {
+    flex: 0 0 75%; /* 75% della larghezza */
+    max-width: 75%;
+}
+
+.description-box .col-1 {
+    flex: 0 0 5%; /* 5% della larghezza */
+    max-width: 5%;
 }
 
 .registrazione-link-wrapper {
@@ -180,4 +203,9 @@ a:hover {
     color: #00FFFF;
     font-size: 30px;
     font-weight: bold;
+}
+
+.text-container p {
+    margin: 0;
+    padding-left: 20px;
 }
