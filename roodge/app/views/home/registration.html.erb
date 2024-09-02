@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                     <%= form.label :password, "Password", class: "form-label" %>
                     <%= form.password_field :password, class: "form-control", required: true, 
-                        pattern: "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[\\?\\!\\$\\%\\&\\/\\+\\-\\#\\=]).{4,}$", title: "Inserire password forte" %>
+                        pattern: "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[\\?\\!\\$\\%\\&\\/\\+\\-\\#\\=]).{8,}$", title: "Inserire password forte" %>
                     <small id="passwordHelp" class="form-text text-muted">
                         <b style="color:lightgray;">Password forte: almeno una lettera minuscola, una maiuscola, un numero e un simbolo tra ? ! $ % & / + - # =</b>
                     </small>
@@ -105,24 +105,91 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputs = document.querySelectorAll('input[required], input[pattern]');
-        const propicInput = document.getElementById('propic');
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[required], input[pattern]');
+            const propicInput = document.getElementById('propic');
 
-        inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (!this.checkValidity()) {
-                    this.classList.add('invalid');
-                } else {
-                    this.classList.remove('invalid');
-                }
-            });
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.checkValidity()) {
+                        this.classList.add('invalid');
+                    } else {
+                        this.classList.remove('invalid'); }
+                });
 
-            input.addEventListener('input', function() {
-                if (this.checkValidity()) {
-                    this.classList.remove('invalid');
-                }
+                input.addEventListener('input', function() {
+                    if (this.checkValidity()) {
+                        this.classList.remove('invalid'); }
+                });
             });
         });
-    });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[required], input[pattern]');
+            const passwordInput = document.querySelector('input[name="user[password]"]');
+            let passwordGenerated = false;
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.checkValidity()) {
+                        this.classList.add('invalid');
+                    } else {
+                        this.classList.remove('invalid');}
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.checkValidity()) {
+                        this.classList.remove('invalid'); }
+                });
+            });
+
+            passwordInput.addEventListener('focus', function() {
+                if (areAllPreviousFieldsFilled() && !passwordGenerated) {
+                    const generatedPassword = generateRandomPassword();
+                    const useGeneratedPassword = confirm(`Vuoi usare la password generata? \n${generatedPassword}`);
+                    if (useGeneratedPassword) {
+                        passwordInput.value = generatedPassword;
+                    } else {
+                        passwordInput.value = ''; }
+
+                passwordGenerated = true;  }
+            });
+
+            function areAllPreviousFieldsFilled() {
+                const fields = [
+                'nome', 'cognome', 'cf', 'data_nascita',
+                'citta_nascita', 'indirizzo_residenza', 'mail',
+                'ruolo', 'nome_utente'
+                ];
+                for (let fieldName of fields) {
+                    const field = document.querySelector(`input[name="user[${fieldName}]"], select[name="user[${fieldName}]"]`);
+                    if (!field || !field.checkValidity()) {
+                        return false; }
+                }
+
+                return true;
+            }
+
+            function generateRandomPassword() {
+                const length = 8;
+                const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!$%&/+ #=";
+                let password = "";
+                let hasLower = false, hasUpper = false, hasDigit = false, hasSpecial = false;
+
+                while (!hasLower || !hasUpper || !hasDigit || !hasSpecial) {
+                    password = "";
+                    hasLower = hasUpper = hasDigit = hasSpecial = false;
+                    for (let i = 0; i < length; i++) {
+                        const char = charset.charAt(Math.floor(Math.random() * charset.length));
+                        if (/[a-z]/.test(char)) hasLower = true;
+                        if (/[A-Z]/.test(char)) hasUpper = true;
+                        if (/[0-9]/.test(char)) hasDigit = true;
+                        if (/[\?\!\$\%\&\/\+\-\#\=]/.test(char)) hasSpecial = true;
+                    password += char; }
+                }
+
+            return password; 
+            }
+        });
+
 </script>
