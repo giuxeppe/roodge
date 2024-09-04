@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   end
 
   def home_logged
+    @user = User.find(session[:user_id])
   end
 
   def registration
