@@ -14,6 +14,10 @@ gem 'sass-rails', '>= 6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
+gem 'google-api-client', '~> 0.53.0'
+gem 'omniauth-google-oauth2'
+
+gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'pg', '~> 1.5.7'
 
