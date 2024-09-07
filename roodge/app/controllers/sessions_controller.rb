@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
     def new
         # Visualizza la pagina di login
+        redirect_to root_path
     end
 
     def create
@@ -15,5 +16,13 @@ class SessionsController < ApplicationController
         render 'home/index'
       end
     end
+
+    def destroy
+      session[:user_id] = nil
+      redirect_to root_path
+    end
+
+    def failure
+      render plain: "Authentication failed!"
+    end
   end
-  
