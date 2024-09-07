@@ -18,9 +18,9 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-      flash.now[:alert] = 'LOGOUT'
+      flash.now[:alert] = 'Logout effettuato con successo'
       session[:user_id] = nil
-      redirect_to root_path
+      render 'home/index'
     end
 
     def failure

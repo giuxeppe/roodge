@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  post 'delete', to: 'sessions#destroy'
+  delete 'login', to: 'sessions#destroy'
 
   get 'home_logged', to: 'home#home_logged', as: :home_logged
 
@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   post 'auth/google_oauth2', to: 'sessions#create', as: :google_login
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: 'sessions#failure'
-  delete 'logout', to: 'sessions#destroy'
 end

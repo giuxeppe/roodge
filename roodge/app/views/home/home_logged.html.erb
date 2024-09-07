@@ -59,9 +59,9 @@
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
                     <p class="info-user"><%= @user.nome_utente %></p>
-                    <form action="<%= login_path %>" method="delete">
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
+                    <%= form_with url: login_path, method: :delete do |form| %>
+                        <%= form.submit "Logout", class: "btn btn-danger" %>
+                    <% end %>
                 </div>
             </div>
         </div>
