@@ -12,7 +12,7 @@
                     <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="room1.html" class="text-decoration-none">
+                            <a href="rooms/index.html" class="text-decoration-none">
                                 <h5 class="mb-1">Room 1</h5>
                                 <div class="tags">
                                     <span class="tag">#tag1</span>
@@ -62,6 +62,7 @@
                     <form action="<%= login_path %>" method="delete">
                         <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
+                    <%= link_to 'Barare', room_path, class: 'btn btn-link', style: "margin-top: 10px;" %>
                 </div>
             </div>
         </div>

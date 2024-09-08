@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  
   root 'home#index'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  post 'delete', to: 'sessions#destroy'
+  post 'delete', to: 'sessions#destroy' 
 
   get 'home_logged', to: 'home#home_logged', as: :home_logged
 
