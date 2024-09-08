@@ -58,14 +58,17 @@
 
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
-                    <p class="info-user"><%= @user.nome_utente %></p>
+                    <p class="info-user"><%= @user.nome_utente %><br>
+                        <% if @user.ruolo == 's' %> Studente
+                        <% elsif @user.ruolo == 'd' %> Docente
+                        <% else %> Ruolo non specificato
+                        <% end %>
+                    </p>
                     <form action="<%= login_path %>" method="delete">
                         <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
-                    <%= link_to 'Barare', room_path, class: 'btn btn-link', style: "margin-top: 10px;" %>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
