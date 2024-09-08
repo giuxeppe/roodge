@@ -8,6 +8,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       redirect_to root_path, notice: 'Registrazione completata con successo!'
     else
+      flash.now[:alert] = 'Errore: uno o più campi non sono stati compilati correttamente'
       render :new
     end
   end

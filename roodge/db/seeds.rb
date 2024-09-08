@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+TagDocente.create(docente: 1, tag: 1);
+
 Tag.create(nome: "algebra lineare");
 Tag.create(nome: "analisi di mercato");
 Tag.create(nome: "antropologia");

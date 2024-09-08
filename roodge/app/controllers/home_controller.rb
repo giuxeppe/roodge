@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @rooms = Room.all
   end
 
   def home_logged
