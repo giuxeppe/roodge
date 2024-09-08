@@ -12,7 +12,7 @@
                     <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="room1.html" class="text-decoration-none">
+                            <a href="rooms/index.html" class="text-decoration-none">
                                 <h5 class="mb-1">Room 1</h5>
                                 <div class="tags">
                                     <span class="tag">#tag1</span>
@@ -58,13 +58,17 @@
 
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
-                    <p class="info-user"><%= @user.nome_utente %></p>
+                    <p class="info-user"><%= @user.nome_utente %><br>
+                        <% if @user.ruolo == 's' %> Studente
+                        <% elsif @user.ruolo == 'd' %> Docente
+                        <% else %> Ruolo non specificato
+                        <% end %>
+                    </p>
                     <%= form_with url: login_path, method: :delete do |form| %>
                         <%= form.submit "Logout", class: "btn btn-danger" %>
                     <% end %>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

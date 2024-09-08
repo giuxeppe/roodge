@@ -18,4 +18,5 @@ class HomeController < ApplicationController
 
   def info_student
   end
+
 end
