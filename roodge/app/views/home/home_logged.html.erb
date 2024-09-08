@@ -58,12 +58,16 @@
 
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
+<<<<<<< HEAD
                     <p class="info-user"><%= @user.nome_utente %><br>
                         <% if @user.ruolo == 's' %> Studente
                         <% elsif @user.ruolo == 'd' %> Docente
                         <% else %> Ruolo non specificato
                         <% end %>
                     </p>
+=======
+                    <p class="info-user"><%= @user.nome_utente %></p>
+>>>>>>> c5e66398b234e0a19bfdca6da65dee31b1f6e249
                 </div>
             </div>
         </div>
