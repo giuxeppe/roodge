@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2024_09_09_074349) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "fullname", default: "", null: false
+    t.string "full_name", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false
     t.string "provider", default: "", null: false

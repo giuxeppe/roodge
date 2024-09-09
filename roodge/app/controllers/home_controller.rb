@@ -7,6 +7,10 @@ class HomeController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
+  def info_student
+    @user = User.find(session[:user_id])
+  end
+
   def registration
   end
 
