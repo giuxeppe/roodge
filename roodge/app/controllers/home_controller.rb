@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   def index
     @rooms = Room.all
+    @devise_mapping = Devise.mappings[:user_provider] # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
+    @resource_class = UserProvider # Sostituisci `User` con il tuo modello
+    @resource_name = :user_provider # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
   end
 
   def home_logged
