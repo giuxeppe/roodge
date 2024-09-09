@@ -49,14 +49,32 @@
 
         <div class="col-lg-3">
             <div class="card">
-                <div class="card-body" style="display: flex; justify-content: center;">
-                    <div class="propic"></div>
-                </div>
-
                 <div class="card-body">
-                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
-                    <p class="info-user">riccardo_mantegazza</p>
-                    
+                    <div class="d-flex align-items-center justify-content-center">
+                        <h2 class="card-title">Login</h2>
+                    </div>
+                    <form action="<%= login_path %>" method="post">
+                        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Accedi</button>
+                    </form>
+                    <div class="text-center my-3">oppure</div>
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-outline-dark w-100">
+                            <img src="https://www.gstatic.com/images/branding/product/1x/gsa_48dp.png" alt="Google logo" style="width: 20px; height: 20px; margin-right: 10px;">
+                                Accedi con Google
+                        </button>
+                    </div>
+                    <div class="registrazione-link-wrapper d-flex align-items-center justify-content-center">
+                        <a href="/registration" class="registrazione-link">Non sei iscritto?<br>Registrati!</a>
+                    </div>
                 </div>
             </div>
         </div>

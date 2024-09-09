@@ -9,11 +9,11 @@
                         <input type="text" class="form-control me-2" placeholder="Inserisci nome della room..." name="query" required>
                         <button type="submit" class="btn btn-dark">Cerca</button>
                     </form>
-                    <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
+                    <h3 class="card-subtitle mb-3">Room Recenti</h3>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="rooms/index.html" class="text-decoration-none">
-                                <h5 class="mb-1">Room 1</h5>
+                            <a href="/room_logged" class="text-decoration-none">
+                                <h5 class="mb-1">Room BARARE ROOM LOGGED</h5>
                                 <div class="tags">
                                     <span class="tag">#tag1</span>
                                     <span class="tag">#tag2</span>
@@ -22,7 +22,7 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="room2.html" class="text-decoration-none">
+                            <a href="#" class="text-decoration-none">
                                 <h5 class="mb-1">Room 2</h5>
                                 <div class="tags">
                                     <span class="tag">#education</span>
@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a href="room3.html" class="text-decoration-none">
+                            <a href="#" class="text-decoration-none">
                                 <h5 class="mb-1">Room 3</h5>
                                 <div class="tags">
                                     <span class="tag">#music</span>
@@ -42,6 +42,9 @@
                             </a>
                         </li>
                     </ul>
+                    <a href="/create_room" class="text-decoration-none">
+                        <h5 class="mb-1" style="margin-top: 25px; padding-left: 16px;">CREA UNA ROOM</h5>
+                    </a>
                 </div>
             </div>
         </div>
@@ -54,16 +57,20 @@
                     <% else %>
                         <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
                     <% end %>
-                </div>
+                </div> 
 
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
-                    <p class="info-user"><%= @user.nome_utente %><br>
-                        <% if @user.ruolo == 's' %> Studente
-                        <% elsif @user.ruolo == 'd' %> Docente
-                        <% else %> Ruolo non specificato
+                    <p class="info-user">
+                        <% if @user.ruolo == 's' %>
+                            <%= link_to "#{@user.nome_utente} Studente", info_student_path %>
+                        <% elsif @user.ruolo == 'd' %>
+                            <%= link_to "#{@user.nome_utente} Docente", info_professor_path %>
+                        <% else %>
+                            <%= @user.nome_utente %> Ruolo non specificato
                         <% end %>
                     </p>
+
                     <%= form_with url: login_path, method: :delete do |form| %>
                         <%= form.submit "Logout", class: "btn btn-danger" %>
                     <% end %>

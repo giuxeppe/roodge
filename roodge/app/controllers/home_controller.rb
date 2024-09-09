@@ -19,4 +19,13 @@ class HomeController < ApplicationController
   def info_student
   end
 
+  def room_unlogged
+  end
+
+  def room_logged
+  end
+
+  def create_room
+  end
+
 end

@@ -40,6 +40,11 @@ navbar navbar-expand-lg bg-body-tertiary
     text-align: left;
 }
 
+.info-user a{
+    color: white;
+    text-align: left;
+}
+
 .info-user:hover {
     text-decoration: underline;
 }
@@ -175,12 +180,12 @@ a:hover {
     text-decoration: underline;
 }
 
-.propic{
+.propic{ 
     background-image: url(/assets/propic.jpg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
-    border: none;
+    border: none; 
     margin-top: 20px;
     border-radius: 50%;
     width: 90%;

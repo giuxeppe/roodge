@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <div class="row">
+
+        <div class="col-lg-9 mb-4">
+            <div class="card">
+                <div class="card-body">
+                <h2 class="card-title">Creazione Room</h2>
+                <%= form_with model: @user, url: registration_path, method: :post, local: true, multipart: true do |form| %>
+        
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <%= form.label :nome_room, "Nome della room", class: "form-label" %>  
+                            <%= form.text_field :nome_room, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il nome può contenere solo lettere e spazi" %>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <%= form.label :tag1, "Tag 1", class: "form-label" %>
+                            <%= form.select :tag1, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                        </div>
+                        <div class="col-md-4">
+                            <%= form.label :tag2, "Tag 2", class: "form-label" %>
+                            <%= form.select :tag2, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                        </div>
+                        <div class="col-md-4">
+                            <%= form.label :tag3, "Tag 3", class: "form-label" %>
+                            <%= form.select :tag3, options_for_select([["Studente", "s"], ["Docente", "d"]], selected: ""), {prompt: "--Nessuna selezione--"}, {class: "form-control", required: true} %>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-12">
+                        <%= form.label :description, "Descrizione", class: "form-label" %>  
+                        <%= form.text_area :description, class: "form-control", rows: 5 %>
+                    </div>
+                
+                    <div class="separator"></div>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <%= form.submit "Avanti", class: "btn btn-dark w-100" %>
+                        </div>
+                    </div>
+                <% end %>        
+            </div>
+            </div>
+        </div> 
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body" style="display: flex; justify-content: center;">
+                    <div class="propic"></div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
+                    <p class="info-user">riccardo_mantegazza</p>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
