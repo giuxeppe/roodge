@@ -6,26 +6,25 @@ class SessionsController < ApplicationController
 
     def create
       user = User.find_by(nome_utente: params[:username])
+
       @rooms = Room.all
   
       if user && user.authenticate(params[:password])
         # Se l'autenticazione ha successo, salva l'utente nella sessione
         session[:user_id] = user.id
-        redirect_to home_logged_path
+        redirect_to home_logged_path, notice: "Logged in con Username e Password!"
       else
-        flash.now[:alert] = 'Nome utente o password non validi'
-        render 'home/index'
+        redirect_to root_path, alert: "Nome utente o password non validi!"
       end
     end
 
     def destroy
       @rooms = Room.all
-      flash.now[:alert] = 'Logout effettuato con successo'
       session[:user_id] = nil
-      render 'home/index'
+      redirect_to root_path, notice: "Logged effettuato con successo!"
     end
 
     def failure
-      render plain: "Authentication failed!"
+      redirect_to root_path, alert: "Authentication failed, please try again."
     end
   end

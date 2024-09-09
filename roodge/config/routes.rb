@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  devise_for :user_providers, controllers: { 
+    registrations: 'user_providers/registrations',
+    sessions: 'user_providers/sessions',
+    omniauth_callbacks: 'user_providers/omniauth_callbacks'
+  }
+
   root 'home#index'
 
   get 'login', to: 'sessions#new'
@@ -19,9 +25,5 @@ Rails.application.routes.draw do
   get "room_logged", to: "home#room_logged"
   get "create_room", to: "home#create_room"
 
-
-  post 'auth/google_oauth2', to: 'sessions#create', as: :google_login
-  get 'auth/:provider/callback', to: 'sessions#create'
-  get 'auth/failure', to: 'sessions#failure'
-
+  get 'room', to: 'rooms#index', as: :room
 end
