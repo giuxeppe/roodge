@@ -10,7 +10,11 @@ gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 
 gem 'google-api-client', '~> 0.53.0'
+
+gem 'devise'
+gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
