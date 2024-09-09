@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get "create_room", to: "home#create_room"
 
   get 'room', to: 'rooms#index', as: :room
+
+  get 'auth', to: 'home#index'
 end

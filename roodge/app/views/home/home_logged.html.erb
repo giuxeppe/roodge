@@ -54,9 +54,11 @@
                             </a>
                         </li>
                     </ul>
-                    <a href="/create_room" class="text-decoration-none">
-                        <h5 class="mb-1" style="margin-top: 25px; padding-left: 16px;">CREA UNA ROOM</h5>
-                    </a>
+                    <% if @user.ruolo == 'd' %>
+                        <a href="/create_room" class="text-decoration-none">
+                            <h5 class="mb-1" style="margin-top: 25px; padding-left: 16px;">CREA UNA ROOM</h5>
+                        </a>
+                    <% end %>
                 </div>
             </div>
         </div>
