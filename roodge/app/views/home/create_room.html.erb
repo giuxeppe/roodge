@@ -16,12 +16,12 @@
             <div class="card">
                 <div class="card-body">
                 <h2 class="card-title">Creazione Room</h2>
-                <%= form_with model: @user, url: create_room_path, method: :post, local: true, multipart: true do |form| %>
+                <%= form_with model: @room, url: create_room_path, local: true do |form| %>
         
                     <div class="row mb-3">
                         <div class="col-md-9">
-                            <%= form.label :nome_room, "Nome della room", class: "form-label" %>  
-                            <%= form.text_field :nome_room, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il nome può contenere solo lettere e spazi" %>
+                            <%= form.label :nome, "Nome della room", class: "form-label" %>  
+                            <%= form.text_field :nome, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il nome può contenere solo lettere e spazi" %>
                         </div>
                     </div>
                     
@@ -45,6 +45,12 @@
                     <div class="col-md-12">
                         <%= form.label :description, "Descrizione", class: "form-label" %>  
                         <%= form.text_area :description, class: "form-control", rows: 5 %>
+                    </div>
+
+                    <div class="col-md-12">
+                        <br>
+                        <%= form.label :post_utenti, "Impedisci la condivisione di materiale" %> 
+                        <%= form.check_box :post_utenti %>
                     </div>
                 
                     <div class="separator"></div>

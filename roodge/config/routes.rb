@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get 'room', to: 'rooms#index', as: :room
 
   get 'auth', to: 'home#index'
+
+  resources :create_room, only: [:new, :create]
 end

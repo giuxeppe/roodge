@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_09_074349) do
+ActiveRecord::Schema.define(version: 2024_09_10_095142) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -91,12 +91,12 @@ ActiveRecord::Schema.define(version: 2024_09_09_074349) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "codice", null: false
     t.string "nome", null: false
     t.string "creatore", null: false
     t.integer "post_utenti", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
   end
 
   create_table "studente_rooms", force: :cascade do |t|
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2024_09_09_074349) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "full_name", default: "", null: false
+    t.string "fullname", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false
     t.string "provider", default: "", null: false
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2024_09_09_074349) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
+    t.string "password_digest", null: false
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
