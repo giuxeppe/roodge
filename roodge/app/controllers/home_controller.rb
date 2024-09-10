@@ -18,11 +18,7 @@ class HomeController < ApplicationController
   end
 
   def info_student
-    if session[:user_id].present?
-      @user = User.find(session[:user_id])
-    else
-      redirect_to root_path
-    end
+    @user = User.find(session[:user_id])
   end
 
   def registration
@@ -32,19 +28,9 @@ class HomeController < ApplicationController
   end
 
   def info_professor
-    if session[:user_id].present?
-      @user = User.find(session[:user_id])
-    else
-      redirect_to root_path
-    end
   end
 
   def info_student
-    if session[:user_id].present?
-      @user = User.find(session[:user_id])
-    else
-      redirect_to root_path
-    end
   end
 
   def room_unlogged
@@ -64,6 +50,11 @@ class HomeController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def other_user_info
+    @other_user = User.find_by(nome_utente: params[:nome_utente])
+    session[:selected_user] = @other_user.nome_utente
   end
 
 end

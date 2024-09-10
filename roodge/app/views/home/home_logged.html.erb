@@ -70,17 +70,17 @@
                     <% else %>
                         <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
                     <% end %>
-                </div> 
+                </div>  
 
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
                     <p class="info-user">
                         <% if @user.ruolo == 's' %>
-                            <%= link_to "#{@user.nome_utente} - Studente", info_student_path %>
+                            <%= link_to "#{@user.nome_utente} Studente", info_student_path %>
                         <% elsif @user.ruolo == 'd' %>
-                            <%= link_to "#{@user.nome_utente} - Docente", info_professor_path %>
+                            <%= link_to "#{@user.nome_utente} Docente", info_professor_path %>
                         <% else %>
-                            <%= @user.nome_utente %> - Ruolo non specificato
+                            <%= @user.nome_utente %> Ruolo non specificato
                         <% end %>
                     </p>
 

@@ -25,6 +25,7 @@
                         </div>
                     </div>
                     
+                    
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <%= form.label :tag1, "Tag 1", class: "form-label" %>
@@ -61,26 +62,13 @@
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body" style="display: flex; justify-content: center;">
-                    <% if @user.propic.attached? %>
-                        <%= image_tag @user.propic, class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
-                    <% else %>
-                        <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
-                    <% end %>
-                </div> 
+                    <div class="propic"></div>
+                </div>
 
                 <div class="card-body">
-                    <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
-                    <p class="info-user">
-                        <% if @user.ruolo == 's' %>
-                            <%= link_to "#{@user.nome_utente} - Studente", info_student_path %>
-                        <% elsif @user.ruolo == 'd' %>
-                            <%= link_to "#{@user.nome_utente} - Docente", info_professor_path %>
-                        <% else %>
-                            <%= @user.nome_utente %> - Ruolo non specificato
-                        <% end %>
-                    </p>
+                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
+                    <p class="info-user">riccardo_mantegazza</p>
                     
-                    <%= link_to "Back", :back %>
                 </div>
             </div>
         </div>
