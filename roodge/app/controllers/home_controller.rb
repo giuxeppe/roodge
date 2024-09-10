@@ -4,6 +4,8 @@ class HomeController < ApplicationController
       redirect_to home_logged_path
     end
     @rooms = Room.all
+    @tag_rooms = TagRoom.all
+    @tags = Tag.all
     @devise_mapping = Devise.mappings[:user_provider] # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
     @resource_class = UserProvider # Sostituisci `User` con il tuo modello
     @resource_name = :user_provider # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
