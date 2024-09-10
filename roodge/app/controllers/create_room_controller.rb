@@ -9,13 +9,17 @@ class CreateRoomController < ApplicationController
 
     if @room.save
       [:tag1, :tag2, :tag3].each do |tag_param|
-        tag_value = params[tag_param]
+        tag_value = params[:room][tag_param.to_s] 
 
         if tag_value.present?
-          @tag_room = TagRoom.new(room: @room, tag: tag_value)
 
-          unless @tag_room.save
-            flash[:alert] = "Error saving tag: #{tag_param}"
+          tag = Tag.find_by(id: tag_value)
+
+          if tag
+            @tag_room = TagRoom.create(room: @room.id, tag: tag_value)
+            @tag_room.save
+          else
+            flash[:alert] = "Tag not found: #{tag_param}"
             render :new and return
           end
         end
