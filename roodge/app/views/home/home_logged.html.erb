@@ -75,13 +75,7 @@
                 <div class="card-body">
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
                     <p class="info-user">
-                        <% if @user.ruolo == 's' %>
-                            <%= link_to "#{@user.nome_utente} Studente", info_student_path %>
-                        <% elsif @user.ruolo == 'd' %>
-                            <%= link_to "#{@user.nome_utente} Docente", info_professor_path %>
-                        <% else %>
-                            <%= @user.nome_utente %> Ruolo non specificato
-                        <% end %>
+                        <%= link_to "#{@user.nome_utente}", info_user_path %>
                     </p>
 
                     <%= form_with url: login_path, method: :delete do |form| %>

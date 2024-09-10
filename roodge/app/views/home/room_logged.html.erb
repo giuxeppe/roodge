@@ -14,11 +14,15 @@
                         <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
                         <div class="user-info" style="font-size: 20px;">francidp_7</div>
                     </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-top:20px;">
+                        <%= link_to 'Aggiungi materiale', add_material_path, class: 'user-info', style: 'font-size: 20px;' %>
+                    </div>
+
                     <ul class="list-group">
                         <div class ="card-body">
                             <div class ="card-body" style="display: flex; padding:0;">
                                 <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
-                                <div class="user-info" style="font-size: 20px;">
+                                <div class="info-user" style="font-size: 20px;">
                                     <%= link_to 'riccardo_mantegazza', other_user_info_path(nome_utente: 'riccardo_mantegazza') %>
                                 </div>
 

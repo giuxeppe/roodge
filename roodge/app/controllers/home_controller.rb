@@ -57,4 +57,7 @@ class HomeController < ApplicationController
     session[:selected_user] = @other_user.nome_utente
   end
 
+  def add_material
+  end
+
 end
