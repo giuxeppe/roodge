@@ -1,5 +1,4 @@
 <div class="container mt-4">
-
     <div class="row">
 
         <% if flash[:notice] %>
@@ -11,7 +10,7 @@
             <div class="alert alert-warning mt-4" role="alert">
                 <%= flash[:alert] %>
             </div>
-        <% end %> 
+        <% end %>
 
         <div class="col-lg-9 mb-4">
             <div class="card">
@@ -77,11 +76,11 @@
                     <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
                     <p class="info-user">
                         <% if @user.ruolo == 's' %>
-                            <%= link_to "#{@user.nome_utente} Studente", info_student_path %>
+                            <%= link_to "#{@user.nome_utente} - Studente", info_student_path %>
                         <% elsif @user.ruolo == 'd' %>
-                            <%= link_to "#{@user.nome_utente} Docente", info_professor_path %>
+                            <%= link_to "#{@user.nome_utente} - Docente", info_professor_path %>
                         <% else %>
-                            <%= @user.nome_utente %> Ruolo non specificato
+                            <%= @user.nome_utente %> - Ruolo non specificato
                         <% end %>
                     </p>
 
