@@ -19,20 +19,39 @@
                 </div>
                 <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                     <div class="user-info" style="color: #00FFFF;">Ruolo:&nbsp;</div>
-                    <div class="user-info">Docente</div>
+                    <% if current_user.ruolo == "s" %>
+                        <div class="user-info">Studente</div>
+                    <% end %>
+                    <% if current_user.ruolo == "d" %>
+                        <div class="user-info">Docente</div>
+                    <% end %>
                 </div>
                 <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                     <div class="user-info" style="color: #00FFFF;">Mail:&nbsp;</div>
                     <div class="user-info"><%= current_user.mail %></div>
                 </div>
-                <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
-                    <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
-                    <div class="user-info">tag vari</div>
-                </div>
-                <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
-                    <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
-                    <div class="user-info">room varie</div>
-                </div>
+                <% if current_user.ruolo == "s" %>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Studente modello:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Primo della classe:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                <% end %>
+
+                <% if current_user.ruolo == "d" %>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
+                        <div class="user-info">tag vari</div>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                <% end %>
+
                 <div class="card-body">
                     <div class="user-info-title">Informazioni</div>
                     <div class="user-info"><%= current_user.bio %></div>

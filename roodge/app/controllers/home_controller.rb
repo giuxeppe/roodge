@@ -10,9 +10,6 @@ class HomeController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
-  def info_student
-    @user = User.find(session[:user_id])
-  end
 
   def registration
   end
@@ -20,10 +17,7 @@ class HomeController < ApplicationController
   def final_registration
   end
 
-  def info_professor
-  end
-
-  def info_student
+  def info_user
   end
 
   def room_unlogged
@@ -33,6 +27,11 @@ class HomeController < ApplicationController
   end
 
   def create_room
+  end
+
+  def other_user_info
+    @other_user = User.find_by(nome_utente: params[:nome_utente])
+    session[:selected_user] = @other_user.nome_utente
   end
 
 end
