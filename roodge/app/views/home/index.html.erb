@@ -26,12 +26,10 @@
                 <ul class="list-group"> 
                 <% @rooms.each do |room| %>
                     <li class="list-group-item">
-                    <a href="<%= room_path(room) %>" class="text-decoration-none">
-                        <h5 class="mb-1"><%= room.name %></h5>
+                    <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
+                        <h5 class="mb-1"><%= room.nome %></h5>
                         <div class="tags">
-                        <% room.tags.each do |tag| %>
-                            <span class="tag">#<%= tag.name %></span>
-                        <% end %>
+                        
                         </div>
                     </a>
                     </li>
