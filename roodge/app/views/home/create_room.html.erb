@@ -85,21 +85,18 @@
     const selectTag2 = document.getElementById('tag2');
     const selectTag3Div = document.getElementById('select-tag3');
 
-  // Funzione per mostrare il campo successivo quando viene selezionato un valore
   function showNextSelect(currentSelect, nextSelectDiv) {
     if (currentSelect.value) {
-      nextSelectDiv.style.display = 'block';  // Mostra il campo successivo
+      nextSelectDiv.style.display = 'block';
     } else {
-      nextSelectDiv.style.display = 'none';   // Nascondi il campo successivo se la selezione è vuota
+      nextSelectDiv.style.display = 'none';
     }
   }
 
-  // Aggiungi l'event listener per il primo select
   selectTag1.addEventListener('change', function() {
     showNextSelect(selectTag1, selectTag2Div);
   });
 
-  // Aggiungi l'event listener per il secondo select
   selectTag2.addEventListener('change', function() {
     showNextSelect(selectTag2, selectTag3Div);
   });
@@ -114,7 +111,6 @@
         const options = select.querySelectorAll('option');
         
         options.forEach(option => {
-            // Mostra tutti i tag se non è selezionato in nessun altro campo
             if (selectedTags.includes(option.value) && option.value !== currentValue) {
             option.disabled = true;
             } else {
@@ -128,7 +124,6 @@
         select.addEventListener('change', updateTagOptions);
     });
 
-    // Aggiorna inizialmente le opzioni nel caso di selezioni già presenti
     updateTagOptions();
     });
 </script>
