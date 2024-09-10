@@ -31,4 +31,10 @@ Rails.application.routes.draw do
   get 'auth', to: 'home#index'
 
   resources :create_room, only: [:new, :create]
+
+  resources :rooms do
+    collection do
+      get :search
+    end
+  end
 end

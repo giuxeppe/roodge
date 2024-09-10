@@ -60,4 +60,16 @@ class HomeController < ApplicationController
   def add_material
   end
 
+  def search
+    if params[:query].present?
+      @rooms = Room.where("nome LIKE ?", "%#{params[:query]}%")
+    else
+      @rooms = Room.none
+    end
+
+    respond_to do |format|
+      format.json { render json: @rooms.pluck(:nome)}
+    end
+  end
+
 end

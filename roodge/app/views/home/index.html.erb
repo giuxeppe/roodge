@@ -16,10 +16,12 @@
             <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Ricerca Room</h2>
-                <form class="d-flex mb-3" action="ricerca_room.php" method="get">
-                <input type="text" class="form-control me-2" placeholder="Inserisci nome della room..." name="query" required>
-                <button type="submit" class="btn btn-dark">Cerca</button>
+                <form class="d-flex mb-3" action="javascript:void(0);" id="search-form">
+                    <input type="text" id="room_search" class="form-control me-2" placeholder="Inserisci nome della room..." autocomplete="off">
                 </form>
+
+                <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
+                </ul>
                 <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
                 <a href="/room_unlogged" class="registrazione-link">BARARE ROOM UNLOGGED</a>
 
@@ -90,3 +92,56 @@
         </div>
     </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("room_search");
+    const resultsList = document.getElementById("results");
+
+    let timeout = null;
+
+    searchInput.addEventListener("input", function() {
+      clearTimeout(timeout);
+
+      const query = searchInput.value.trim();
+      resultsList.innerHTML = '';
+      resultsList.style.display = 'none';
+
+      if (query.length > 0) {
+        timeout = setTimeout(function() {
+          fetch(`/rooms/search?query=${query}`, {
+            headers: { 'Accept': 'application/json' }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.length > 0) {
+              resultsList.style.display = 'block';
+              data.forEach(function(room) {
+                const li = document.createElement("li");
+                li.textContent = room;
+                li.style.padding = "8px";
+                li.style.cursor = "pointer";
+                li.addEventListener("click", function() {
+                  searchInput.value = room;
+                  resultsList.innerHTML = '';
+                  resultsList.style.display = 'none';
+                });
+                resultsList.appendChild(li);
+              });
+            }
+          })
+          .catch(function(error) {
+            console.error("Errore nella ricerca:", error);
+          });
+        }, 300);
+      }
+    });
+
+    // Nascondere la lista quando si clicca fuori dalla ricerca
+    document.addEventListener("click", function(event) {
+      if (!searchInput.contains(event.target) && !resultsList.contains(event.target)) {
+        resultsList.style.display = 'none';
+      }
+    });
+  });
+</script>
