@@ -1,0 +1,62 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-body" style="display: flex; justify-content: center;">
+            <%= image_tag current_user.propic, class: "propic", style: "border-radius: 50%;" %>
+
+        </div>
+    </div>
+  
+        <div class="col-md-8">
+            <div class="card"> 
+                <div class="card-body" style="display: flex; justify-content: center;">
+                    <h4 class="mb-1" style="font-size: 40px;"><%= @other_user.nome_utente %></h4>
+                </div>
+        
+                <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                    <div class="user-info" style="color: #00FFFF;">Nome:&nbsp;</div>
+                    <div class="user-info"><%= "#{@other_user.nome} #{@other_user.cognome}" %></div>
+                </div>
+                <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                    <div class="user-info" style="color: #00FFFF;">Ruolo:&nbsp;</div>
+                    <% if @other_user.ruolo == "s" %>
+                        <div class="user-info">Studente</div>
+                    <% end %>
+                    <% if @other_user.ruolo == "d" %>
+                        <div class="user-info">Docente</div>
+                    <% end %>
+                </div>
+                <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                    <div class="user-info" style="color: #00FFFF;">Mail:&nbsp;</div>
+                    <div class="user-info"><%= @other_user.mail %></div>
+                </div>
+                <% if @other_user.ruolo == "s" %>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Studente modello:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Primo della classe:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                <% end %>
+
+                <% if @other_user.ruolo == "d" %>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
+                        <div class="user-info">tag vari</div>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
+                        <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
+                        <div class="user-info">room varie</div>
+                    </div>
+                <% end %>
+
+                <div class="card-body">
+                    <div class="user-info-title">Informazioni</div>
+                    <div class="user-info"><%= @other_user.bio %></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

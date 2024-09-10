@@ -19,8 +19,7 @@ body {
     color: #00FFFF; /* Scritte in celeste */
 }
 
-navbar navbar-expand-lg bg-body-tertiary
-
+.navbar, .navbar-expand-lg .bg-body-tertiary,
 .navbar-dark .navbar-brand,
 .navbar-dark .nav-link {
     color: #FFFFFF; /* Colore celeste per navbar */
@@ -181,7 +180,6 @@ a:hover {
 }
 
 .propic{ 
-    background-image: url(/assets/propic.jpg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
@@ -264,14 +262,14 @@ a:hover {
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     height: 100%;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     width: 100%;
   }
   
   .gsi-material-button .gsi-material-button-contents {
-    -webkit-flex-grow: 1;
-    flex-grow: 1;
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
     font-family: 'Roboto', arial, sans-serif;
     font-weight: 500;
     overflow: hidden;

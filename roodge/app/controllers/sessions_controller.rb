@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         redirect_to home_logged_path, notice: "Logged in con Username e Password!"
       else
         redirect_to root_path, alert: "Nome utente o password non validi!"
-      end
+      end 
     end
 
     def destroy
