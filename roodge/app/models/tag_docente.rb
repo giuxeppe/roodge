@@ -1,3 +1,4 @@
 class TagDocente < ApplicationRecord
-  validates :docente, uniqueness: true
+  validates :docente, presence: true
+  validates :tag, presence: true
 end
