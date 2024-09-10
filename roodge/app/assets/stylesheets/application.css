@@ -19,8 +19,7 @@ body {
     color: #00FFFF; /* Scritte in celeste */
 }
 
-navbar navbar-expand-lg bg-body-tertiary
-
+.navbar, .navbar-expand-lg .bg-body-tertiary,
 .navbar-dark .navbar-brand,
 .navbar-dark .nav-link {
     color: #FFFFFF; /* Colore celeste per navbar */
@@ -181,7 +180,6 @@ a:hover {
 }
 
 .propic{ 
-    background-image: url(/assets/propic.jpg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;

@@ -23,7 +23,7 @@ class UserProviders::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    store_location_for(resource_or_scope, root_path) || root_path
+    store_location_for(resource_or_scope, home_logged_path) || home_logged_path
   end
   # protected
 
