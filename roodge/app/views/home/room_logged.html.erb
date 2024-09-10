@@ -1,0 +1,83 @@
+<div class="container mt-4">
+    <div class="row">
+
+        <div class="col-lg-9 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Nome Room</h2>
+                    <div class="tags" style="margin-top: 20px;">
+                        <span class="tag">#tag1</span>
+                        <span class="tag">#tag2</span>
+                        <span class="tag">#tag3</span>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-top:20px;">
+                        <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
+                        <div class="user-info" style="font-size: 20px;">francidp_7</div>
+                    </div>
+                    <div class="card-body" style="display: flex; padding:0; margin-top:20px;">
+                        <%= link_to 'Aggiungi materiale', add_material_path, class: 'user-info', style: 'font-size: 20px;' %>
+                    </div>
+
+                    <ul class="list-group">
+                        <div class ="card-body">
+                            <div class ="card-body" style="display: flex; padding:0;">
+                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
+                                <div class="info-user" style="font-size: 20px;">
+                                    <%= link_to 'riccardo_mantegazza', other_user_info_path(nome_utente: 'riccardo_mantegazza') %>
+                                </div>
+
+
+
+                            </div>
+                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                        </div>
+                        <div class ="card-body">
+                            <div class ="card-body" style="display: flex; padding:0;">
+                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 2&nbsp</div>
+                                <div class="user-info" style="font-size: 20px;">- mariorossi_</div>
+                            </div>
+                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                        </div>
+                        <div class ="card-body">
+                            <div class ="card-body" style="display: flex; padding:0;">
+                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 3&nbsp</div>
+                                <div class="user-info" style="font-size: 20px;">- flavi_depino5</div>
+                            </div>
+                        </div>
+                        <div class ="card-body">
+                            <div class ="card-body" style="display: flex; padding:0;">
+                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 4&nbsp</div>
+                                <div class="user-info" style="font-size: 20px;">- pietrozinni_32</div>
+                            </div>
+                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body" style="display: flex; justify-content: center;">
+                    <% if current_user.propic.attached? %>
+                        <%= image_tag current_user.propic, class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% else %>
+                        <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% end %>
+                </div>  
+
+                <div class="card-body">
+                    <h5 class="mb-1" style="font-size: 25px;"><%= current_user.nome %> <%= current_user.cognome %></h5>
+                    <p class="info-user">
+                        <%= link_to "#{current_user.nome_utente}", info_user_path %>
+                    </p>
+
+                    <%= form_with url: login_path, method: :delete do |form| %>
+                        <%= form.submit "Logout", class: "btn btn-danger" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
