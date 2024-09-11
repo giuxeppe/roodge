@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                 <h2 class="card-title">Aggiungi materiale per "<%= @selected_room.nome %>"</h2>
-                <%= form_with model: @user, url: create_room_path, method: :post, local: true, multipart: true do |form| %>
+                <%= form_with model: @user, url: add_material_path, method: :post, local: true, multipart: true do |form| %>
         
                     <div class="row mb-3">
                         <div class="col-md-9">
@@ -41,8 +41,8 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <%= form.label :price, "Prezzo (in euro)", class: "form-label" %>  
-                            <%= form.number_field :price, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", oninput: "validity.valid||(value='');" %>
+                            <%= form.label :prezzo, "Prezzo (in euro)", class: "form-label" %>  
+                            <%= form.number_field :prezzo, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", oninput: "validity.valid||(value='');" %>
                             <small id="propicHelp" class="form-text text-muted">
                             <b style="color:lightgray;">Massimo valore (in euro): 999,99</b>
                             </small>
