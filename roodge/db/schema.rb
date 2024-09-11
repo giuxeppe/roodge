@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2024_09_09_074349) do
     t.string "nome", null: false
     t.string "creatore", null: false
     t.integer "post_utenti", default: 0, null: false
+    t.string "descrizione"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

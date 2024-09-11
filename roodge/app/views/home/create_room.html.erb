@@ -25,27 +25,26 @@
                         </div>
                     </div>
                     
-                    
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <%= form.label :tag1, "Tag 1", class: "form-label" %>
-                            <%= form.select :tag1, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--"}, {class: "form-control tag-select", id: "tag1", required: true} %>
+                            <%= form.label :tag1, "Tag 1", class: "form-label" %>                
+                            <%= form.select :tag1, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--", selected: ""}, {class: "form-control tag-select", id: "tag1", required: true} %>
                         </div>
 
                         <div class="col-md-4" id="select-tag2" style="display:none;">
                             <%= form.label :tag2, "Tag 2", class: "form-label" %>
-                            <%= form.select :tag2, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--"}, {class: "form-control tag-select", id: "tag2", required: true} %>
+                            <%= form.select :tag2, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--", selected: ""}, {class: "form-control tag-select", id: "tag2", required: true} %>
                         </div>
 
                         <div class="col-md-4" id="select-tag3" style="display:none;">
                             <%= form.label :tag3, "Tag 3", class: "form-label" %>
-                            <%= form.select :tag3, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--"}, {class: "form-control tag-select", id: "tag3", required: true} %>
+                            <%= form.select :tag3, options_for_select(Tag.all.map { |tag| [tag.nome, tag.id] }), {prompt: "--Nessuna selezione--", selected: ""}, {class: "form-control tag-select", id: "tag3", required: true} %>
                         </div>
                     </div>
         
                     <div class="col-md-12">
-                        <%= form.label :description, "Descrizione", class: "form-label" %>  
-                        <%= form.text_area :description, class: "form-control", rows: 5 %>
+                        <%= form.label :descrizione, "Descrizione", class: "form-label" %>  
+                        <%= form.text_area :descrizione, class: "form-control", rows: 5 %>
                     </div>
 
                     <div class="col-md-12">
@@ -68,13 +67,24 @@
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body" style="display: flex; justify-content: center;">
-                    <div class="propic"></div>
-                </div>
+                    <% if @user.propic.attached? %>
+                        <%= image_tag @user.propic, class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% else %>
+                        <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% end %>
+                </div>  
 
                 <div class="card-body">
-                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
-                    <p class="info-user">riccardo_mantegazza</p>
-                    
+                    <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
+                    <p class="info-user">
+                        <%= link_to "#{@user.nome_utente}", info_user_path %>
+                    </p>
+
+                    <%= form_with url: login_path, method: :delete do |form| %>
+                        <%= form.submit "Logout", class: "btn btn-danger" %>
+                    <% end %>
+                    <br>
+                    <%= link_to "Back", :back %>
                 </div>
             </div>
         </div>
@@ -90,21 +100,18 @@
     const selectTag2 = document.getElementById('tag2');
     const selectTag3Div = document.getElementById('select-tag3');
 
-  // Funzione per mostrare il campo successivo quando viene selezionato un valore
   function showNextSelect(currentSelect, nextSelectDiv) {
     if (currentSelect.value) {
-      nextSelectDiv.style.display = 'block';  // Mostra il campo successivo
+      nextSelectDiv.style.display = 'block';
     } else {
-      nextSelectDiv.style.display = 'none';   // Nascondi il campo successivo se la selezione è vuota
+      nextSelectDiv.style.display = 'none';
     }
   }
 
-  // Aggiungi l'event listener per il primo select
   selectTag1.addEventListener('change', function() {
     showNextSelect(selectTag1, selectTag2Div);
   });
 
-  // Aggiungi l'event listener per il secondo select
   selectTag2.addEventListener('change', function() {
     showNextSelect(selectTag2, selectTag3Div);
   });
@@ -119,7 +126,6 @@
         const options = select.querySelectorAll('option');
         
         options.forEach(option => {
-            // Mostra tutti i tag se non è selezionato in nessun altro campo
             if (selectedTags.includes(option.value) && option.value !== currentValue) {
             option.disabled = true;
             } else {
@@ -133,7 +139,6 @@
         select.addEventListener('change', updateTagOptions);
     });
 
-    // Aggiorna inizialmente le opzioni nel caso di selezioni già presenti
     updateTagOptions();
     });
 </script>
