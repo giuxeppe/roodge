@@ -85,16 +85,14 @@ class HomeController < ApplicationController
   end
 
   def search 
-    query = params[:query]
-    if query.present?
-      @rooms = Room.where("nome LIKE ?", "%#{params[:query]}%")
-      render json: @rooms
+    if params[:query].present?
+      @rooms = Room.where('nome LIKE ?', "%#{params[:query]}%")
     else
       @rooms = Room.none
     end
 
     respond_to do |format|
-      format.json { render json: @rooms.pluck(:nome)}
+      format.json {render json: @rooms}
     end
   end
 

@@ -30,6 +30,11 @@
                             <div class="user-info" style="font-size: 20px;">- francidp_7</div>
                         </div>
                         <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                        <div class="user-info" id="comment-toggle" style="font-size: 20px; cursor: pointer;">Commenti</div>
+                        <ul class="list-group" id="comments-section" style="display: none;">
+                            <div class="user-info" style="font-size: 20px;">marisol_69: No vabbè epico!</div>
+                            <div class="user-info" style="font-size: 20px;">riccardo_mantegazza: Ci sono errori ortografici</div>
+                        </ul>
                     </div>
                     <div class ="card-body">
                         <div class ="card-body" style="display: flex; padding:0;">
@@ -89,3 +94,19 @@
 
     </div>
 </div>
+
+<script>
+    document.getElementById("comment-toggle").addEventListener("click", function() {
+        var commentSection = document.getElementById("comments-section");
+        if (commentSection.style.display === "none") {
+            commentSection.style.display = "block";
+        } else {
+            commentSection.style.display = "none";
+        }
+    });
+
+    // Con jQuery (se stai utilizzando jQuery nella tua app)
+    $("#comment-toggle").click(function() {
+        $("#comments-section").toggle();
+    });
+</script>

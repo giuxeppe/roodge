@@ -16,9 +16,9 @@
             <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Ricerca Room</h2>
-                <form class="d-flex mb-3" action="javascript:void(0);" id="search-form">
-                    <input type="text" id="room_search" class="form-control me-2" placeholder="Inserisci nome della room..." autocomplete="off">
-                </form>
+                <input type="text" id="room_search" class="form-control me-2" placeholder="Inserisci nome della room..." autocomplete="off">
+                <ul id="room-suggestions">
+                </ul>
 
                 <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
                 </ul>
@@ -97,54 +97,34 @@
     </div>
 </div>
 
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("room_search");
-    const resultsList = document.getElementById("results");
+    const searchInput = document.getElementById('room-search');
+    const suggestionsList = document.getElementById('room-suggestions');
 
-    let timeout = null;
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const query = searchInput.value;
 
-    searchInput.addEventListener("input", function() {
-      clearTimeout(timeout);
-
-      const query = searchInput.value.trim();
-      resultsList.innerHTML = '';
-      resultsList.style.display = 'none';
-
-      if (query.length > 0) {
-        timeout = setTimeout(function() {
-          fetch(`/rooms/search?query=${query}`, {
+        if (query.length > 0) {
+          fetch(`/rooms/search?query=${encodeURIComponent(query)}`, {
             headers: { 'Accept': 'application/json' }
           })
           .then(response => response.json())
           .then(data => {
-            if (data.length > 0) {
-              resultsList.style.display = 'block';
-              data.forEach(function(room) {
-                const li = document.createElement("li");
-                li.textContent = room;
-                li.style.padding = "8px";
-                li.style.cursor = "pointer";
-                li.addEventListener("click", function() {
-                  searchInput.value = room;
-                  resultsList.innerHTML = '';
-                  resultsList.style.display = 'none';
-                });
-                resultsList.appendChild(li);
-              });
-            }
-          })
-          .catch(function(error) {
-            console.error("Errore nella ricerca:", error);
+            suggestionsList.innerHTML = '';
+            
+            data.forEach(room => {
+              const li = document.createElement('li');
+              li.textContent = room.nome;
+              suggestionsList.appendChild(li);
+            });
           });
-        }, 300);
-      }
-    });
-
-    document.addEventListener("click", function(event) {
-      if (!searchInput.contains(event.target) && !resultsList.contains(event.target)) {
-        resultsList.style.display = 'none';
-      }
-    });
+        } else {
+          suggestionsList.innerHTML = '';
+        }
+      });
+    }
   });
 </script>

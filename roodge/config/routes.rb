@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :create_room, only: [:new, :create]
   resources :add_material, only: [:create]
 
-  resources :rooms do
+  resources :rooms, only: [:index] do
     collection do
       get :search
     end
