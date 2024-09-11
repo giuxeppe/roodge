@@ -45,6 +45,9 @@ class HomeController < ApplicationController
   end
 
   def room_logged
+    @room = Room.find(params[:id])
+    @tag_rooms = TagRoom.all
+    @tags = Tag.all
   end
 
   def create_room
