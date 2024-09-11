@@ -48,6 +48,7 @@ class HomeController < ApplicationController
     @room = Room.find(params[:id])
     @tag_rooms = TagRoom.all
     @tags = Tag.all
+    session[:selected_room_id] = @room.id
   end
 
   def create_room
@@ -69,6 +70,18 @@ class HomeController < ApplicationController
   end
 
   def add_material
+    if session[:user_id].present?
+      @user = User.find(session[:user_id])
+      @material = Materiale.new
+
+      if session[:selected_room_id].present?
+        @selected_room = Room.find(session[:selected_room_id])
+      else
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   def search

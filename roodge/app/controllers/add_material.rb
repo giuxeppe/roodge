@@ -1,0 +1,3 @@
+class AddMaterial < ApplicationController
+    
+end

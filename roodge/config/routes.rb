@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get "room_logged/:id", to: "home#room_logged", as: "room_logged"
   get "create_room", to: "home#create_room"
   get "other_user_info", to: "home#other_user_info", as: "other_user_info"
-  get "add_material", to: "home#add_material"
+  get "add_material/:id", to: "home#add_material", as: "add_material"
 
   get 'room', to: 'rooms#index', as: :room
 

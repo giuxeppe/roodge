@@ -20,6 +20,9 @@
             <div class="card-body" style="display: flex">
                 <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
                 <div class="user-info" style="font-size: 20px;"><%= @room.creatore %></div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                </div>
             </div>
             <ul class="list-group">
                 <div class ="card-body">

@@ -15,7 +15,7 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                <h2 class="card-title">Aggiunta materiale per la room NOME ROOM</h2>
+                <h2 class="card-title">Aggiungi materiale per "<%= @selected_room.nome %>"</h2>
                 <%= form_with model: @user, url: create_room_path, method: :post, local: true, multipart: true do |form| %>
         
                     <div class="row mb-3">
@@ -24,28 +24,35 @@
                             <%= form.text_field :titolo, class: "form-control", required: true, pattern: "[A-Za-zÀ-ÖØ-öø-ÿ\s]+", title: "Il nome può contenere solo lettere e spazi" %>
                         </div>
                     </div>
-        
-                    <div class="col-md-12">
-                        <%= form.label :description, "Descrizione", class: "form-label" %>  
-                        <%= form.text_area :description, class: "form-control", rows: 5 %>
+
+                    <div class="row mb-3">        
+                        <div class="col-md-12">
+                            <%= form.label :description, "Descrizione", class: "form-label" %>  
+                            <%= form.text_area :description, class: "form-control", rows: 5 %>
+                        </div>
                     </div>
 
-                    <div class="col-md-9">
-                        AGGIUNGI FILE TALE E QUALE ALLA PROPIC ALLA REGISTRAZIONE
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <%= form.label :allegato, "Allegato", class: "form-label" %>  
+                            <%= form.file_field :allegato, class: "form-control", required: false %>
+                        </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <%= form.label :price, "Prezzo", class: "form-label" %>  
-                        <%= form.number_field :price, class: "form-control", step: "0.01", min: "0", placeholder: "Inserisci il prezzo" %>
-                        LIMITA A UN NUMERO DECIMALE (MAX SECONDA CIFRA DECIMALE) O INTERO MINORE O UGUALE A 999,99
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <%= form.label :price, "Prezzo (in euro)", class: "form-label" %>  
+                            <%= form.number_field :price, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", oninput: "validity.valid||(value='');" %>
+                            <small id="propicHelp" class="form-text text-muted">
+                            <b style="color:lightgray;">Massimo valore (in euro): 999,99</b>
+                            </small>
+                        </div>
                     </div>
                   
-
-                
                     <div class="separator"></div>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <%= form.submit "Avanti", class: "btn btn-dark w-100" %>
+                            <%= form.submit "Aggiungi", class: "btn btn-dark w-100" %>
                         </div>
                     </div>
                 <% end %>        
@@ -56,13 +63,22 @@
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body" style="display: flex; justify-content: center;">
-                    <div class="propic"></div>
-                </div>
+                    <% if @user.propic.attached? %>
+                        <%= image_tag @user.propic, class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% else %>
+                        <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% end %>
+                </div>  
 
                 <div class="card-body">
-                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
-                    <p class="info-user">riccardo_mantegazza</p>
-                    
+                    <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
+                    <p class="info-user">
+                        <%= link_to "#{@user.nome_utente}", info_user_path %>
+                    </p>
+
+                    <%= form_with url: login_path, method: :delete do |form| %>
+                        <%= form.submit "Logout", class: "btn btn-danger" %>
+                    <% end %>
                 </div>
             </div>
         </div>
