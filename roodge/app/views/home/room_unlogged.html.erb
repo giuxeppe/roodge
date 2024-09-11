@@ -19,7 +19,9 @@
                 </div>
                 <div class="card-body" style="display: flex">
                     <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
-                    <div class="user-info" style="font-size: 20px;"><%= @room.creatore %></div>
+                    <div class="user-info" style="font-size: 20px;">
+                        <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
+                    </div>
                 </div>
                 <ul class="list-group">
                     <div class ="card-body">

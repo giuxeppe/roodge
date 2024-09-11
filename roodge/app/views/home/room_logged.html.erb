@@ -19,7 +19,13 @@
             </div>
             <div class="card-body" style="display: flex">
                 <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
-                <div class="user-info" style="font-size: 20px;"><%= @room.creatore %></div>
+                <div class="user-info" style="font-size: 20px;">
+                    <% if @room.creatore == current_user.nome_utente %>
+                        <%= link_to "#{current_user.nome_utente}", info_user_path %>
+                    <% else %>
+                        <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
+                    <% end %>
+                </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
                 </div>
@@ -38,7 +44,7 @@
                         <div class="user-info" style="font-size: 20px;">- mariorossi_</div>
                     </div>
                     <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                </div>
+                </div> 
                 <div class ="card-body">
                     <div class ="card-body" style="display: flex; padding:0;">
                         <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 3&nbsp</div>

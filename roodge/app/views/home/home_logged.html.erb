@@ -16,13 +16,13 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Ricerca Room</h2>
-                    <form class="d-flex mb-3" action="ricerca_room.php" method="get">
-                        <input type="text" class="form-control me-2" placeholder="Inserisci nome della room..." name="query" required>
-                        <button type="submit" class="btn btn-dark">Cerca</button>
-                    </form>
+                    <div class="search-container">
+                        <input type="text" id="search-input" class="form-control" placeholder="Inserisci nome della room...">
+                        <ul id="suggestions-list" class="suggestions-list"></ul>
+                    </div>
                     <h3 class="card-subtitle mb-3">Room Recenti</h3>
                     <ul class="list-group"> 
-                        <% @rooms.each do |room| %>
+                        <% @rooms.each do |room| %> 
                             <li class="list-group-item">
                             <a href="<%= room_logged_path(room) %>" class="text-decoration-none">
                                 <h5 class="mb-1"><%= room.nome %></h5>
@@ -74,3 +74,33 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById('search-input');
+    const suggestionsList = document.getElementById('suggestions-list');
+  
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value;
+  
+      if (query.length > 0) {
+        fetch(`/rooms/search?query=${encodeURIComponent(query)}`, {
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+          suggestionsList.innerHTML = '';
+          data.forEach(room => {
+            const li = document.createElement('li');
+            li.textContent = room.name;
+            suggestionsList.appendChild(li);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+      } else {
+        suggestionsList.innerHTML = '';
+      }
+    });
+  });
+  
+</script>
