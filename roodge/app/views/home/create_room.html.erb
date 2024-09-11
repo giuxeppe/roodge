@@ -67,13 +67,24 @@
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body" style="display: flex; justify-content: center;">
-                    <div class="propic"></div>
-                </div>
+                    <% if @user.propic.attached? %>
+                        <%= image_tag @user.propic, class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% else %>
+                        <%= image_tag "default_profile.png", class: "propic", style: "width: 150px; height: 150px; border-radius: 50%;" %>
+                    <% end %>
+                </div>  
 
                 <div class="card-body">
-                    <h5 class="mb-1" style="font-size: 25px;">Riccardo Mantegazza</h5>
-                    <p class="info-user">riccardo_mantegazza</p>
-                    
+                    <h5 class="mb-1" style="font-size: 25px;"><%= @user.nome %> <%= @user.cognome %></h5>
+                    <p class="info-user">
+                        <%= link_to "#{@user.nome_utente}", info_user_path %>
+                    </p>
+
+                    <%= form_with url: login_path, method: :delete do |form| %>
+                        <%= form.submit "Logout", class: "btn btn-danger" %>
+                    <% end %>
+                    <br>
+                    <%= link_to "Back", :back %>
                 </div>
             </div>
         </div>

@@ -23,23 +23,25 @@
                 <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
                 </ul>
                 <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
-                <a href="/room_unlogged" class="registrazione-link">BARARE ROOM UNLOGGED</a>
-
                 <ul class="list-group"> 
-                <% @rooms.each do |room| %>
-                    <li class="list-group-item">
-                    <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
-                        <h5 class="mb-1"><%= room.nome %></h5>
-                        <div class="tags">
-                          <% @tag_rooms.each do |tag| %>
-                            <% if tag.room == room.id %>
-                              <span class="badge bg-secondary">#<%= tag.tag %></span>
+                  <% @rooms.each do |room| %>
+                      <li class="list-group-item">
+                      <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
+                          <h5 class="mb-1"><%= room.nome %></h5>
+                          <div class="tags">
+                            <% @tag_rooms.each do |tag_room| %>
+                                <% if room.id.to_s == tag_room.room.to_s %>
+                                  <% @tags.each do |tag| %>
+                                    <% if tag.id.to_s == tag_room.tag.to_s%>
+                                      <span class="badge bg-secondary">#<%= tag.nome %></span>
+                                    <% end %>
+                                  <% end %>
+                                <% end %>
                             <% end %>
-                          <% end %>
-                        </div>
-                    </a>
-                    </li>
-                <% end %>
+                          </div>
+                      </a>
+                      </li>
+                  <% end %>
                 </ul>
             </div>
             </div>
@@ -139,7 +141,6 @@
       }
     });
 
-    // Nascondere la lista quando si clicca fuori dalla ricerca
     document.addEventListener("click", function(event) {
       if (!searchInput.contains(event.target) && !resultsList.contains(event.target)) {
         resultsList.style.display = 'none';
