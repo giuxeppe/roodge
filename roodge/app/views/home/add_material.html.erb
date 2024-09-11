@@ -79,6 +79,10 @@
                     <%= form_with url: login_path, method: :delete do |form| %>
                         <%= form.submit "Logout", class: "btn btn-danger" %>
                     <% end %>
+
+                    <br>
+
+                    <%= link_to "Back", :back %>
                 </div>
             </div>
         </div>
