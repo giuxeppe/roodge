@@ -6,14 +6,17 @@ class HomeController < ApplicationController
     @rooms = Room.all
     @tag_rooms = TagRoom.all
     @tags = Tag.all
-    @devise_mapping = Devise.mappings[:user_provider] # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
-    @resource_class = UserProvider # Sostituisci `User` con il tuo modello
-    @resource_name = :user_provider # Sostituisci `:user` con il tuo modello, ad es. `:user_provider` se usi quello
+    @devise_mapping = Devise.mappings[:user_provider]
+    @resource_class = UserProvider
+    @resource_name = :user_provider
   end
 
   def home_logged
     if session[:user_id].present?
       @user = User.find(session[:user_id])
+      @rooms = Room.all
+      @tag_rooms = TagRoom.all
+      @tags = Tag.all
     else
       redirect_to root_path
     end
@@ -36,6 +39,9 @@ class HomeController < ApplicationController
   end
 
   def room_unlogged
+    @room = Room.find(params[:id])
+    @tag_rooms = TagRoom.all
+    @tags = Tag.all
   end
 
   def room_logged

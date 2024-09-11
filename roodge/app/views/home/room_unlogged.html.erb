@@ -4,46 +4,52 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">Nome Room</h2>
+                    <h3 class="card-title"><%= @room.nome %></h3>
                     <div class="tags" style="margin-top: 20px;">
-                        <span class="tag">#tag1</span>
-                        <span class="tag">#tag2</span>
-                        <span class="tag">#tag3</span>
+                        <% @tag_rooms.each do |tag_room| %>
+                            <% if @room.id.to_s == tag_room.room.to_s %>
+                                <% @tags.each do |tag| %>
+                                    <% if tag.id.to_s == tag_room.tag.to_s%>
+                                        <span class="badge bg-secondary">#<%= tag.nome %></span>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
                     </div>
-                    <div class="card-body" style="display: flex; padding:0; margin-top:20px;">
-                        <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
-                        <div class="user-info" style="font-size: 20px;">francidp_7</div>
-                    </div>
-                    <ul class="list-group">
-                        <div class ="card-body">
-                            <div class ="card-body" style="display: flex; padding:0;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
-                                <div class="user-info" style="font-size: 20px;">- francidp_7</div>
-                            </div>
-                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                        </div>
-                        <div class ="card-body">
-                            <div class ="card-body" style="display: flex; padding:0;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 2&nbsp</div>
-                                <div class="user-info" style="font-size: 20px;">- mariorossi_</div>
-                            </div>
-                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                        </div>
-                        <div class ="card-body">
-                            <div class ="card-body" style="display: flex; padding:0;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 3&nbsp</div>
-                                <div class="user-info" style="font-size: 20px;">- flavi_depino5</div>
-                            </div>
-                        </div>
-                        <div class ="card-body">
-                            <div class ="card-body" style="display: flex; padding:0;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 4&nbsp</div>
-                                <div class="user-info" style="font-size: 20px;">- pietrozinni_32</div>
-                            </div>
-                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                        </div>
-                    </ul>
                 </div>
+                <div class="card-body" style="display: flex">
+                    <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
+                    <div class="user-info" style="font-size: 20px;"><%= @room.creatore %></div>
+                </div>
+                <ul class="list-group">
+                    <div class ="card-body">
+                        <div class ="card-body" style="display: flex; padding:0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
+                            <div class="user-info" style="font-size: 20px;">- francidp_7</div>
+                        </div>
+                        <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                    </div>
+                    <div class ="card-body">
+                        <div class ="card-body" style="display: flex; padding:0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 2&nbsp</div>
+                            <div class="user-info" style="font-size: 20px;">- mariorossi_</div>
+                        </div>
+                        <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                    </div>
+                    <div class ="card-body">
+                        <div class ="card-body" style="display: flex; padding:0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 3&nbsp</div>
+                            <div class="user-info" style="font-size: 20px;">- flavi_depino5</div>
+                        </div>
+                    </div>
+                    <div class ="card-body">
+                        <div class ="card-body" style="display: flex; padding:0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 4&nbsp</div>
+                            <div class="user-info" style="font-size: 20px;">- pietrozinni_32</div>
+                        </div>
+                        <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                    </div>
+                </ul>
             </div>
         </div>
 

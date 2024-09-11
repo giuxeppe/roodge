@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post 'registration', to: 'registrations#create'
 
   get "info_user", to: "home#info_user"
-  get "room_unlogged", to: "home#room_unlogged"
+  get 'room_unlogged/:id', to: 'home#room_unlogged', as: 'room_unlogged'
   get "room_logged", to: "home#room_logged"
   get "create_room", to: "home#create_room"
   get "other_user_info", to: "home#other_user_info", as: "other_user_info"
