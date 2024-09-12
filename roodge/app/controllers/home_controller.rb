@@ -92,6 +92,11 @@ class HomeController < ApplicationController
       @tag_rooms = TagRoom.all
       @tags = Tag.all
     end
+
+    def add_comment
+      @user = User.find(session[:user_id])
+      @selected_room = Room.find(session[:selected_room_id])
+    end
   
   end
   

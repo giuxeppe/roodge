@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get 'auth', to: 'home#index'
   
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
+    get "add_comment", to: "home#add_comment"
   
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]
