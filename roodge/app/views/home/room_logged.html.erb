@@ -37,9 +37,17 @@
                         <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
                     <% end %>
                 </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
-                </div>
+                <% if @room.post_utenti == 1 %>
+                    <% if @room.creatore == current_user.nome_utente %>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                    </div>
+                <% end %>
             </div>
             <ul class="list-group">
                 <% @materials.each do |materiale| %>
