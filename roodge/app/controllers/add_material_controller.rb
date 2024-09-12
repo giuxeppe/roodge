@@ -1,5 +1,10 @@
 
 class AddMaterialController < ApplicationController
+
+    def new
+        @material = Materiale.new
+    end
+
     def create
         @room = Room.find(session[:selected_room_id])
 
@@ -7,9 +12,11 @@ class AddMaterialController < ApplicationController
 
         @material = Materiale.new(material_params)
 
+        @material.proprietario = @user.nome_utente
+        @material.room = @room.id
 
         if @material.save
-            redirect_to room_path(@room), notice: "Materiale aggiunto con successo!"
+            redirect_to room_logged_path(@room), notice: "Materiale aggiunto con successo!"
         else
             flash[:alert] = "Errore nella creazione del materiale"
             render :new
@@ -19,6 +26,6 @@ class AddMaterialController < ApplicationController
     private
 
     def material_params
-        params.require(:user).permit(:titolo, :descrizione, :prezzo, :allegato)
+        params.require(:materiale).permit(:titolo, :descrizione, :prezzo, :allegato)
     end
 end

@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                 <h2 class="card-title">Aggiungi materiale per "<%= @selected_room.nome %>"</h2>
-                <%= form_with model: @user, url: add_material_path, method: :post, local: true, multipart: true do |form| %>
+                <%= form_with model: @material, url: add_material_path, method: :post, local: true, multipart: true do |form| %>
         
                     <div class="row mb-3">
                         <div class="col-md-9">
@@ -28,8 +28,8 @@
 
                     <div class="row mb-3">        
                         <div class="col-md-12">
-                            <%= form.label :description, "Descrizione", class: "form-label" %>  
-                            <%= form.text_area :description, class: "form-control", rows: 5 %>
+                            <%= form.label :descrizione, "Descrizione", class: "form-label" %>  
+                            <%= form.text_area :descrizione, class: "form-control", rows: 5 %>
                         </div>
                     </div>
 
@@ -42,8 +42,13 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <%= form.label :prezzo, "Prezzo (in euro)", class: "form-label" %>  
-                            <%= form.number_field :prezzo, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", oninput: "validity.valid||(value='');" %>
+                            <% if @user.ruolo == 's' %>
+                                <%= form.label :prezzo, "Prezzo (in euro)", class: "form-label" %>  
+                                <%= form.number_field :prezzo, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", oninput: "validity.valid||(value='');" %>
+                            <% else %>
+                                <%= form.label :prezzo, "Prezzo (in euro)", class: "form-label" %>
+                                <%= form.number_field :prezzo, class: "form-control", step: "0.01", min: "0", max: "999.99", value: 0, placeholder: "Inserisci il prezzo", readonly: true, oninput: "validity.valid||(value='');" %>
+                            <% end %>
                             <small id="propicHelp" class="form-text text-muted">
                             <b style="color:lightgray;">Massimo valore (in euro): 999,99</b>
                             </small>
@@ -80,6 +85,10 @@
                     <%= form_with url: login_path, method: :delete do |form| %>
                         <%= form.submit "Logout", class: "btn btn-danger" %>
                     <% end %>
+
+                    <br>
+
+                    <%= link_to "Back", :back %>
                 </div>
             </div>
         </div>

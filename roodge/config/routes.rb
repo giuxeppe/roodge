@@ -34,9 +34,9 @@ Rails.application.routes.draw do
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
   
     resources :create_room, only: [:new, :create]
-    resources :add_material, only: [:create]
-    
-    resources :rooms do
+    resources :add_material, only: [:new, :create]
+  
+    resources :rooms, only: [:index] do
       collection do
         post :search
       end
