@@ -25,17 +25,44 @@
                     </div>
                 </div>
                 <ul class="list-group">
-                    <div class ="card-body">
-                        <div class ="card-body" style="display: flex; padding:0;">
-                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
+                    <div class="card-body">
+                        <div class="card-body" style="display: flex; padding: 0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp;</div>
                             <div class="user-info" style="font-size: 20px;">- francidp_7</div>
                         </div>
-                        <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                        <div class="user-info" id="comment-toggle" style="font-size: 20px; cursor: pointer;">Commenti</div>
-                        <ul class="list-group" id="comments-section" style="display: none;">
-                            <div class="user-info" style="font-size: 20px;">marisol_69: No vabbè epico!</div>
-                            <div class="user-info" style="font-size: 20px;">riccardo_mantegazza: Ci sono errori ortografici</div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
+                            <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
+                            <div class="user-info" id="comment-toggle" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
+                        </div>
+                        
+                        <ul class="card-body" id="comments-section" style="display: none;">
+                            <div class="card-body">
+                                <div class="user-info" style="font-size: 20px;">
+                                    <%= link_to "marisol_69", other_user_info_path(nome_utente: "marisol_69") %> - 
+                                    <span class="user-info toggle-answers" style="cursor: pointer; font-size: 20px;">Risposte</span>
+                                </div>
+                                <div class="user-info" style="font-size: 20px; margin-top: 5px;">No vabbè epico!</div>
+                            </div>
+                    
+
+                            <ul class="card-body answers-section" style="display: none;">
+                                <div class="card-body">
+                                    <div class="user-info" style="font-size: 20px;">
+                                        <%= link_to "riccardo_mantegazza", other_user_info_path(nome_utente: "riccardo_mantegazza") %>
+                                    </div>
+                                    <div class="user-info" style="font-size: 20px;">Assolutamente vero</div>
+                                </div>
+                            </ul>
+
+                            <div class="card-body">
+                                <div class="user-info" style="font-size: 20px;">
+                                    <%= link_to "fra_rossi01", other_user_info_path(nome_utente: "fra_rossi01") %>
+                                </div>
+                                <div class="user-info" style="font-size: 20px;">Ci sono errori ortografici</div>
+                            </div>
                         </ul>
+
                     </div>
                     <div class ="card-body">
                         <div class ="card-body" style="display: flex; padding:0;">
@@ -95,19 +122,20 @@
 
     </div>
 </div>
-
+ 
 <script>
     document.getElementById("comment-toggle").addEventListener("click", function() {
         var commentSection = document.getElementById("comments-section");
-        if (commentSection.style.display === "none") {
-            commentSection.style.display = "block";
-        } else {
-            commentSection.style.display = "none";
-        }
+        commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
     });
 
-    // Con jQuery (se stai utilizzando jQuery nella tua app)
-    $("#comment-toggle").click(function() {
-        $("#comments-section").toggle();
+    document.querySelectorAll(".toggle-answers").forEach(function(toggle) {
+        toggle.addEventListener("click", function() {
+            var answersSection = this.closest('.card-body').nextElementSibling;
+
+            if (answersSection && answersSection.tagName === "UL" && answersSection.classList.contains("answers-section")) {
+                answersSection.style.display = answersSection.style.display === "none" ? "block" : "none";
+            }
+        });
     });
 </script>
