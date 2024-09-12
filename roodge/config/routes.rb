@@ -31,14 +31,14 @@ Rails.application.routes.draw do
   
     get 'auth', to: 'home#index'
   
-    get "rooms/search", to: "rooms#search"
+    get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
   
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:create]
-  
-    resources :rooms, only: [:index] do
+    
+    resources :rooms do
       collection do
-        get :search
+        post :search
       end
     end
   end

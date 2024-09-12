@@ -5,7 +5,6 @@ class CreateRoomController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    @room.codice = SecureRandom.hex(10) # Genera un codice casuale
     @room.creatore = current_user.nome_utente
 
     if @room.save

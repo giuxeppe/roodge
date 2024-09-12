@@ -16,35 +16,38 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Ricerca Room</h2>
-                <input type="text" id="room_search" class="form-control me-2" placeholder="Inserisci nome della room..." autocomplete="off">
-                <ul id="room-suggestions">
-                </ul>
 
                 <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
                 </ul>
-                <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
-                <ul class="list-group"> 
-                  <% @rooms.each do |room| %>
-                      <li class="list-group-item">
+
+                <h3 class="card-subtitle mb-3">Rooms Recenti</h3>
+                <ul class="list-group">
+                  <% @rooms.sort_by(&:created_at).reverse.first(3).each do |room| %>
+                    <li class="list-group-item">
                       <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
-                          <h5 class="mb-1"><%= room.nome %></h5>
-                          <div class="tags">
-                            <% @tag_rooms.each do |tag_room| %>
-                                <% if room.id.to_s == tag_room.room.to_s %>
-                                  <% @tags.each do |tag| %>
-                                    <% if tag.id.to_s == tag_room.tag.to_s%>
-                                      <span class="badge bg-secondary">#<%= tag.nome %></span>
-                                    <% end %>
-                                  <% end %>
+                        <h5 class="mb-1"><%= room.nome %></h5>
+                        <div class="tags">
+                          <% @tag_rooms.each do |tag_room| %>
+                            <% if room.id.to_s == tag_room.room.to_s %>
+                              <% @tags.each do |tag| %>
+                                <% if tag.id.to_s == tag_room.tag.to_s %>
+                                  <span class="badge bg-secondary">#<%= tag.nome %></span>
                                 <% end %>
+                              <% end %>
                             <% end %>
-                          </div>
+                          <% end %>
+                        </div>
                       </a>
-                      </li>
+                    </li>
                   <% end %>
                 </ul>
-            </div>
+
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="/all_rooms_unlogged">RICERCA ROOM</a>
+                </h5>
+              </div>
             </div>
         </div>
 
@@ -97,35 +100,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById('room-search');
-    const suggestionsList = document.getElementById('room-suggestions');
-
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        const query = searchInput.value;
-
-        if (query.length > 0) {
-          fetch(`/rooms/search?query=${encodeURIComponent(query)}`, {
-            headers: { 'Accept': 'application/json' }
-          })
-          .then(response => response.json())
-          .then(data => {
-            suggestionsList.innerHTML = '';
-            
-            data.forEach(room => {
-              const li = document.createElement('li');
-              li.textContent = room.nome;
-              suggestionsList.appendChild(li);
-            });
-          });
-        } else {
-          suggestionsList.innerHTML = '';
-        }
-      });
-    }
-  });
-</script>

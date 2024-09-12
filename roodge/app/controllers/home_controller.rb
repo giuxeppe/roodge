@@ -84,17 +84,11 @@ class HomeController < ApplicationController
         redirect_to root_path
       end
     end
-  
-    def search 
-      if params[:query].present?
-        @rooms = Room.where('nome LIKE ?', "%#{params[:query]}%")
-      else
-        @rooms = Room.none
-      end
-  
-      respond_to do |format|
-        format.json {render json: @rooms}
-      end
+
+    def all_rooms_unlogged
+      @rooms = Room.all
+      @tag_rooms = TagRoom.all
+      @tags = Tag.all
     end
   
   end

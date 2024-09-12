@@ -6,7 +6,10 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title"><%= @room.nome %></h3>
-                    <div class="tags" style="margin-top: 20px;">
+                    <div class="card-body" style="padding: 0px;">
+                        <div class="user-info" style="font-size: 20px;">Lorem ipsum dolor bla bla bla</div>
+                    </div>
+                    <div class="tags" style="margin-top: 10px;">
                         <% @tag_rooms.each do |tag_room| %>
                             <% if @room.id.to_s == tag_room.room.to_s %>
                                 <% @tags.each do |tag| %>
@@ -20,7 +23,7 @@
                 </div>
                 <div class="card-body" style="display: flex">
                     <div class="user-info" style="color: #00FFFF; font-size: 20px;">Creatore:&nbsp;</div>
-                    <div class="user-info" style="font-size: 20px;">
+                    <div class="info-user" style="font-size: 20px;">
                         <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
                     </div>
                 </div>
