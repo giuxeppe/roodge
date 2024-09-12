@@ -96,9 +96,19 @@ class HomeController < ApplicationController
     end
 
     def add_commenti
-      @user = User.find(session[:user_id])
-      @selected_room = Room.find(session[:selected_room_id])
-      @materiale = Materiale.find(params[:materiale_id])
+      if session[:user_id].present?
+        @user = User.find(session[:user_id])
+        @commenti = Commenti.new
+  
+        if session[:selected_room_id].present?
+          @selected_room = Room.find(session[:selected_room_id])
+          @materiale = Materiale.find(params[:materiale_id])
+        else
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path
+      end
     end
 
     def all_rooms_logged

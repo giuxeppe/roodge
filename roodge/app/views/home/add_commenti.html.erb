@@ -11,28 +11,28 @@
             <div class="alert alert-warning mt-4" role="alert">
                 <%= flash[:alert] %>
             </div>
-        <% end %>  
+        <% end %>
 
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                <h2 class="card-title">Aggiungi commento per <%= @materiale.titolo %></h2>
-                <%= form_with model: @commenti, url: add_commenti_path(@materiale.id), method: :post, local: true, multipart: true do |form| %>
-                    <div class="row mb-3">        
-                        <div class="col-md-12">
-                            <%= form.label :testo, "Testo del commento", class: "form-label" %>  
-                            <%= form.text_area :testo, class: "form-control", rows: 5 %>
+                    <h2 class="card-title">Aggiungi commento per <%= @materiale.titolo %></h2>
+                    <%= form_with model: @commenti, url: add_commenti_path(@materiale.id), method: :post, local: true do |form| %>
+                        <div class="row mb-3">        
+                            <div class="col-md-12">
+                                <%= form.label :testo, "Testo del commento", class: "form-label" %>  
+                                <%= form.text_area :testo, class: "form-control", rows: 5 %>
+                            </div>
                         </div>
-                    </div>
-                  
-                    <div class="separator"></div>
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <%= form.submit "Aggiungi", class: "btn btn-dark w-100" %>
+                    
+                        <div class="separator"></div>
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <%= form.submit "Aggiungi", class: "btn btn-dark w-100" %>
+                            </div>
                         </div>
-                    </div>
-                <% end %>        
-            </div>
+                    <% end %>
+                </div>
             </div>
         </div> 
 
