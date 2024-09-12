@@ -18,8 +18,7 @@ class AddMaterialController < ApplicationController
         if @material.save
             redirect_to room_logged_path(@room), notice: "Materiale aggiunto con successo!"
         else
-            flash[:alert] = "Errore nella creazione del materiale"
-            render :new
+            redirect_to room_logged_path(@room), alert: "Errore nella creazione del materiale"
         end
     end
 

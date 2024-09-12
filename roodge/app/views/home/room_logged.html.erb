@@ -77,27 +77,16 @@
                         </div>
                         
                         <ul class="card-body" id="comments-section" style="display: none;">
-                            <div class="info-user" style="font-size: 20px;"><a href="/add_comment">COMMENTA</a>
-                            </div>
-                            <div class="card-body">
-                                <div class="user-info" style="font-size: 20px;">
-                                    <%= link_to "marisol_69", other_user_info_path(nome_utente: "marisol_69") %> - 
-                                    <span class="user-info toggle-answers" style="cursor: pointer; font-size: 20px;">Risposte</span>
-                                </div>
-                                <div class="user-info" style="font-size: 20px; margin-top: 5px;">No vabbè epico!</div>
-                            </div>
-                    
-
-                            <ul class="card-body answers-section" style="display: none;">
+                            <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
+                            <% @commenti.each do |commenti| %>
                                 <div class="card-body">
                                     <div class="user-info" style="font-size: 20px;">
-                                        <%= link_to "riccardo_mantegazza", other_user_info_path(nome_utente: "riccardo_mantegazza") %>
+                                        <%= link_to commenti.commentatore, other_user_info_path(nome_utente: commenti.commentatore) %> - 
+                                        <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commenti.testo %></span>
                                     </div>
-                                    <div class="user-info" style="font-size: 20px;">Assolutamente vero</div>
                                 </div>
-                            </ul>
-
-                        
+                            <% end %>
+                        </ul>
                     </div>
                 <% end %>
             </ul>
@@ -137,15 +126,5 @@
     document.getElementById("comment-toggle").addEventListener("click", function() {
         var commentSection = document.getElementById("comments-section");
         commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
-    });
-
-    document.querySelectorAll(".toggle-answers").forEach(function(toggle) {
-        toggle.addEventListener("click", function() {
-            var answersSection = this.closest('.card-body').nextElementSibling;
-
-            if (answersSection && answersSection.tagName === "UL" && answersSection.classList.contains("answers-section")) {
-                answersSection.style.display = answersSection.style.display === "none" ? "block" : "none";
-            }
-        });
     });
 </script>

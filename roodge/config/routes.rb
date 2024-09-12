@@ -32,12 +32,13 @@ Rails.application.routes.draw do
     get 'auth', to: 'home#index'
   
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
-    get "all_rooms_logged", to: "home#all_rooms_logged"
-    get "add_comment", to: "home#add_comment"
+    get "add_commenti/:materiale_id", to: "home#add_commenti", as: :add_commenti
+    post "add_commenti/:materiale_id", to: "add_commenti#create"
     get "payment", to: "home#payment"
-  
+
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]
+    resources :add_commenti, only: [:new, :create]
   
     resources :rooms, only: [:index] do
       collection do
