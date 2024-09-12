@@ -7,12 +7,15 @@ class AddCommentiController < ApplicationController
       @room = Room.find(session[:selected_room_id])
 
       @user = User.find(session[:user_id])
+
+      @materiale = Materiale.find(params[:materiale_id])
       
       @commenti = Commenti.new(commenti_params)
 
       @commenti.proprietario = @room.creatore
       @commenti.commentatore = @user.nome_utente
       @commenti.room = @room.id
+      @commenti.materiale = @materiale.titolo
 
       if @commenti.save
           redirect_to room_logged_path(@room), notice: "Commento aggiunto con successo!"

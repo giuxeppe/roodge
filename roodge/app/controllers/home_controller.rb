@@ -71,6 +71,12 @@ class HomeController < ApplicationController
   
         if session[:selected_room_id].present?
           @selected_room = Room.find(session[:selected_room_id])
+
+          if(@selected_room.post_utenti == 1)
+            if(@selected_room.creatore != @user.nome_utente)
+                redirect_to root_path, alert: "Non puoi aggiungere materiale in questa room"
+            end
+        end
         else
           redirect_to root_path
         end

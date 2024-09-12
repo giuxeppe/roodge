@@ -39,9 +39,17 @@
                         <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
                     <% end %>
                 </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
-                </div>
+                <% if @room.post_utenti == 1 %>
+                    <% if @room.creatore == current_user.nome_utente %>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                    </div>
+                <% end %>
             </div>
             <ul class="list-group">
                 <% @materials.each do |materiale| %>
@@ -73,18 +81,20 @@
                                     Nessun allegato disponibile
                                 </div>
                             <% end %>
-                            <div class="user-info" id="comment-toggle" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
+                            <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
                         </div>
                         
-                        <ul class="card-body" id="comments-section" style="display: none;">
+                        <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
                             <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
-                            <% @commenti.each do |commenti| %>
-                                <div class="card-body">
-                                    <div class="user-info" style="font-size: 20px;">
-                                        <%= link_to commenti.commentatore, other_user_info_path(nome_utente: commenti.commentatore) %> - 
-                                        <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commenti.testo %></span>
+                            <% @commenti.each do |commento| %>
+                                <% if commento.materiale == materiale.titolo %>
+                                    <div class="card-body">
+                                        <div class="user-info" style="font-size: 20px;">
+                                            <%= link_to commento.commentatore, other_user_info_path(nome_utente: commento.commentatore) %> - 
+                                            <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commento.testo %></span>
+                                        </div>
                                     </div>
-                                </div>
+                                <% end %>
                             <% end %>
                         </ul>
                     </div>
@@ -123,8 +133,11 @@
 </div>
 
 <script>
-    document.getElementById("comment-toggle").addEventListener("click", function() {
-        var commentSection = document.getElementById("comments-section");
-        commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
+    document.querySelectorAll("[id^='comment-toggle-']").forEach(function(button) {
+        button.addEventListener("click", function() {
+            var id = this.id.split('-').pop();
+            var commentSection = document.getElementById("comments-section-" + id);
+            commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
+        });
     });
 </script>
