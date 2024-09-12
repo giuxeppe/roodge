@@ -262,5 +262,32 @@
                 tag3Select.style.display = 'none';
             }
         });
+
+        const selects = document.querySelectorAll('.tag-select');
+
+        function updateTagOptions() {
+            const selectedTags = Array.from(selects)
+            .map(select => select.value)
+            .filter(value => value !== "");
+
+            selects.forEach(select => {
+            const currentValue = select.value;
+            const options = select.querySelectorAll('option');
+            
+            options.forEach(option => {
+                if (selectedTags.includes(option.value) && option.value !== currentValue) {
+                option.disabled = true;
+                } else {
+                option.disabled = false;
+                }
+            });
+            });
+        }
+
+        selects.forEach(select => {
+            select.addEventListener('change', updateTagOptions);
+        });
+
+        updateTagOptions();
     });
 </script>
