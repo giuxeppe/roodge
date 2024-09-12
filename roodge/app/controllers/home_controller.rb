@@ -100,6 +100,12 @@ class HomeController < ApplicationController
       @tag_docenti = TagDocente.all
       @tags = Tag.all
       @user = User.find(session[:user_id])
+      @rooms = Room.all
+    end
+
+    def payment
+      @user = User.find(session[:user_id])
+      
     end
   
   end

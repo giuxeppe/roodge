@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
     get "all_rooms_logged", to: "home#all_rooms_logged"
     get "add_comment", to: "home#add_comment"
+    get "payment", to: "home#payment"
   
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]

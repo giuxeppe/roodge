@@ -16,6 +16,8 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title"><%= @room.nome %></h3>
+                <%= link_to 'BARARE', payment_path, class: 'btn btn-primary' %>
+
                 <div class="tags" style="margin-top: 20px;">
                     <% @tag_rooms.each do |tag_room| %>
                         <% if @room.id.to_s == tag_room.room.to_s %>

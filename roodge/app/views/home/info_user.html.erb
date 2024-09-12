@@ -58,7 +58,13 @@
               
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <div class="user-info">
+                            <% @rooms.each do |room| %>
+                                <% if room.creatore == @user.nome_utente %>
+                                    <%= room.nome %>
+                                <% end %>
+                            <% end %>
+                        </div>
                     </div>
                 <% end %>
 
