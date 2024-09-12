@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     get "rooms/search", to: "rooms#search"
   
     resources :create_room, only: [:new, :create]
-    resources :add_material, only: [:create]
+    resources :add_material, only: [:new, :create]
   
     resources :rooms, only: [:index] do
       collection do

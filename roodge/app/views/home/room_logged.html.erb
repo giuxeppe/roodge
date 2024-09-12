@@ -1,6 +1,17 @@
 <div class="container mt-4">
     <div class="row">
 
+    <% if flash[:notice] %>
+        <div class="alert alert-info mt-4" role="alert">
+            <%= flash[:notice] %>
+        </div>
+    <% end %>
+    <% if flash[:alert]%>
+        <div class="alert alert-warning mt-4" role="alert">
+            <%= flash[:alert] %>
+        </div>
+    <% end %>
+
     <div class="col-lg-9 mb-4">
         <div class="card">
             <div class="card-body">
@@ -31,33 +42,35 @@
                 </div>
             </div>
             <ul class="list-group">
-                <div class ="card-body">
-                    <div class ="card-body" style="display: flex; padding:0;">
-                        <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 1&nbsp</div>
-                        <div class="user-info" style="font-size: 20px;">- francidp_7</div>
+                <% @materials.each do |materiale| %>
+                    <div class="card-body">
+                        <div class="card-body" style="display: flex; padding:0;">
+                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
+                                <%= materiale.titolo %>&nbsp
+                            </div>
+
+                            <div class="user-info" style="font-size: 20px;">- <%= materiale.proprietario %></div>
+                        </div>
+
+                        <div class="user-info" style="font-size: 20px;">
+                            <%= materiale.descrizione %>
+                        </div>
+
+                        <div class="user-info" style="font-size: 20px;">
+                            
+                        </div>
+
+                        <% if materiale.allegato.present? %>
+                            <div class="user-info" style="font-size: 20px;">
+                                <%= link_to 'SCARICA ALLEGATO', materiale.allegato, target: "_blank" %>
+                            </div>
+                        <% else %>
+                            <div class="user-info" style="font-size: 20px; color: red;">
+                                Nessun allegato disponibile
+                            </div>
+                        <% end %>
                     </div>
-                    <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                </div>
-                <div class ="card-body">
-                    <div class ="card-body" style="display: flex; padding:0;">
-                        <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 2&nbsp</div>
-                        <div class="user-info" style="font-size: 20px;">- mariorossi_</div>
-                    </div>
-                    <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                </div> 
-                <div class ="card-body">
-                    <div class ="card-body" style="display: flex; padding:0;">
-                        <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 3&nbsp</div>
-                        <div class="user-info" style="font-size: 20px;">- flavi_depino5</div>
-                    </div>
-                </div>
-                <div class ="card-body">
-                    <div class ="card-body" style="display: flex; padding:0;">
-                        <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">Materiale 4&nbsp</div>
-                        <div class="user-info" style="font-size: 20px;">- pietrozinni_32</div>
-                    </div>
-                    <div class="user-info" style="font-size: 20px;">SCARICA ALLEGATO</div>
-                </div>
+                <% end %>
             </ul>
         </div>
     </div>

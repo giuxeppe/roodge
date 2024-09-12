@@ -7,7 +7,7 @@ class CreateMateriales < ActiveRecord::Migration[6.1]
       t.string :descrizione
       t.string :allegato
       t.integer :approvato, null: false, default: 0
-      t.integer :prezzo, null: false, default: 0
+      t.decimal :prezzo, null: false, default: 0
 
       t.timestamps
     end

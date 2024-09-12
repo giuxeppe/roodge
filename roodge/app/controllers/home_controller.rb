@@ -43,6 +43,7 @@ class HomeController < ApplicationController
       @room = Room.find(params[:id])
       @tag_rooms = TagRoom.all
       @tags = Tag.all
+      @materials = Materiale.where(room: @room.id)
     end
   
     def room_logged
@@ -50,6 +51,7 @@ class HomeController < ApplicationController
       @tag_rooms = TagRoom.all
       @tags = Tag.all
       session[:selected_room_id] = @room.id
+      @materials = Materiale.where(room: @room.id)
     end
   
     def create_room
