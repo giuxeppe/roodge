@@ -34,6 +34,6 @@ class CreateRoomController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:nome, :post_utenti, :description)
-  end
+    params.require(:room).permit(:nome, :tag1, :tag2, :tag3, :description, :post_utenti, :codice)
+  end  
 end
