@@ -25,18 +25,18 @@ Rails.application.routes.draw do
     get "room_logged/:id", to: "home#room_logged", as: "room_logged"
     get "create_room", to: "home#create_room"
     get "other_user_info", to: "home#other_user_info", as: "other_user_info"
-    get "add_material", to: "home#add_material"
+    get "add_material/", to: "home#add_material"
   
     get 'room', to: 'rooms#index', as: :room
   
     get 'auth', to: 'home#index'
   
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
-    get "all_rooms_logged", to: "home#all_rooms_logged"
-    get "add_comment", to: "home#add_comment"
-  
+    get "add_commenti/:materiale_id", to: "home#add_commenti", as: "add_commenti"
+    post 'add_commenti/:materiale_id', to: 'home#add_commenti'
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]
+    resources :add_commenti, only: [:new, :create]
   
     resources :rooms, only: [:index] do
       collection do

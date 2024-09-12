@@ -16,17 +16,14 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                <h2 class="card-title">Aggiungi commento per TITOLO MATERIALE</h2>
-                <%= form_with model: @material, url: add_material_path, method: :post, local: true, multipart: true do |form| %>
-        
-
+                <h2 class="card-title">Aggiungi commento per <%= @materiale.titolo %></h2>
+                <%= form_with model: @commenti, url: add_commenti_path(@materiale.id), method: :post, local: true, multipart: true do |form| %>
                     <div class="row mb-3">        
                         <div class="col-md-12">
                             <%= form.label :testo, "Testo del commento", class: "form-label" %>  
                             <%= form.text_area :testo, class: "form-control", rows: 5 %>
                         </div>
                     </div>
-
                   
                     <div class="separator"></div>
                     <div class="row">

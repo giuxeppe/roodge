@@ -53,6 +53,7 @@ class HomeController < ApplicationController
       @tags = Tag.all
       session[:selected_room_id] = @room.id
       @materials = Materiale.where(room: @room.id)
+      @commenti = Commenti.where(room: @room.id)
     end
   
     def create_room
@@ -94,9 +95,10 @@ class HomeController < ApplicationController
       @tags = Tag.all
     end
 
-    def add_comment
+    def add_commenti
       @user = User.find(session[:user_id])
       @selected_room = Room.find(session[:selected_room_id])
+      @materiale = Materiale.find(params[:materiale_id])
     end
 
     def all_rooms_logged
