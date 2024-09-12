@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2024_09_12_103128) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-  end
+  end 
 
   create_table "studente_rooms", force: :cascade do |t|
     t.string "studente", null: false

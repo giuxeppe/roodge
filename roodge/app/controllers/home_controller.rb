@@ -23,20 +23,10 @@ class HomeController < ApplicationController
       end
     end
   
-    def info_student
-      @user = User.find(session[:user_id])
-    end
-  
     def registration
     end
   
     def final_registration
-    end
-  
-    def info_professor
-    end
-  
-    def info_student
     end
   
     def room_unlogged
@@ -120,6 +110,12 @@ class HomeController < ApplicationController
     def all_rooms_logged
       @rooms = Room.all
       @tag_rooms = TagRoom.all
+      @tags = Tag.all
+      @user = User.find(session[:user_id])
+    end
+
+    def info_user
+      @tag_docenti = TagDocente.all
       @tags = Tag.all
       @user = User.find(session[:user_id])
     end
