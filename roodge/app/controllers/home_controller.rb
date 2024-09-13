@@ -44,7 +44,7 @@ class HomeController < ApplicationController
       @materials = Materiale.where(room: @room.id)
       @commenti = Commenti.where(room: @room.id)
       @tag_docente = TagDocente.all
-      @st_room = StudenteRoom.all
+      @st_rooms = StudenteRoom.all
       @ban = Ban.where(room: @room.id)
       @user = User.find(session[:user_id])
       if(@ban.exists?(utente: @user.nome_utente, room: @room.id))
