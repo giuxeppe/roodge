@@ -2,7 +2,7 @@ class MaterialsController < ApplicationController
   def approve
 
     #modificareeee
-    material = Material.find(params[:material_id])
+    material = Materiale.find(params[:material_id])
 
     room_id = params[:room_id]
 
