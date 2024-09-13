@@ -17,6 +17,7 @@
             <div class="card-body">
                 <h3 class="card-title"><%= @room.nome %></h3>
                 <%= link_to 'BARARE', payment_path, class: 'btn btn-primary' %>
+                <div class="user-info" style="font-size: 20px;"><%= @room.description %></div>
 
                 <div class="tags" style="margin-top: 20px;">
                     <% @tag_rooms.each do |tag_room| %>
@@ -54,15 +55,43 @@
             <ul class="list-group">
                 <% @materials.each do |materiale| %>
                     <div class="card-body">
-                        <div class="card-body" style="display: flex; padding:0;">
-                            <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
-                                <%= materiale.titolo %>&nbsp
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; padding: 0;">
+                            <div style="display: flex; align-items: center;">
+                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
+                                    <%= materiale.titolo %>&nbsp;
+                                </div>
+                        
+                                <div class="info-user" style="font-size: 20px;">
+                                    - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
+                                </div>
                             </div>
+                        
+                            <% pin_displayed = false %>
+                            <% @tag_docente.each do |tag_docente| %>
+                                <% break if pin_displayed %>
+                                
+                                <% if tag_docente.docente == materiale.proprietario %>
+                                    <% @tag_rooms.each do |tag_room| %>
+                                        <% if tag_room.room.to_s == @room.id.to_s %>
+                                            <% if tag_docente.tag == tag_room.tag %>
+                                                <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                            <% pin_displayed = true %>
+                                            <% break %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
 
-                            <div class="info-user" style="font-size: 20px;">- 
-                            <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
-                            </div>
+                            <% if pin_displayed == false %>
+                                <%if materiale.approvato == 1 %>
+                                    <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                <% end %>
+                            <% end %>
+
+                              
                         </div>
+                
 
                         <div class="user-info" style="font-size: 20px;">
                             <%= materiale.descrizione %>

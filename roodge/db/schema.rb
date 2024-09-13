@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_12_154759) do
+ActiveRecord::Schema.define(version: 2024_09_13_070507) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,10 +49,8 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
 
   create_table "commentis", force: :cascade do |t|
     t.integer "codice", null: false
-    t.integer "codice", null: false
     t.string "room", null: false
     t.string "proprietario", null: false
-    t.string "titolo", null: false
     t.string "titolo", null: false
     t.string "commentatore", null: false
     t.string "testo"
@@ -76,7 +74,6 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
     t.string "descrizione"
     t.string "allegato"
     t.integer "approvato", default: 0, null: false
-    t.integer "prezzo", default: 0, null: false
     t.integer "prezzo", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -138,7 +135,6 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "full_name", default: "", null: false
     t.string "full_name", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false

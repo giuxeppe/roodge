@@ -44,6 +44,8 @@ class HomeController < ApplicationController
       session[:selected_room_id] = @room.id
       @materials = Materiale.where(room: @room.id)
       @commenti = Commenti.where(room: @room.id)
+      @tag_docente = TagDocente.all
+
     end
   
     def create_room
