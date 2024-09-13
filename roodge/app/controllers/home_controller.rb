@@ -1,4 +1,3 @@
-
 class HomeController < ApplicationController
     def index
       if session[:user_id].present?
@@ -122,9 +121,13 @@ class HomeController < ApplicationController
     end
 
     def payment
+      @material = Materiale.find(params[:materiale_id])
       @user = User.find(session[:user_id])
-      
+    end
+    
+    def confirm_payment
+      @material = Materiale.find(params[:materiale_id])
+      redirect_to room_logged_path(@material.room), notice: "Pagamento effettuato con successo!"
     end
   
-  end
-  
+end

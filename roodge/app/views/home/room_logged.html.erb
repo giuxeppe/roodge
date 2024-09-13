@@ -16,7 +16,6 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title"><%= @room.nome %></h3>
-                <%= link_to 'BARARE', payment_path, class: 'btn btn-primary' %>
 
                 <div class="tags" style="margin-top: 20px;">
                     <% @tag_rooms.each do |tag_room| %>
@@ -58,24 +57,24 @@
                             <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
                                 <%= materiale.titolo %>&nbsp
                             </div>
-
-                            <div class="info-user" style="font-size: 20px;">- 
-                            <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
+                            <div class="info-user" style="font-size: 20px;">-  
+                                <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
                             </div>
-                        </div>
-
+                        </div>             
                         <div class="user-info" style="font-size: 20px;">
                             <%= materiale.descrizione %>
                         </div>
-
-                        <div class="user-info" style="font-size: 20px;">
-                            
-                        </div>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
                             <% if materiale.allegato.present? %>
-                                <div class="user-info" style="font-size: 20px;">
-                                    <%= link_to 'SCARICA ALLEGATO', materiale.allegato, target: "_blank" %>
-                                </div>
+                                <% if materiale.prezzo > 0 %>
+                                    <div class="user-info" style="font-size: 20px;">
+                                        <%= link_to 'Scarica allegato', payment_path(materiale_id: materiale.id) %>
+                                    </div>
+                                <% else %>
+                                    <div class="user-info" style="font-size: 20px;">
+                                        <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                                    </div>
+                                <% end %>
                             <% else %>
                                 <div class="user-info" style="font-size: 20px; color: red;">
                                     Nessun allegato disponibile
@@ -83,7 +82,6 @@
                             <% end %>
                             <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
                         </div>
-                        
                         <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
                             <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
                             <% @commenti.each do |commento| %>
@@ -98,7 +96,7 @@
                             <% end %>
                         </ul>
                     </div>
-                <% end %>
+                <% end %>              
             </ul>
         </div>
     </div> 
