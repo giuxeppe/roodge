@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     get "add_commenti/:materiale_id", to: "home#add_commenti", as: :add_commenti
     post "add_commenti/:materiale_id", to: "add_commenti#create"
     get "payment", to: "home#payment"
+    post 'ban_user', to: 'bans#create', as: 'ban_user'
+    post 'approve_material', to: 'materials#approve', as: 'approve_material'
 
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]
