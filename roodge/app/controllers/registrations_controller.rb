@@ -28,7 +28,7 @@ class RegistrationsController < ApplicationController
     # Creiamo una riga nella tabella tag_docentes per ogni tag selezionato
     [tag1, tag2, tag3].each do |tag|
       if tag.present?
-        TagDocente.create(docente: user.nome_utente, tag: tag)
+        TagDocente.create(docente: user.nome_utente, tag: tag.to_s)
       end
     end
   end
