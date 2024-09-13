@@ -32,8 +32,11 @@ class AddMaterialController < ApplicationController
             @material.approvato = 1
         end
 
-        if(@studente_rooms = StudenteRoom.where(room: @room.id, studente: @user.nome_utente).exists?)
-            @studente_rooms.approvazioni += 1
+        if(StudenteRoom.where(room: @room.id, studente: @user.nome_utente).exists?)
+            @studente_rooms = StudenteRoom.find_by(room: @room.id, studente: @user.nome_utente)
+            @approvazioni = @studente_rooms.approvazioni
+            @approvazioni += 1
+            @studente_rooms.approvazioni = @approvazioni
             @studente_rooms.save
             if(@studente_rooms.approvazioni >= 10)
                 @material.approvato = 1
