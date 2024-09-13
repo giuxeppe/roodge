@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "codice", null: false
     t.string "nome", null: false
     t.string "creatore", null: false
     t.integer "post_utenti", default: 0, null: false
@@ -103,6 +102,9 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.string "tag1"
+    t.string "tag2"
+    t.string "tag3"
   end
 
   create_table "studente_rooms", force: :cascade do |t|
@@ -163,7 +165,7 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
+    t.string "password_digest", null: false
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
