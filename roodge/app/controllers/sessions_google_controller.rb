@@ -17,6 +17,11 @@ class SessionsGoogleController < ApplicationController
     redirect_to root_path, notice: "Logged out!"
   end
 
+  def destroy_google
+    sign_out(current_user)
+    redirect_to root_path, notice: 'Logout di Google effettuato con successo.'
+  end
+
   def failure
     redirect_to root_path, alert: "Authentication failed, please try again."
   end

@@ -2,16 +2,16 @@
 Rails.application.routes.draw do
   
     devise_for :user_providers, controllers: { 
-      registrations: 'user_providers/registrations',
-      sessions: 'user_providers/sessions',
       omniauth_callbacks: 'user_providers/omniauth_callbacks'
     }
-  
+
     root 'home#index'
   
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'login', to: 'sessions#destroy'
+
+    get 'sessions_google/destroy_google', to: 'sessions_google#destroy_google', as: :destroy_google
   
     get 'home_logged', to: 'home#home_logged', as: :home_logged
   

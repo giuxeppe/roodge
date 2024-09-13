@@ -92,6 +92,8 @@
                     <div class="registrazione-link-wrapper d-flex align-items-center justify-content-center">
                         <a href="/registration" class="registrazione-link">Non sei iscritto?<br>Registrati!</a>
                     </div>
+                    <%= link_to 'Logout', destroy_google_path, method: :delete, class: 'btn btn-primary' %>
+
                 </div>
             </div>
         </div>
