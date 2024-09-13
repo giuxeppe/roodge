@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
     get "add_commenti/:materiale_id", to: "home#add_commenti", as: :add_commenti
     post "add_commenti/:materiale_id", to: "add_commenti#create"
-    get "payment", to: "home#payment"
+    
+    get 'payment', to: 'home#payment'
+    post 'confirm_payment', to: 'home#confirm_payment'
     post 'ban_user', to: 'bans#create', as: 'ban_user'
     post 'approve_material', to: 'materials#approve', as: 'approve_material'
 
