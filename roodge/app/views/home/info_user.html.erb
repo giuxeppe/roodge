@@ -43,12 +43,28 @@
 
                 <% if current_user.ruolo == "d" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
-                        <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
-                        <div class="user-info">tag vari</div>
+                        <div class="user-info" style="color: #00FFFF;">Tag associati:&nbsp;</div>
+                        <div class="user-info">
+                            <div class="tags" style="margin-top: 20px;">
+                                <% @tag_docenti.each do |tag_docenti| %>
+                                    <% if @user.nome_utente == tag_docenti.docente %>
+                                        #<%= tag_docenti.tag %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
                     </div>
+              
+              
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <div class="user-info">
+                            <% @rooms.each do |room| %>
+                                <% if room.creatore == @user.nome_utente %>
+                                    <%= room.nome %>
+                                <% end %>
+                            <% end %>
+                        </div>
                     </div>
                 <% end %>
 
@@ -67,4 +83,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> 

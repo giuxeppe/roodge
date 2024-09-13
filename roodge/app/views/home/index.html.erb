@@ -1,3 +1,4 @@
+
 <div class="container mt-4">
     <div class="row"> 
         
@@ -15,35 +16,35 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Ricerca Room</h2>
-                <form class="d-flex mb-3" action="javascript:void(0);" id="search-form">
-                    <input type="text" id="room_search" class="form-control me-2" placeholder="Inserisci nome della room..." autocomplete="off">
-                </form>
 
-                <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
-                </ul>
-                <h3 class="card-subtitle mb-3">Rooms Disponibili</h3>
-                <ul class="list-group"> 
-                  <% @rooms.each do |room| %>
-                      <li class="list-group-item">
+                <h3 class="card-subtitle mb-3">Rooms Recenti</h3>
+                <ul class="list-group">
+                  <% @rooms.sort_by(&:created_at).reverse.first(3).each do |room| %>
+                    <li class="list-group-item">
                       <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
-                          <h5 class="mb-1"><%= room.nome %></h5>
-                          <div class="tags">
-                            <% @tag_rooms.each do |tag_room| %>
-                                <% if room.id.to_s == tag_room.room.to_s %>
-                                  <% @tags.each do |tag| %>
-                                    <% if tag.id.to_s == tag_room.tag.to_s%>
-                                      <span class="badge bg-secondary">#<%= tag.nome %></span>
-                                    <% end %>
-                                  <% end %>
+                        <h5 class="mb-1"><%= room.nome %></h5>
+                        <div class="tags">
+                          <% @tag_rooms.each do |tag_room| %>
+                            <% if room.id.to_s == tag_room.room.to_s %>
+                              <% @tags.each do |tag| %>
+                                <% if tag.id.to_s == tag_room.tag.to_s %>
+                                  <span class="badge bg-secondary">#<%= tag.nome %></span>
                                 <% end %>
+                              <% end %>
                             <% end %>
-                          </div>
+                          <% end %>
+                        </div>
                       </a>
-                      </li>
+                    </li>
                   <% end %>
                 </ul>
-            </div>
+
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="/all_rooms_unlogged">RICERCA ROOM</a>
+                </h5>
+              </div>
             </div>
         </div>
 
@@ -96,55 +97,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById("room_search");
-    const resultsList = document.getElementById("results");
-
-    let timeout = null;
-
-    searchInput.addEventListener("input", function() {
-      clearTimeout(timeout);
-
-      const query = searchInput.value.trim();
-      resultsList.innerHTML = '';
-      resultsList.style.display = 'none';
-
-      if (query.length > 0) {
-        timeout = setTimeout(function() {
-          fetch(`/rooms/search?query=${query}`, {
-            headers: { 'Accept': 'application/json' }
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.length > 0) {
-              resultsList.style.display = 'block';
-              data.forEach(function(room) {
-                const li = document.createElement("li");
-                li.textContent = room;
-                li.style.padding = "8px";
-                li.style.cursor = "pointer";
-                li.addEventListener("click", function() {
-                  searchInput.value = room;
-                  resultsList.innerHTML = '';
-                  resultsList.style.display = 'none';
-                });
-                resultsList.appendChild(li);
-              });
-            }
-          })
-          .catch(function(error) {
-            console.error("Errore nella ricerca:", error);
-          });
-        }, 300);
-      }
-    });
-
-    document.addEventListener("click", function(event) {
-      if (!searchInput.contains(event.target) && !resultsList.contains(event.target)) {
-        resultsList.style.display = 'none';
-      }
-    });
-  });
-</script>

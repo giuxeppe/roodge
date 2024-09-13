@@ -1,4 +1,4 @@
 class Commenti < ApplicationRecord
-  validates :codice, :room, :proprietario, :titolo, presence: true
-  validates :codice, uniqueness: { scope: [:room, :proprietario, :titolo] }
-end
+  validates :room, :proprietario, :testo, presence: true
+  validates :room, uniqueness: { scope: [:proprietario, :testo] }
+end 

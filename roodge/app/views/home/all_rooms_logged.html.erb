@@ -1,52 +1,34 @@
-
 <div class="container mt-4">
     <div class="row">
-
-        <% if flash[:notice] %>
-            <div class="alert alert-info mt-4" role="alert">
-                <%= flash[:notice] %>
-            </div>
-        <% end %>
-        <% if flash[:alert]%>
-            <div class="alert alert-warning mt-4" role="alert">
-                <%= flash[:alert] %>
-            </div>
-        <% end %>
-
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-subtitle mb-3">Room Recenti</h3>
-                    <ul class="list-group"> 
-                        <% @rooms.each do |room| %> 
+
+                    <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
+                    </ul>
+
+                    <h3 class="card-subtitle mb-3">Room più recenti</h3>
+                    <ul class="list-group">
+                        <% @rooms.sort_by(&:nome).each do |room| %>
                             <li class="list-group-item">
                             <a href="<%= room_logged_path(room) %>" class="text-decoration-none">
                                 <h5 class="mb-1"><%= room.nome %></h5>
                                 <div class="tags">
-                                    <% @tag_rooms.each do |tag_room| %>
-                                        <% if room.id.to_s == tag_room.room.to_s %>
-                                        <% @tags.each do |tag| %>
-                                            <% if tag.id.to_s == tag_room.tag.to_s%>
-                                            <span class="badge bg-secondary">#<%= tag.nome %></span>
-                                            <% end %>
-                                        <% end %>
+                                <% @tag_rooms.each do |tag_room| %>
+                                    <% if room.id.to_s == tag_room.room.to_s %>
+                                    <% @tags.each do |tag| %>
+                                        <% if tag.id.to_s == tag_room.tag.to_s %>
+                                        <span class="badge bg-secondary">#<%= tag.nome %></span>
                                         <% end %>
                                     <% end %>
+                                    <% end %>
+                                <% end %>
                                 </div>
                             </a>
                             </li>
                         <% end %>
                     </ul>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="/all_rooms_logged">RICERCA ROOM</a>
-                        </h5>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <% if @user.ruolo == 'd' %>
-                            <%= link_to 'CREA UNA ROOM', create_room_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
-                        <% end %>
-                    </div>
+
                 </div>
             </div>
         </div>

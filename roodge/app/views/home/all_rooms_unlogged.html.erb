@@ -1,0 +1,65 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-9 mb-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <ul id="results" style="list-style-type:none; margin:0; padding:0; border:1px solid #ccc; max-height:200px; overflow-y:auto; position:relative; width:100%; display:none; background-color:white;">
+                    </ul>
+
+                    <h3 class="card-subtitle mb-3">Room più recenti</h3>
+                    <ul class="list-group">
+                        <% @rooms.sort_by(&:nome).each do |room| %>
+                            <li class="list-group-item">
+                            <a href="<%= room_unlogged_path(room) %>" class="text-decoration-none">
+                                <h5 class="mb-1"><%= room.nome %></h5>
+                                <div class="tags">
+                                <% @tag_rooms.each do |tag_room| %>
+                                    <% if room.id.to_s == tag_room.room.to_s %>
+                                    <% @tags.each do |tag| %>
+                                        <% if tag.id.to_s == tag_room.tag.to_s %>
+                                        <span class="badge bg-secondary">#<%= tag.nome %></span>
+                                        <% end %>
+                                    <% end %>
+                                    <% end %>
+                                <% end %>
+                                </div>
+                            </a>
+                            </li>
+                        <% end %>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <h2 class="card-title">Login</h2>
+                        </div>
+                        <form action="<%= login_path %>" method="post">
+                            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100">Accedi</button>
+                        </form>
+                        <div class="text-center my-3">oppure</div>
+                        <div class="d-grid mb-3 d-flex align-items-center justify-content-center">                    
+                            
+                        </div>
+                        <div class="registrazione-link-wrapper d-flex align-items-center justify-content-center">
+                            <a href="/registration" class="registrazione-link">Non sei iscritto?<br>Registrati!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
