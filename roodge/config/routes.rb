@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     
     get 'payment', to: 'home#payment'
     post 'confirm_payment', to: 'home#confirm_payment'
+    post 'ban_user', to: 'bans#create', as: 'ban_user'
+    post 'approve_material', to: 'materials#approve', as: 'approve_material'
 
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]

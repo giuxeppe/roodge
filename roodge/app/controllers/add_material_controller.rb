@@ -17,6 +17,37 @@ class AddMaterialController < ApplicationController
         end
 
         @material = Materiale.new(material_params)
+        @tag_docente = TagDocente.where(docente: @user.nome_utente)
+        @tag_room = TagRoom.where(room: @room.id)
+        @tag_docente.each do |tag|
+            @tag_room.each do |tag2|
+                if(tag.tag == tag2.tag)
+                    @material.approvato = 1
+                    break
+                end
+            end
+        end
+
+        if(@user.nome_utente == @room.creatore)
+            @material.approvato = 1
+        end
+
+        if(StudenteRoom.where(room: @room.id, studente: @user.nome_utente).exists?)
+            @studente_rooms = StudenteRoom.find_by(room: @room.id, studente: @user.nome_utente)
+            @approvazioni = @studente_rooms.approvazioni
+            @approvazioni += 1
+            @studente_rooms.approvazioni = @approvazioni
+            @studente_rooms.save
+            if(@studente_rooms.approvazioni >= 10)
+                @material.approvato = 1
+            end
+        else
+            @studente_rooms = StudenteRoom.new
+            @studente_rooms.room = @room.id
+            @studente_rooms.studente = @user.nome_utente
+            @studente_rooms.approvazioni = 1
+            @studente_rooms.save
+        end
 
         @material.proprietario = @user.nome_utente
         @material.room = @room.id

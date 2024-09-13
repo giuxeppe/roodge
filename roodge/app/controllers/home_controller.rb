@@ -43,6 +43,13 @@ class HomeController < ApplicationController
       session[:selected_room_id] = @room.id
       @materials = Materiale.where(room: @room.id)
       @commenti = Commenti.where(room: @room.id)
+      @tag_docente = TagDocente.all
+      @st_rooms = StudenteRoom.all
+      @ban = Ban.where(room: @room.id)
+      @user = User.find(session[:user_id])
+      if(@ban.exists?(utente: @user.nome_utente, room: @room.id))
+        redirect_to home_logged_path, alert: "Sei stato bannato da questa room"
+      end
     end
   
     def create_room

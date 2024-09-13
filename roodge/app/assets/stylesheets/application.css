@@ -322,4 +322,26 @@ a:hover {
     background-color: white;
     opacity: 8%;
   }
-  
+
+  .green-pin {
+    background-image: url(/assets/green_pin.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1/1;
+}
+
+.yellow-pin {
+    background-image: url(/assets/yellow_pin.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    width: 10%;
+    aspect-ratio: 1/1;
+}

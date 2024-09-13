@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_12_154759) do
+ActiveRecord::Schema.define(version: 2024_09_13_102647) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,10 +48,8 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
   end
 
   create_table "commentis", force: :cascade do |t|
-    t.integer "codice", null: false
     t.string "room", null: false
     t.string "proprietario", null: false
-    t.string "titolo", null: false
     t.string "commentatore", null: false
     t.string "testo"
     t.datetime "created_at", precision: 6, null: false
@@ -74,7 +72,7 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
     t.string "descrizione"
     t.string "allegato"
     t.integer "approvato", default: 0, null: false
-    t.integer "prezzo", default: 0, null: false
+    t.decimal "prezzo", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -92,13 +90,15 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "codice", null: false
     t.string "nome", null: false
     t.string "creatore", null: false
     t.integer "post_utenti", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.string "tag1"
+    t.string "tag2"
+    t.string "tag3"
   end
 
   create_table "studente_rooms", force: :cascade do |t|
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "full_name", default: "", null: false
+    t.string "fullname", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false
     t.string "provider", default: "", null: false
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 2024_09_12_154759) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
+    t.string "password_digest", null: false
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
