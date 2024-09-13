@@ -15,7 +15,10 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">Pagamento per NOME MATERIALE</h2>
+                    <!-- Mostra il titolo del materiale -->
+                    <h2 class="card-title">Pagamento per <%= @material.titolo %></h2>
+                    
+                    <!-- Form di pagamento -->
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <label class="form-label" for="nome-cognome">Nome e cognome del titolare:</label>
@@ -41,10 +44,12 @@
                             <input type="date" id="scadenza" class="form-control" placeholder="MM/YYYY">
                         </div>
                     </div>
-                    <div class = "separator"></div>
+                    
+                    <div class="separator"></div>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <div class="btn btn-dark w-100">Pagamento</div>
+                            <!-- Aggiungiamo il pulsante per confermare il pagamento -->
+                            <%= button_to 'Conferma Pagamento', confirm_payment_path(materiale_id: @material.id), method: :post, class: 'btn btn-dark w-100' %>
                         </div>
                     </div>
                 </div>
