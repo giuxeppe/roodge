@@ -45,6 +45,7 @@ class HomeController < ApplicationController
       @materials = Materiale.where(room: @room.id)
       @commenti = Commenti.where(room: @room.id)
       @tag_docente = TagDocente.all
+      @st_room = StudenteRoom.all
 
     end
   
