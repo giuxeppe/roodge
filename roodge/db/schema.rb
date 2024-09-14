@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end 
+  end
 
   create_table "bans", force: :cascade do |t|
     t.string "utente", null: false
