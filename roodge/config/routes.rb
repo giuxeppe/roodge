@@ -1,7 +1,8 @@
 
 Rails.application.routes.draw do
   
-    devise_for :user_providers, controllers: { 
+    devise_for :user_providers, controllers: {
+      registrations: 'user_providers/registrations',
       omniauth_callbacks: 'user_providers/omniauth_callbacks'
     }
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   
     get 'registration', to: 'registrations#new', as: :registration
     post 'registration', to: 'registrations#create'
-  
+     
     get "info_user", to: "home#info_user"
     get 'room_unlogged/:id', to: 'home#room_unlogged', as: 'room_unlogged'
     get "room_logged/:id", to: "home#room_logged", as: "room_logged"

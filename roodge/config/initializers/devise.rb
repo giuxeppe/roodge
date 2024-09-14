@@ -25,12 +25,12 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :google_oauth2, 
-    Rails.application.credentials.dig(:google_client_id),
-    Rails.application.credentials.dig(:google_client_secret), {
-      scope: 'userinfo.email, userinfo.profile'
-    }
-    
+  config.omniauth :google_oauth2, ENV['google_client_id'], ENV['google_client_secret'], {}
+
+  
+  OmniAuth.config.on_failure = proc do |env|
+      "Users::OmniauthCallbacksController".constantize.action(:failure).call(env)
+    end
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

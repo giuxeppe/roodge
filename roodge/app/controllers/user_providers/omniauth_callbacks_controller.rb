@@ -9,17 +9,19 @@ class UserProviders::OmniauthCallbacksController < Devise::OmniauthCallbacksCont
   # end
 
   def google_oauth2
-    @user_provider = UserProvider.from_omniauth(request.env['omniauth.auth'])
-  
-    if @user_provider.user
-      sign_in_and_redirect @user_provider.user, event: :authentication
-      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
+    @user = UserProvider.from_omniauth(request.env['omniauth.auth'])
+
+    if @user.persisted?
+      sign_in_and_redirect @user
     else
-      redirect_to registration_url, alert: 'Non risulti registrato. Registrati per accedere.'
+      session[:user_google_id] = @user.id
+      redirect_to new_user_provider_registration_path, alert: "#{@user.email} non risulta registrata. Registrati per accedere."
     end
   end
 
   def failure
+    flash[:error] = 'There was an error while trying to authenticate you...'
     redirect_to root_path
   end
+
 end
