@@ -25,12 +25,16 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :google_oauth2, 
+  config.omniauth :google_oauth2,
     Rails.application.credentials.dig(:google_client_id),
-    Rails.application.credentials.dig(:google_client_secret), {
-      scope: 'userinfo.email, userinfo.profile'
-    }
-    
+    Rails.application.credentials.dig(:google_client_secret)
+
+  
+  OmniAuth.config.on_failure = proc do |env|
+      "UserProviders::OmniauthCallbacksController".constantize.action(:failure).call(env)
+    end
+
+  
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -43,6 +47,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
+  
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
