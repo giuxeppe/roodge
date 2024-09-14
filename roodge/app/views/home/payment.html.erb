@@ -15,41 +15,39 @@
         <div class="col-lg-9 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <!-- Mostra il titolo del materiale -->
                     <h2 class="card-title">Pagamento per <%= @material.titolo %></h2>
                     
-                    <!-- Form di pagamento -->
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <label class="form-label" for="nome-cognome">Nome e cognome del titolare:</label>
-                            <input type="text" id="nome-cognome" class="form-control">
+                            <input type="text" id="nome-cognome" class="form-control" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Solo lettere e spazi">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <label class="form-label" for="numero-carta">Numero della carta:</label>
-                            <input type="text" id="numero-carta" class="form-control">
+                            <input type="text" id="numero-carta" class="form-control" required pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}" title="Formato: NNNN NNNN NNNN NNNN">
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <label class="form-label" for="cvv">CVV:</label>
-                            <input type="text" id="cvv" class="form-control">
+                            <input type="text" id="cvv" class="form-control" required pattern="\d{3}" title="Tre cifre">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-9">
                             <label class="form-label" for="scadenza">Scadenza:</label>
-                            <input type="date" id="scadenza" class="form-control" placeholder="MM/YYYY">
+                            <input type="date" id="scadenza" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="separator"></div>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <!-- Aggiungiamo il pulsante per confermare il pagamento -->
-                            <%= button_to 'Conferma Pagamento', confirm_payment_path(materiale_id: @material.id), method: :post, class: 'btn btn-dark w-100' %>
+                            <button type="button" id="conferma-pagamento" data-url="<%= url_for(@material.allegato) %>" class="btn btn-dark w-100">Conferma Pagamento</button>
                         </div>
                     </div>
                 </div>
@@ -85,3 +83,88 @@
 
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const confermaPagamentoButton = document.getElementById('conferma-pagamento');
+  
+    // Funzione per verificare se la data di scadenza è futura
+    function isScadenzaValida() {
+      const scadenza = document.getElementById('scadenza').value;
+      const scadenzaDate = new Date(scadenza);
+      const currentDate = new Date();
+      return scadenzaDate > currentDate;
+    }
+  
+    // Funzione per validare i campi e mostrare un messaggio di errore specifico
+    function validateFields() {
+      let isValid = true;
+      let errorMessage = ''; // Variabile per raccogliere i messaggi di errore
+  
+      const nomeCognome = document.getElementById('nome-cognome');
+      const numeroCarta = document.getElementById('numero-carta');
+      const cvv = document.getElementById('cvv');
+      const scadenza = document.getElementById('scadenza');
+  
+      // Validazione Nome e Cognome
+      if (!nomeCognome.checkValidity()) {
+        nomeCognome.style.border = '2px solid red';
+        errorMessage += 'Il campo "Nome e cognome" deve contenere solo lettere e spazi.\n';
+        isValid = false;
+      } else {
+        nomeCognome.style.border = '2px solid green';
+      }
+  
+      // Validazione Numero della carta
+      if (!numeroCarta.checkValidity()) {
+        numeroCarta.style.border = '2px solid red';
+        errorMessage += 'Il campo "Numero della carta" deve avere il formato NNNN NNNN NNNN NNNN.\n';
+        isValid = false;
+      } else {
+        numeroCarta.style.border = '2px solid green';
+      }
+  
+      // Validazione CVV
+      if (!cvv.checkValidity()) {
+        cvv.style.border = '2px solid red';
+        errorMessage += 'Il campo "CVV" deve contenere esattamente tre cifre.\n';
+        isValid = false;
+      } else {
+        cvv.style.border = '2px solid green';
+      }
+  
+      // Validazione della data di scadenza
+      if (!isScadenzaValida()) {
+        scadenza.style.border = '2px solid red';
+        errorMessage += 'La data di scadenza deve essere futura.\n';
+        isValid = false;
+      } else {
+        scadenza.style.border = '2px solid green';
+      }
+  
+      // Mostra un messaggio di errore completo se ci sono campi non validi
+      if (!isValid) {
+        alert(errorMessage);
+      }
+  
+      return isValid;
+    }
+  
+    // Funzione da eseguire quando si clicca su "Conferma Pagamento"
+    confermaPagamentoButton.addEventListener('click', function() {
+      if (validateFields()) {
+        // Scarica il file direttamente nella cartella "Download" del browser
+        const url = confermaPagamentoButton.getAttribute('data-url');
+        const a = document.createElement('a');
+        a.href = url;
+        a.setAttribute('download', '');  // Questo forza il browser a scaricare il file
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+  
+        // Dopo il download, effettua il redirect alla pagina room_logged con il messaggio di successo
+        window.location.href = "<%= room_logged_path(@material.room, notice: 'Materiale acquistato con successo!') %>";
+      }
+    });
+  });  
+</script>

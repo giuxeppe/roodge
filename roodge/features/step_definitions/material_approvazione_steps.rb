@@ -1,16 +1,15 @@
 # features/step_definitions/material_steps.rb
 
 Dato("che mi sono precedentemente loggato con nome utente {string} e password {string}") do |username, password|
-    visit '/index'
-    
+    visit '/'
     fill_in 'username', with: username
     fill_in 'password', with: password
-    
+ 
     click_button 'Accedi'
 
     @current_username = username
     
-    expect(page).to have_content("Loggato - Room Recenti")
+    expect(page).to have_content("Logged in con Username e Password!")
 end
 
 Dato("che ho associato il tag {string}") do |tag_name|

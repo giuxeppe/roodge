@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_13_172726) do
+ActiveRecord::Schema.define(version: 2024_09_14_080528) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest", null: false
+    t.string "password_digest"
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
