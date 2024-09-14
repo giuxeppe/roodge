@@ -19,18 +19,19 @@ class RegistrationsController < ApplicationController
 
   private
 
-   # Metodo per salvare i tag per il docente
-   def save_tags_for_docente(user)
+  # Metodo per salvare i tag per il docente
+  def save_tags_for_docente(user)
     tag1 = params[:user][:tag1]
     tag2 = params[:user][:tag2]
     tag3 = params[:user][:tag3]
 
-    # Creiamo una riga nella tabella tag_docentes per ogni tag selezionato
-    [tag1, tag2, tag3].each do |tag|
-      if tag.present?
-        TagDocente.create(docente: user.nome_utente, tag: tag.to_s)
+    ActiveRecord::Base.transaction do
+      [tag1, tag2, tag3].each do |tag|
+        if tag.present?
+          TagDocente.create!(docente: user.nome_utente, tag: tag.to_s)
+        end
       end
-    end
+    end    
   end
 
   def user_params
