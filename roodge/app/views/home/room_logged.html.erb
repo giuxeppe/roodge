@@ -10,7 +10,7 @@
         <div class="alert alert-warning mt-4" role="alert">
             <%= flash[:alert] %>
         </div>
-    <% end %>
+    <% end %> 
 
     <div class="col-lg-9 mb-4">
         <div class="card">
@@ -64,15 +64,6 @@
                                     - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            <div class="info-user" style="font-size: 20px;">-  
-                                <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
-                            </div>
-                        </div>             
-                        <div class="user-info" style="font-size: 20px;">
-                            <%= materiale.descrizione %>
-                        </div>
-=======
                         
                             <% pin_displayed = false %>
                             <% @tag_docente.each do |tag_docente| %>
@@ -114,7 +105,6 @@
                         <div class="user-info" style="font-size: 20px;">
                             <%= materiale.descrizione %>
                         </div>
->>>>>>> main
                         <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
                             <% if materiale.allegato.present? %>
                                 <% if materiale.prezzo > 0 %>
@@ -133,8 +123,6 @@
                             <% end %>
                             <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
                         </div>
-<<<<<<< HEAD
-=======
                         <% if current_user.ruolo == "d" %>
                             <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
                                 <% @utente_abilitato = 0 %>
@@ -215,7 +203,6 @@
                             </div>
                         <% end %>
                         
->>>>>>> main
                         <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
                             <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
                             <% @commenti.each do |commento| %>
