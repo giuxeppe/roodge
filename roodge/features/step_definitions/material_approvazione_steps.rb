@@ -44,7 +44,6 @@ Dato("che è presente un materiale non approvato il cui proprietario è {string}
     expect(page).to have_button("Approva materiale"), "Il bottone 'Approva materiale' non esiste\n"
 end
 
-
 Quando("clicco sul bottone {string}") do |nome_bottone|
     click_button(nome_bottone)
 end

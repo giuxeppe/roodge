@@ -1,4 +1,4 @@
-Dato('che mi sono precedentemente loggato con nome utente {string} e password {string}') do |username, password|
+Dato('che mi sono loggato con nome utente {string} e password {string}') do |username, password|
     visit '/'
     fill_in 'username', with: username
     fill_in 'password', with: password
@@ -10,7 +10,7 @@ Dato('che mi sono precedentemente loggato con nome utente {string} e password {s
     expect(page).to have_content("Logged in con Username e Password!")
 end
 
-Dato("che ho associato il tag {string}") do |tag_name|
+Dato("che ho il tag {string}") do |tag_name|
     tag = Tag.find_by(nome: tag_name)
     expect(tag).not_to be_nil, "Il tag '#{tag_name}' non esiste\n"
 
@@ -22,33 +22,50 @@ Dato("che ho associato il tag {string}") do |tag_name|
 end
 
 Dato("che sono nella pagina di creazione di una room, avendo cliccato il bottone {string}") do |button_name|
-    click_button(button_name)
+    click_link(button_name)
     expect(page).to have_content("Creazione Room")
 end
 
 Quando("inserisco {string} come nome della room") do |room_name|
-    fill_in 'nome', with: room_name
+    fill_in 'Nome della room', with: room_name
+    expect(find_field('Nome della room').value).to eq(room_name)
 end
 
 Quando("seleziono il tag {string} come tag1") do |tag_name|
+    tag=Tag.find_by(nome: tag_name)
+    expect(tag).not_to be_nil, "Il tag '#{tag_name}' non esiste\n"
     select(tag_name, from: 'tag1')
     @tag=tag_name
-    if @tag == 'analisi di mercato'
+    selected_tag=find_field('tag1').value
+    expect(selected_tag).to eq(tag.id.to_s)
+    if @tag == 'calcolo combinatorio'
         @message='Room creata con successo.'
     else
         @message='Errore: selezionare almeno un tag che ti appartiene.'
+    end
 end
 
 Quando("seleziono il tag {string} come tag2") do |tag_name|
+    tag=Tag.find_by(nome: tag_name)
+    expect(tag).not_to be_nil, "Il tag '#{tag_name}' non esiste\n"
     select(tag_name, from: 'tag2')
+    @tag=tag_name
+    selected_tag=find_field('tag2').value
+    expect(selected_tag).to eq(tag.id.to_s)
 end
 
 Quando("seleziono il tag {string} come tag3") do |tag_name|
+    tag=Tag.find_by(nome: tag_name)
+    expect(tag).not_to be_nil, "Il tag '#{tag_name}' non esiste\n"
     select(tag_name, from: 'tag3')
+    @tag=tag_name
+    selected_tag=find_field('tag3').value
+    expect(selected_tag).to eq(tag.id.to_s)
 end
 
 Quando("inserisco {string} come descrizione") do |description_text|
-    fill_in 'description', with: description_text
+    fill_in 'Descrizione', with: description_text
+    expect(find_field('Descrizione').value).to eq(description_text)
 end
 
 Quando("clicco il bottone {string}") do |button_name|
