@@ -51,8 +51,13 @@
             
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <%= form.label :mail, "Indirizzo email", class: "form-label" %>  
-                    <%= form.email_field :mail, class: "form-control", required: true, pattern: "[A-Za-z0-9\.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}", title: "La mail deve contenere il carattere @ e non può avere altri simboli al di fuori del .", autocomplete: "email" %>
+                    <% if session[:user_google_email].present? %>
+                        <%= form.label :mail, "Indirizzo emailE", class: "form-label" %>
+                        <%= form.email_field :mail, class: "form-control", required: true, pattern: "[A-Za-z0-9\.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}", title: "La mail deve contenere il carattere @ e non può avere altri simboli al di fuori del .", autocomplete: "email", value: session[:user_google_email], readonly: true %>
+                    <% else %>
+                        <%= form.label :mail, "Indirizzo email", class: "form-label" %>  
+                        <%= form.email_field :mail, class: "form-control", required: true, pattern: "[A-Za-z0-9\.]+@[A-Za-z0-9]+\.[A-Za-z]{2,}", title: "La mail deve contenere il carattere @ e non può avere altri simboli al di fuori del .", autocomplete: "email" %>
+                    <% end %>
                 </div>
                 <div class="col-md-6">
                     <%= form.label :ruolo, "Ruolo", class: "form-label" %>

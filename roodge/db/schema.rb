@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_14_080528) do
+ActiveRecord::Schema.define(version: 2024_09_14_180312) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.string "testo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "materiale"
   end
 
   create_table "cronologia_visitates", force: :cascade do |t|
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.integer "post_utenti", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
     t.string "tag1"
     t.string "tag2"
     t.string "tag3"
@@ -130,7 +132,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "full_name", default: "", null: false
+    t.string "fullname", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false
     t.string "provider", default: "", null: false
@@ -139,12 +141,10 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
     t.string "token"
     t.datetime "expires_at"
     t.index ["email"], name: "index_user_providers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_user_providers_on_reset_password_token", unique: true
-    t.index ["user_id"], name: "index_user_providers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -160,11 +160,13 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
+    t.string "password_digest", null: false
+    t.string "tag1"
+    t.string "tag2"
+    t.string "tag3"
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "user_providers", "users"
 end

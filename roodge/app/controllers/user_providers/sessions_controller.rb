@@ -15,8 +15,8 @@ class UserProviders::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    super
-    redirect_to "https://accounts.google.com/Logout"
+    session[:user_google_email] = nil
+    sign_out(current_user)
   end
 
   def after_sign_out_path_for(_resource_or_scope)

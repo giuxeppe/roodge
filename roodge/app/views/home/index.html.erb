@@ -67,7 +67,7 @@
                         <button type="submit" class="btn btn-dark w-100">Accedi</button>
                     </form>
                     <div class="text-center my-3">oppure</div>
-                    <div class="d-grid mb-3 d-flex align-items-center justify-content-center">                    
+                    <div class="d-grid mb-3 d-flex align-items-center justify-content-center">
                         <% if @devise_mapping.omniauthable? %>
                             <% @resource_class.omniauth_providers.each do |provider| %>
                                 <%= button_to omniauth_authorize_path(@resource_name, provider), data: { turbo: false }, class: "gsi-material-button", method: :post do %>
@@ -92,9 +92,6 @@
                     <div class="registrazione-link-wrapper d-flex align-items-center justify-content-center">
                         <a href="/registration" class="registrazione-link">Non sei iscritto?<br>Registrati!</a>
                     </div>
-                    <%= form_for :user, url: destroy_user_provider_session_path, method: :delete do %>
-                      <%= submit_tag 'Logout', class: 'btn btn-primary' %>
-                    <% end %>
                 </div>
             </div>
         </div>

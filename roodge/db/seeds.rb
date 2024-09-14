@@ -8,6 +8,18 @@
 
 TagDocente.create(docente: 1, tag: 1);
 
+UserProvider.create!(
+  email: 'marchio.1984819@studenti.uniroma1.it',
+  password: 'Prova123!.',
+  fullname: 'John Doe',
+  uid: '1234567890',
+  avatar_url: 'http://example.com/avatar.jpg',
+  provider: 'google',
+  token: 'your_token_here',
+  expires_at: 1.hour.from_now
+)
+
+
 Tag.create(nome: "algebra lineare");
 Tag.create(nome: "analisi di mercato");
 Tag.create(nome: "antropologia");

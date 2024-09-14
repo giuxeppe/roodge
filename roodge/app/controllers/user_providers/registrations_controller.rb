@@ -4,6 +4,28 @@ class UserProviders::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  before_action :require_google_session, only: [:new]
+
+  def new
+    super
+  end
+
+  def create
+    super
+  end
+
+  def edit
+    super
+  end
+
+  private
+
+  def require_google_session
+    unless session[:user_google_email]
+      redirect_to root_path, alert: 'Devi essere autenticato tramite Google per accedere a questa pagina.'
+    end
+  end
+
   # GET /resource/sign_up
   # def new
   #   super

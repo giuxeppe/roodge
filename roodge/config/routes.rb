@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     resources :create_room, only: [:new, :create]
     resources :add_material, only: [:new, :create]
     resources :add_commenti, only: [:new, :create]
+    resources :user_providers, only: [:new, :create]
+
   
     resources :rooms, only: [:index] do
       collection do
