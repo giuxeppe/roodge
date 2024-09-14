@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.string "testo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "materiale"
   end
 
   create_table "cronologia_visitates", force: :cascade do |t|
@@ -160,7 +161,7 @@ ActiveRecord::Schema.define(version: 2024_09_14_080528) do
     t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
+    t.string "password_digest", null: false
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 

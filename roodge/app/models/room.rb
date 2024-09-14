@@ -1,4 +1,3 @@
-
 class Room < ApplicationRecord
     before_save :generate_codice
 
