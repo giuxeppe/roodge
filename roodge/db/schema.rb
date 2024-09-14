@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end 
+  end
 
   create_table "bans", force: :cascade do |t|
     t.string "utente", null: false
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
     t.string "testo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "materiale"
   end
 
   create_table "cronologia_visitates", force: :cascade do |t|
@@ -90,13 +89,11 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "codice", null: false
     t.string "nome", null: false
     t.string "creatore", null: false
     t.integer "post_utenti", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "description"
     t.string "tag1"
     t.string "tag2"
     t.string "tag3"
@@ -133,7 +130,7 @@ ActiveRecord::Schema.define(version: 2024_09_13_172726) do
   create_table "user_providers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "fullname", default: "", null: false
+    t.string "full_name", default: "", null: false
     t.string "uid", default: "", null: false
     t.string "avatar_url", default: "", null: false
     t.string "provider", default: "", null: false
