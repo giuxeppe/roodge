@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
     def destroy
       @rooms = Room.all
       session[:user_id] = nil
+      sign_out(current_user)
       redirect_to root_path, notice: "Logged effettuato con successo!"
     end
 
