@@ -19,6 +19,7 @@ class SessionsGoogleController < ApplicationController
 
   def destroy_google
     sign_out(current_user)
+    session[:user_google_email] = nil
     redirect_to root_path, notice: 'Logout di Google effettuato con successo.'
   end
 
