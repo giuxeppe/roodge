@@ -9,41 +9,17 @@ class UserProviders::OmniauthCallbacksController < Devise::OmniauthCallbacksCont
   # end
 
   def google_oauth2
-    user = UserProvider.from_omniauth(auth)
-
-    if user.present?
-      sign_out_all_scopes
-      flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
-      sign_in_and_redirect user, event: :authentication
+    @user_provider = UserProvider.from_omniauth(request.env['omniauth.auth'])
+  
+    if @user_provider.user
+      sign_in_and_redirect @user_provider.user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
-      flash[:error] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
-      redirect_to new_user_provider_session_path
+      redirect_to registration_url, alert: 'Non risulti registrato. Registrati per accedere.'
     end
   end
 
-  # More info at:
-  # https://github.com/heartcombo/devise#omniauth
-
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
-
-  # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
-
-  # protected
-
-  # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
-
-  private 
-
-  def auth
-    @auth ||= request.env['omniauth.auth']
+  def failure
+    redirect_to root_path
   end
 end
