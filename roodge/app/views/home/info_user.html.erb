@@ -60,10 +60,10 @@
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
                         <div class="user-info">
-                            <% @rooms.each do |room| %>
-                                <% if room.creatore == @user.nome_utente %>
-                                    <%= room.nome %>
-                                <% end %>
+                            <% @rooms.select { |room| room.creatore == @user.nome_utente }.each do |room| %>
+                                <div class="info-user" style="font-size: 25px">
+                                    <%= link_to room.nome, room_logged_path(room) %>
+                                </div>
                             <% end %>
                         </div>
                     </div>
@@ -71,8 +71,8 @@
 
                 <div class="card-body">
                     <div class="user-info-title">Informazioni aggiuntive</div>
-                    <% if current_user.bio %>
-                        <div class="user-info"><%= current_user.bio %></div>
+                    <% if @user.bio %>
+                        <div class="user-info"><%= @user.bio %></div>
                     <% else %>
                         <div class="user-info">Nessuna informazione aggiuntiva</div>
                     <% end %>

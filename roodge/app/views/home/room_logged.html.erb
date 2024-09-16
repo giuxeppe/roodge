@@ -39,15 +39,17 @@
                         <%= link_to "#{@room.creatore}", other_user_info_path(nome_utente: @room.creatore) %>
                     <% end %>
                 </div>
+            </div>
+            <div class="card-body d-flex align-items-center justify-content-center" style="padding-top: 10px">
                 <% if @room.post_utenti == 1 %>
                     <% if @room.creatore == current_user.nome_utente %>
                         <div class="d-flex align-items-center justify-content-center">
-                            <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                            <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg'%>
                         </div>
                     <% end %>
                 <% else %>
                     <div class="d-flex align-items-center justify-content-center">
-                        <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg', style: 'margin-top: 25px;' %>
+                        <%= link_to 'AGGIUNGI MATERIALE', add_material_path, class: 'btn btn-primary btn-lg' %>
                     </div>
                 <% end %>
             </div>
@@ -106,7 +108,8 @@
                             <% if materiale.allegato.present? %>
                                 <% if materiale.prezzo > 0 %>
                                     <div class="user-info" style="font-size: 20px;">
-                                        <%= link_to 'Scarica allegato', payment_path(materiale_id: materiale.id) %>
+                                        <%= link_to 'Scarica allegato a pagamento', payment_path(materiale_id: materiale.id)%>
+                                        <span class="user-info" style="font-size: 20px; margin-left: 10px;">- Prezzo: €<%= materiale.prezzo %></span>
                                     </div>
                                 <% else %>
                                     <div class="user-info" style="font-size: 20px;">
