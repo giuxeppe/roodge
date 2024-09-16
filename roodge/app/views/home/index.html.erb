@@ -42,7 +42,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title">
-                  <a href="/all_rooms_unlogged">RICERCA ROOM</a>
+                  <%= link_to "ELENCO ROOM", all_rooms_unlogged_path %>
                 </h5>
               </div>
             </div>
@@ -90,7 +90,7 @@
                         <% end %>
                     </div>
                     <div class="registrazione-link-wrapper d-flex align-items-center justify-content-center">
-                        <a href="/registration" class="registrazione-link">Non sei iscritto?<br>Registrati!</a>
+                        <%= link_to "Non sei iscritto?<br>Registrati!".html_safe, registration_path, class: "registrazione-link" %>
                     </div>
                 </div>
             </div>

@@ -45,10 +45,11 @@
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Tag associati:&nbsp;</div>
                         <div class="user-info">
-                            <div class="tags" style="margin-top: 20px;">
-                                <% @tag_docenti.each do |tag_docenti| %>
-                                    <% if @user.nome_utente == tag_docenti.docente %>
-                                        #<%= tag_docenti.tag %>
+                            <div class="tags">
+                                <% @tag_docenti.each do |tag_docente| %>
+                                    <% nome_tag = Tag.find_by(id: tag_docente.tag) %>
+                                    <% if nome_tag && @user.nome_utente == tag_docente.docente %>
+                                        #<span style="margin-right: 10px;"><%= nome_tag.nome %></span>
                                     <% end %>
                                 <% end %>
                             </div>
@@ -69,8 +70,12 @@
                 <% end %>
 
                 <div class="card-body">
-                    <div class="user-info-title">Informazioni</div>
-                    <div class="user-info"><%= current_user.bio %></div>
+                    <div class="user-info-title">Informazioni aggiuntive</div>
+                    <% if current_user.bio %>
+                        <div class="user-info"><%= current_user.bio %></div>
+                    <% else %>
+                        <div class="user-info">Nessuna informazione aggiuntiva</div>
+                    <% end %>
                 </div>
                 <div class="card-body">
                     <%= form_with url: login_path, method: :delete do |form| %>

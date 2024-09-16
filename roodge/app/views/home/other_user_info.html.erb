@@ -45,11 +45,24 @@
                 <% if @other_user.ruolo == "d" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
-                        <div class="user-info">tag vari</div>
+                        <div class="user-info">
+                            <div class="tags">
+                                <% @tag_docenti.each do |tag_docente| %>
+                                    <% nome_tag = Tag.find_by(id: tag_docente.tag) %>
+                                    <% if nome_tag && @other_user.nome_utente == tag_docente.docente %>
+                                        #<span style="margin-right: 10px;"><%= nome_tag.nome %></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        
+                        <div class="user-info">
+                            <% room_names = @rooms.select { |room| room.creatore == @other_user.nome_utente }.map(&:nome) %>
+                            <%= room_names.join(", ") %>
+                        </div>
                     </div>
                 <% end %>
 

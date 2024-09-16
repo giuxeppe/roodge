@@ -34,6 +34,10 @@ class HomeController < ApplicationController
       @tags = Tag.all
       session[:selected_room_id] = @room.id
       @materials = Materiale.where(room: @room.id)
+      @devise_mapping = Devise.mappings[:user_provider]
+      @resource_class = UserProvider
+      @resource_name = :user_provider
+      @commenti = Commenti.where(room: @room.id)
     end
   
     def room_logged
@@ -68,6 +72,8 @@ class HomeController < ApplicationController
     def other_user_info
       @other_user = User.find_by(nome_utente: params[:nome_utente])
       session[:selected_user] = @other_user.nome_utente
+      @tag_docenti = TagDocente.all
+      @rooms = Room.all
     end
   
     def add_material
@@ -95,6 +101,9 @@ class HomeController < ApplicationController
       @rooms = Room.all
       @tag_rooms = TagRoom.all
       @tags = Tag.all
+      @devise_mapping = Devise.mappings[:user_provider]
+      @resource_class = UserProvider
+      @resource_name = :user_provider
     end
 
     def add_commenti
