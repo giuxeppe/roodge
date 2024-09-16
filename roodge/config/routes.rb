@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get 'auth', to: 'home#index'
   
     get "all_rooms_unlogged", to: "home#all_rooms_unlogged"
+    get "all_rooms_logged", to: "home#all_rooms_logged"
     get "add_commenti/:materiale_id", to: "home#add_commenti", as: :add_commenti
     post "add_commenti/:materiale_id", to: "add_commenti#create"
     

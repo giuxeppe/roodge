@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2024_09_14_180312) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "materiale"
-    t.string "materiale"
   end
 
   create_table "cronologia_visitates", force: :cascade do |t|
@@ -168,6 +167,4 @@ ActiveRecord::Schema.define(version: 2024_09_14_180312) do
     t.index ["nome_utente"], name: "index_users_on_nome_utente", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end

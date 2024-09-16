@@ -25,6 +25,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -36,7 +37,8 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails', require: false
+  gem 'cucumber'
+  gem 'cucumber-rails'
   gem 'database_cleaner-active_record'
   gem 'capybara'
   gem 'selenium-webdriver'
