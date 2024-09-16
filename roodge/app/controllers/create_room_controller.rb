@@ -5,6 +5,7 @@ class CreateRoomController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+    @room.codice = SecureRandom.hex(10) if @room.codice.blank?
     @room.creatore = current_user.nome_utente
 
     # Otteniamo i tag selezionati nel form
