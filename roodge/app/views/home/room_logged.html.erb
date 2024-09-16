@@ -54,147 +54,305 @@
                 <% end %>
             </div>
             <ul class="list-group">
-                <% @materials.each do |materiale| %>
-                    <div class="card-body">
-                        <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; padding: 0;">
-                            <div style="display: flex; align-items: center;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
-                                    <%= materiale.titolo %>&nbsp;
-                                </div>
-                        
-                                <div class="info-user" style="font-size: 20px;">
-                                    - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
-                                </div>
-                            </div>
-                        
-                            <% pin_displayed = false %>
-                            <%if materiale.approvato == 1 %>
-                                <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
-                                <% pin_displayed = true %>
-                            <% end %>
+                
+                <li class="list-group-item">
+                    <div class="form-check">
+                        <input type="checkbox" id="checkbox-materials" class="form-check-input">
+                        <label for="checkbox-materials" class="form-check-label white-text">Visualizza solo i materiali approvati</label>
+                    </div>
+                </li>
 
-                            <% if pin_displayed == false %>
-                                <% @st_rooms.each do |st_room| %>
-                                    <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
-                                        <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
-                                            <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                            <% end %>                              
-                        </div>
-
-                        <div class="user-info" style="font-size: 20px;">
-                            <%= materiale.descrizione %>
-                        </div>
-                        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
-                            <% if materiale.allegato.present? %>
-                                <% if materiale.prezzo > 0 %>
-                                    <div class="user-info" style="font-size: 20px;">
-                                        <%= link_to 'Scarica allegato a pagamento', payment_path(materiale_id: materiale.id)%>
-                                        <span class="user-info" style="font-size: 20px; margin-left: 10px;">- Prezzo: €<%= materiale.prezzo %></span>
+                <div id="details" style="display: none;">
+                    <% @materials.each do |materiale| %>
+                        <% if materiale.approvato == 0 %>
+                            <% next %>
+                        <% end %>
+                        <div class="card-body">
+                            <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; padding: 0;">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
+                                        <%= materiale.titolo %>&nbsp;
                                     </div>
-                                <% else %>
-                                    <div class="user-info" style="font-size: 20px;">
-                                        <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                            
+                                    <div class="info-user" style="font-size: 20px;">
+                                        - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
                                     </div>
-                                <% end %>
-                            <% else %>
-                                <div class="user-info" style="font-size: 20px; color: red;">
-                                    Nessun allegato disponibile
                                 </div>
-                            <% end %>
-                            <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
-                        </div>
-                        <% if current_user.ruolo == "d" %>
-                            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
-                                <% @utente_abilitato = 0 %>
-                                <% @tag_docente = TagDocente.where(docente: current_user.nome_utente) %>
-                                <% @tag_room = TagRoom.where(room: @room.id) %>
-                                <% @tag_docente.each do |tag_docente| %>
-                                    <% @tag_room.each do |tag_room| %>
-                                        <% if tag_docente.tag == tag_room.tag %>
-                                            <% @utente_abilitato = 1 %>
-                                        <% end %>
-                                    <% end %>
+                            
+                                <% pin_displayed = false %>
+                                <%if materiale.approvato == 1 %>
+                                    <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                    <% pin_displayed = true %>
                                 <% end %>
-                                <% if @utente_abilitato == 1 %>
-                                    <% if !@ban.exists?(utente: materiale.proprietario, room: @room.id) %>
-                                        <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
-                                            
-                                        <% else %>
-                                            <%= form_with url: approve_material_path, method: :post do %>
-                                                <%= hidden_field_tag :material_id, materiale.id %>
-                                                <%= hidden_field_tag :user_id, @user.id %>
-                                                <%= hidden_field_tag :room_id, @room.id %>
-                                                <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+
+                                <% if pin_displayed == false %>
+                                    <% @st_rooms.each do |st_room| %>
+                                        <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
+                                            <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
+                                                <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
                                             <% end %>
                                         <% end %>
                                     <% end %>
+                                <% end %>                              
+                            </div>
 
-                                    <% if current_user.nome_utente == @room.creatore %>
-                                        <% if materiale.proprietario != current_user.nome_utente %>
-                                            <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
-                                                <div class="bg-danger text-white text-center p-3">
-                                                    Utente già bannato!
-                                                </div>
+                            <div class="user-info" style="font-size: 20px;">
+                                <%= materiale.descrizione %>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
+                                <% if materiale.allegato.present? %>
+                                    <% if materiale.prezzo > 0 %>
+                                        <div class="user-info" style="font-size: 20px;">
+                                            <%= link_to 'Scarica allegato a pagamento', payment_path(materiale_id: materiale.id)%>
+                                            <span class="user-info" style="font-size: 20px; margin-left: 10px;">- Prezzo: €<%= materiale.prezzo %></span>
+                                        </div>
+                                    <% else %>
+                                        <div class="user-info" style="font-size: 20px;">
+                                            <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                                        </div>
+                                    <% end %>
+                                <% else %>
+                                    <div class="user-info" style="font-size: 20px; color: red;">
+                                        Nessun allegato disponibile
+                                    </div>
+                                <% end %>
+                                <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
+                            </div>
+                            <% if current_user.ruolo == "d" %>
+                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
+                                    <% @utente_abilitato = 0 %>
+                                    <% @tag_docente = TagDocente.where(docente: current_user.nome_utente) %>
+                                    <% @tag_room = TagRoom.where(room: @room.id) %>
+                                    <% @tag_docente.each do |tag_docente| %>
+                                        <% @tag_room.each do |tag_room| %>
+                                            <% if tag_docente.tag == tag_room.tag %>
+                                                <% @utente_abilitato = 1 %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                    <% if @utente_abilitato == 1 %>
+                                        <% if !@ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
+                                                
                                             <% else %>
-                                                <%= form_with url: ban_user_path, method: :post do %>
-                                                    <%= hidden_field_tag :user_nome_utente, materiale.proprietario %>
+                                                <%= form_with url: approve_material_path, method: :post do %>
+                                                    <%= hidden_field_tag :material_id, materiale.id %>
+                                                    <%= hidden_field_tag :user_id, @user.id %>
                                                     <%= hidden_field_tag :room_id, @room.id %>
-                                                    <%= submit_tag "Bandisci utente", class: "btn btn-danger" %>
+                                                    <%= submit_tag "Approva materiale", class: "btn btn-success" %>
                                                 <% end %>
                                             <% end %>
                                         <% end %>
-                                    <% end %>
 
-                                <% else %>
-                                    <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
-                                        <div class="bg-danger text-white text-center p-3">
-                                            Utente già bannato!
-                                        </div>
+                                        <% if current_user.nome_utente == @room.creatore %>
+                                            <% if materiale.proprietario != current_user.nome_utente %>
+                                                <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                                    <div class="bg-danger text-white text-center p-3">
+                                                        Utente già bannato!
+                                                    </div>
+                                                <% else %>
+                                                    <%= form_with url: ban_user_path, method: :post do %>
+                                                        <%= hidden_field_tag :user_nome_utente, materiale.proprietario %>
+                                                        <%= hidden_field_tag :room_id, @room.id %>
+                                                        <%= submit_tag "Bandisci utente", class: "btn btn-danger" %>
+                                                    <% end %>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>
+
                                     <% else %>
-                                        <% if materiale.approvato == 1 %>
-                                            
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% else %>
+                                            <% if materiale.approvato == 1 %>
+                                                
+                                            <% end %>
                                         <% end %>
                                     <% end %>
+                                </div>
+                            <% else %>
+                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
+                                    <% if materiale.approvato == 1 %>
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% else %>
+                                            
+                                        <% end %>
+                                    <% else %>
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                            
+                            <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
+                                <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
+                                <% @commenti.each do |commento| %>
+                                    <% if commento.materiale == materiale.titolo %>
+                                        <div class="card-body">
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to commento.commentatore, other_user_info_path(nome_utente: commento.commentatore) %> - 
+                                                <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commento.testo %></span>
+                                            </div>
+                                        </div>
+                                    <% end %>
                                 <% end %>
+                            </ul>
+                        </div>
+                    <% end %>
+                </div>
+
+
+                <div id="all_details" style="display: block;">
+                    <% @materials.each do |materiale| %>
+                        <div class="card-body">
+                            <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; padding: 0;">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
+                                        <%= materiale.titolo %>&nbsp;
+                                    </div>
+                            
+                                    <div class="info-user" style="font-size: 20px;">
+                                        - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
+                                    </div>
+                                </div>
+                            
+                                <% pin_displayed = false %>
+                                <%if materiale.approvato == 1 %>
+                                    <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                    <% pin_displayed = true %>
+                                <% end %>
+
+                                <% if pin_displayed == false %>
+                                    <% @st_rooms.each do |st_room| %>
+                                        <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
+                                            <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
+                                                <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>                              
                             </div>
-                        <% else %>
-                            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
-                                <% if materiale.approvato == 1 %>
-                                    <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
-                                        <div class="bg-danger text-white text-center p-3">
-                                            Utente già bannato!
+
+                            <div class="user-info" style="font-size: 20px;">
+                                <%= materiale.descrizione %>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
+                                <% if materiale.allegato.present? %>
+                                    <% if materiale.prezzo > 0 %>
+                                        <div class="user-info" style="font-size: 20px;">
+                                            <%= link_to 'Scarica allegato a pagamento', payment_path(materiale_id: materiale.id)%>
+                                            <span class="user-info" style="font-size: 20px; margin-left: 10px;">- Prezzo: €<%= materiale.prezzo %></span>
                                         </div>
                                     <% else %>
-                                        
+                                        <div class="user-info" style="font-size: 20px;">
+                                            <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                                        </div>
                                     <% end %>
                                 <% else %>
-                                    <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
-                                        <div class="bg-danger text-white text-center p-3">
-                                            Utente già bannato!
+                                    <div class="user-info" style="font-size: 20px; color: red;">
+                                        Nessun allegato disponibile
+                                    </div>
+                                <% end %>
+                                <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
+                            </div>
+                            <% if current_user.ruolo == "d" %>
+                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
+                                    <% @utente_abilitato = 0 %>
+                                    <% @tag_docente = TagDocente.where(docente: current_user.nome_utente) %>
+                                    <% @tag_room = TagRoom.where(room: @room.id) %>
+                                    <% @tag_docente.each do |tag_docente| %>
+                                        <% @tag_room.each do |tag_room| %>
+                                            <% if tag_docente.tag == tag_room.tag %>
+                                                <% @utente_abilitato = 1 %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                    <% if @utente_abilitato == 1 %>
+                                        <% if !@ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
+                                                
+                                            <% else %>
+                                                <%= form_with url: approve_material_path, method: :post do %>
+                                                    <%= hidden_field_tag :material_id, materiale.id %>
+                                                    <%= hidden_field_tag :user_id, @user.id %>
+                                                    <%= hidden_field_tag :room_id, @room.id %>
+                                                    <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>
+
+                                        <% if current_user.nome_utente == @room.creatore %>
+                                            <% if materiale.proprietario != current_user.nome_utente %>
+                                                <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                                    <div class="bg-danger text-white text-center p-3">
+                                                        Utente già bannato!
+                                                    </div>
+                                                <% else %>
+                                                    <%= form_with url: ban_user_path, method: :post do %>
+                                                        <%= hidden_field_tag :user_nome_utente, materiale.proprietario %>
+                                                        <%= hidden_field_tag :room_id, @room.id %>
+                                                        <%= submit_tag "Bandisci utente", class: "btn btn-danger" %>
+                                                    <% end %>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>
+
+                                    <% else %>
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% else %>
+                                            <% if materiale.approvato == 1 %>
+                                                
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            <% else %>
+                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 10px;">
+                                    <% if materiale.approvato == 1 %>
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% else %>
+                                            
+                                        <% end %>
+                                    <% else %>
+                                        <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>
+                                            <div class="bg-danger text-white text-center p-3">
+                                                Utente già bannato!
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                            
+                            <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
+                                <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
+                                <% @commenti.each do |commento| %>
+                                    <% if commento.materiale == materiale.titolo %>
+                                        <div class="card-body">
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to commento.commentatore, other_user_info_path(nome_utente: commento.commentatore) %> - 
+                                                <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commento.testo %></span>
+                                            </div>
                                         </div>
                                     <% end %>
                                 <% end %>
-                            </div>
-                        <% end %>
-                        
-                        <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
-                            <div class="info-user" style="font-size: 20px;"><%= link_to 'COMMENTA', add_commenti_path(materiale.id) %></div>
-                            <% @commenti.each do |commento| %>
-                                <% if commento.materiale == materiale.titolo %>
-                                    <div class="card-body">
-                                        <div class="user-info" style="font-size: 20px;">
-                                            <%= link_to commento.commentatore, other_user_info_path(nome_utente: commento.commentatore) %> - 
-                                            <span class="user-info" style="font-size: 20px; margin-top: 5px;"><%= commento.testo %></span>
-                                        </div>
-                                    </div>
-                                <% end %>
-                            <% end %>
-                        </ul>
-                    </div>
-                <% end %>              
+                            </ul>
+                        </div>
+                    <% end %>
+                </div>
             </ul>
         </div>
     </div> 
@@ -229,11 +387,32 @@
 </div>
 
 <script>
+
     document.querySelectorAll("[id^='comment-toggle-']").forEach(function(button) {
         button.addEventListener("click", function() {
             var id = this.id.split('-').pop();
             var commentSection = document.getElementById("comments-section-" + id);
             commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('checkbox-materials');
+        const all_details = document.getElementById('all_details');
+        const details = document.getElementById('details');
+
+        function updateUI() {
+            if(checkbox.checked) {
+                details.style.display = 'block';
+                all_details.style.display = 'none';
+            } else {
+                details.style.display = 'none';
+                all_details.style.display = 'block';
+            }
+        }
+
+        checkbox.addEventListener('change', updateUI);
+
+        updateUI();
     });
 </script>
