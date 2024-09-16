@@ -1,10 +1,8 @@
-# features/step_definitions/material_steps.rb
-
-Dato("che mi sono precedentemente loggato con nome utente {string} e password {string}") do |username, password|
+Dato('che mi sono precedentemente loggato con nome utente {string} e password {string}') do |username, password|
     visit '/'
     fill_in 'username', with: username
     fill_in 'password', with: password
- 
+
     click_button 'Accedi'
 
     @current_username = username
@@ -16,7 +14,7 @@ Dato("che ho associato il tag {string}") do |tag_name|
     tag = Tag.find_by(nome: tag_name)
     expect(tag).not_to be_nil, "Il tag '#{tag_name}' non esiste\n"
 
-    docente = Docente.find_by(nome_utente: @current_username)
+    docente = User.find_by(nome_utente: @current_username)
     expect(docente).not_to be_nil, "Il docente '#{@current_username}' non esiste\n"
 
     tag_docente = TagDocente.find_by(tag: tag.id, docente: docente.nome_utente)
@@ -31,12 +29,12 @@ end
 
 Dato("che la room {string} ha associato il tag {string}") do |nome_room, nome_tag|
     tag = Tag.find_by(nome: nome_tag)
-    expect(tag).not be_nil, "Il tag '#{nome_tag}' non esiste\n"
+    expect(tag).not_to be_nil, "Il tag '#{nome_tag}' non esiste\n"
 
     room = Room.find_by(nome: nome_room)
     expect(room).not_to be_nil, "La room '#{nome_room}' non esiste\n"
 
-    tag_room = TagRoom.find_by(room: room.nome, tag: tag.id)
+    tag_room = TagRoom.find_by(room: room.id, tag: tag.id)
     expect(tag_room).not_to be_nil, "La room '#{nome_room}' non ha associato il tag '#{nome_tag}'\n"
 end
 
@@ -45,7 +43,6 @@ Dato("che è presente un materiale non approvato il cui proprietario è {string}
     expect(page).to have_link(nome_prop), "Il proprietario '#{nome_prop}' non è presente nella pagina\n"
     expect(page).to have_button("Approva materiale"), "Il bottone 'Approva materiale' non esiste\n"
 end
-
 
 Quando("clicco sul bottone {string}") do |nome_bottone|
     click_button(nome_bottone)
