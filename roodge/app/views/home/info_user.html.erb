@@ -33,11 +33,21 @@
                 <% if current_user.ruolo == "s" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Studente modello:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_approvate.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Primo della classe:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_studente_modello.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                            </div>
+                        <% end %>
                     </div>
                 <% end %>
 
@@ -45,10 +55,11 @@
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Tag associati:&nbsp;</div>
                         <div class="user-info">
-                            <div class="tags" style="margin-top: 20px;">
-                                <% @tag_docenti.each do |tag_docenti| %>
-                                    <% if @user.nome_utente == tag_docenti.docente %>
-                                        #<%= tag_docenti.tag %>
+                            <div class="tags">
+                                <% @tag_docenti.each do |tag_docente| %>
+                                    <% nome_tag = Tag.find_by(id: tag_docente.tag) %>
+                                    <% if nome_tag && @user.nome_utente == tag_docente.docente %>
+                                        #<span style="margin-right: 10px;"><%= nome_tag.nome %></span>
                                     <% end %>
                                 <% end %>
                             </div>
@@ -59,18 +70,22 @@
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
                         <div class="user-info">
-                            <% @rooms.each do |room| %>
-                                <% if room.creatore == @user.nome_utente %>
-                                    <%= room.nome %>
-                                <% end %>
+                            <% @rooms.select { |room| room.creatore == @user.nome_utente }.each do |room| %>
+                                <div class="info-user" style="font-size: 25px">
+                                    <%= link_to room.nome, room_logged_path(room) %>
+                                </div>
                             <% end %>
                         </div>
                     </div>
                 <% end %>
 
                 <div class="card-body">
-                    <div class="user-info-title">Informazioni</div>
-                    <div class="user-info"><%= current_user.bio %></div>
+                    <div class="user-info-title">Informazioni aggiuntive</div>
+                    <% if @user.bio %>
+                        <div class="user-info"><%= @user.bio %></div>
+                    <% else %>
+                        <div class="user-info">Nessuna informazione aggiuntiva</div>
+                    <% end %>
                 </div>
                 <div class="card-body">
                     <%= form_with url: login_path, method: :delete do |form| %>

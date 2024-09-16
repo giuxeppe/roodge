@@ -34,28 +34,72 @@
                 <% if @other_user.ruolo == "s" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Studente modello:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_approvate.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <% if session[:user_id].present? %>
+                                    <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                                <% else %>
+                                    <%= link_to @room_nome.nome, room_unlogged_path(@room_nome) %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Primo della classe:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_studente_modello.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <% if session[:user_id].present? %>
+                                    <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                                <% else %>
+                                    <%= link_to @room_nome.nome, room_unlogged_path(@room_nome) %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     </div>
                 <% end %>
 
                 <% if @other_user.ruolo == "d" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Tag:&nbsp;</div>
-                        <div class="user-info">tag vari</div>
+                        <div class="user-info">
+                            <div class="tags">
+                                <% @tag_docenti.each do |tag_docente| %>
+                                    <% nome_tag = Tag.find_by(id: tag_docente.tag) %>
+                                    <% if nome_tag && @other_user.nome_utente == tag_docente.docente %>
+                                        #<span style="margin-right: 10px;"><%= nome_tag.nome %></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Room create:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        
+                        <div class="user-info">
+                            <div class="user-info">
+                            <% @rooms.select { |room| room.creatore == @other_user.nome_utente }.each do |room| %>
+                                <div class="info-user" style="font-size: 25px">
+                                    <% if session[:user_id].present? %>
+                                        <%= link_to room.nome, room_logged_path(room) %>
+                                    <% else %>
+                                        <%= link_to room.nome, room_unlogged_path(room) %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                        </div>
                     </div>
                 <% end %>
 
                 <div class="card-body">
-                    <div class="user-info-title">Informazioni</div>
-                    <div class="user-info"><%= @other_user.bio %></div>
+                    <div class="user-info-title">Informazioni aggiuntive</div>
+                    <% if @other_user.bio %>
+                        <div class="user-info"><%= @other_user.bio %></div>
+                    <% else %>
+                        <div class="user-info">Nessuna informazione aggiuntiva</div>
+                    <% end %>
                 </div>
             </div>
         </div>
