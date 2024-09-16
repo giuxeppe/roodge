@@ -38,6 +38,7 @@ class HomeController < ApplicationController
       @resource_class = UserProvider
       @resource_name = :user_provider
       @commenti = Commenti.where(room: @room.id)
+      @st_rooms = StudenteRoom.all
     end
   
     def room_logged
@@ -74,6 +75,12 @@ class HomeController < ApplicationController
       session[:selected_user] = @other_user.nome_utente
       @tag_docenti = TagDocente.all
       @rooms = Room.all
+      @classi_approvate = StudenteRoom.where(studente: @other_user.nome_utente)
+                                .where(approvazioni: 3...10)
+                                .map(&:room)
+      @classi_studente_modello = StudenteRoom.where(studente: @other_user.nome_utente)
+                                .where('approvazioni >= ?', 10)
+                                .map(&:room)
     end
   
     def add_material
@@ -134,6 +141,14 @@ class HomeController < ApplicationController
       @tags = Tag.all
       @user = User.find(session[:user_id])
       @rooms = Room.all
+      @classi_approvate = StudenteRoom.where(studente: @user.nome_utente)
+                                .where(approvazioni: 3...10)
+                                .map(&:room)
+      @classi_studente_modello = StudenteRoom.where(studente: @user.nome_utente)
+                                .where('approvazioni >= ?', 10)
+                                .map(&:room)
+
+
     end
 
     def payment

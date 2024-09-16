@@ -34,11 +34,29 @@
                 <% if @other_user.ruolo == "s" %>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Studente modello:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_approvate.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <% if session[:user_id].present? %>
+                                    <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                                <% else %>
+                                    <%= link_to @room_nome.nome, room_unlogged_path(@room_nome) %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="card-body" style="display: flex; padding:0; margin-left: 16px">
                         <div class="user-info" style="color: #00FFFF;">Primo della classe:&nbsp;</div>
-                        <div class="user-info">room varie</div>
+                        <% @classi_studente_modello.each do |nome_classe| %>
+                            <div class="info-user" style="font-size: 25px">
+                                <% @room_nome = Room.find_by(id: nome_classe) %>
+                                <% if session[:user_id].present? %>
+                                    <%= link_to @room_nome.nome, room_logged_path(@room_nome) %>
+                                <% else %>
+                                    <%= link_to @room_nome.nome, room_unlogged_path(@room_nome) %>
+                                <% end %>
+                            </div>
+                        <% end %>
                     </div>
                 <% end %>
 

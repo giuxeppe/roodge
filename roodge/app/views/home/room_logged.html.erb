@@ -68,32 +68,15 @@
                             </div>
                         
                             <% pin_displayed = false %>
-                            <% @tag_docente.each do |tag_docente| %>
-                                <% break if pin_displayed %>
-                                
-                                <% if tag_docente.docente == materiale.proprietario %>
-                                    <% @tag_rooms.each do |tag_room| %>
-                                        <% if tag_room.room.to_s == @room.id.to_s %>
-                                            <% if tag_docente.tag == tag_room.tag %>
-                                                <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
-                                            <% pin_displayed = true %>
-                                            <% break %>
-                                            <% end %>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                            <% end %>
-
-                            <% if pin_displayed == false %>
-                                <%if materiale.approvato == 1 %>
-                                    <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
-                                <% end %>
+                            <%if materiale.approvato == 1 %>
+                                <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                <% pin_displayed = true %>
                             <% end %>
 
                             <% if pin_displayed == false %>
                                 <% @st_rooms.each do |st_room| %>
                                     <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
-                                        <% if st_room.approvazioni > 2 %>
+                                        <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
                                             <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
                                         <% end %>
                                     <% end %>
@@ -138,9 +121,7 @@
                                 <% if @utente_abilitato == 1 %>
                                     <% if !@ban.exists?(utente: materiale.proprietario, room: @room.id) %>
                                         <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
-                                            <div class="bg-success text-white text-center p-3">
-                                                Materiale già approvato!
-                                            </div>
+                                            
                                         <% else %>
                                             <%= form_with url: approve_material_path, method: :post do %>
                                                 <%= hidden_field_tag :material_id, materiale.id %>
@@ -174,9 +155,7 @@
                                         </div>
                                     <% else %>
                                         <% if materiale.approvato == 1 %>
-                                            <div class="bg-success text-white text-center p-3">
-                                                Materiale già approvato!
-                                            </div>
+                                            
                                         <% end %>
                                     <% end %>
                                 <% end %>
@@ -189,9 +168,7 @@
                                             Utente già bannato!
                                         </div>
                                     <% else %>
-                                        <div class="bg-success text-white text-center p-3">
-                                            Materiale già approvato!
-                                        </div>
+                                        
                                     <% end %>
                                 <% else %>
                                     <% if @ban.exists?(utente: materiale.proprietario, room: @room.id) %>

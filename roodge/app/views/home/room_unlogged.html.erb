@@ -27,14 +27,32 @@
                 <ul class="list-group">
                     <% @materials.each do |materiale| %>
                         <div class="card-body">
-                            <div class="card-body" style="display: flex; padding:0;">
-                                <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
-                                    <%= materiale.titolo %>&nbsp
+                            <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; padding: 0;">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="user-info" style="color: #00FFFF; font-size: 20px; font-weight: bold;">
+                                        <%= materiale.titolo %>&nbsp;
+                                    </div>
+                            
+                                    <div class="info-user" style="font-size: 20px;">
+                                        - <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
+                                    </div>
                                 </div>
+                            
+                                <% pin_displayed = false %>
+                                <%if materiale.approvato == 1 %>
+                                    <div class="green-pin" style="display: inline-block; width: 20px; height: 20px; background-color: green; border-radius: 50%;"></div>
+                                    <% pin_displayed = true %>
+                                <% end %>
 
-                                <div class="info-user" style="font-size: 20px;">- 
-                                <%= link_to "#{materiale.proprietario}", other_user_info_path(nome_utente: materiale.proprietario) %>
-                                </div>
+                                <% if pin_displayed == false %>
+                                    <% @st_rooms.each do |st_room| %>
+                                        <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
+                                            <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
+                                                <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>                              
                             </div>
 
                             <div class="user-info" style="font-size: 20px;">
@@ -56,7 +74,7 @@
                                 <% end %>
                                 <div class="user-info" id="comment-toggle-<%= materiale.id %>" style="font-size: 20px; cursor: pointer; margin-left: auto;">Commenti</div>
                             </div>
-                            
+
                             <ul class="card-body" id="comments-section-<%= materiale.id %>" style="display: none;">
                                 <% @commenti.each do |commento| %>
                                     <% if commento.materiale == materiale.titolo %>
