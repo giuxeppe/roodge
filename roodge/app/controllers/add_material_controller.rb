@@ -45,6 +45,6 @@ class AddMaterialController < ApplicationController
     private
 
     def material_params
-        params.require(:materiale).permit(:titolo, :descrizione, :prezzo, :allegato)
+        params.require(:materiale).permit(:titolo, :descrizione, :prezzo, :approvato, :allegato)
     end
 end

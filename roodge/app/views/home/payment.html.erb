@@ -47,7 +47,7 @@
                     <div class="separator"></div>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <button type="button" id="conferma-pagamento" data-url="<%= url_for(@material.allegato) %>" class="btn btn-dark w-100">Conferma Pagamento</button>
+                            <button type="button" id="conferma-pagamento" data-url="<%= rails_blob_url(@material.allegato, disposition: 'attachment') %>" class="btn btn-dark w-100">Conferma Pagamento</button>
                         </div>
                     </div>
                 </div>

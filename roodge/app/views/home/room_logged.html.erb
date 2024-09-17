@@ -240,7 +240,7 @@
                                             <% end %>
                                         <% end %>
                                     <% end %>
-                                <% end %>                              
+                                <% end %>
                             </div>
 
                             <div class="user-info" style="font-size: 20px;">
@@ -392,21 +392,22 @@
 
 <script>
 
-    document.querySelectorAll("[id^='comment-toggle-']").forEach(function(button) {
-        button.addEventListener("click", function() {
-            var id = this.id.split('-').pop();
-            var commentSection = document.getElementById("comments-section-" + id);
-            commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
-        });
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
+
+        document.querySelectorAll("[id^='comment-toggle-']").forEach(function(button) {
+            button.addEventListener("click", function() {
+                var id = this.id.split('-').pop();
+                var commentSection = document.getElementById("comments-section-" + id);
+                commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
+            });
+        });
+
         const checkbox = document.getElementById('checkbox-materials');
         const all_details = document.getElementById('all_details');
         const details = document.getElementById('details');
 
         function updateUI() {
-            if(checkbox.checked) {
+            if(checkbox && checkbox.checked) {
                 details.style.display = 'block';
                 all_details.style.display = 'none';
             } else {
@@ -415,8 +416,10 @@
             }
         }
 
-        checkbox.addEventListener('change', updateUI);
-
-        updateUI();
+        if (checkbox) {
+            checkbox.addEventListener('change', updateUI);
+            updateUI(); 
+        }
     });
+
 </script>
