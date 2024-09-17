@@ -77,9 +77,15 @@
                                 </div>
                                 <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
                                     <% if materiale.allegato.present? %>
-                                        <div class="user-info" style="font-size: 20px;">
-                                            <%= link_to 'SCARICA ALLEGATO', materiale.allegato, target: "_blank" %>
-                                        </div>
+                                        <% if materiale.prezzo > 0 %>
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to 'Accedi per scaricare! Materiale a pagamento.', root_path%>
+                                            </div>
+                                        <% else %>
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                                            </div>
+                                        <% end %>
                                     <% else %>
                                         <div class="user-info" style="font-size: 20px; color: red;">
                                             Nessun allegato disponibile
@@ -144,9 +150,15 @@
                                 </div>
                                 <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px;">
                                     <% if materiale.allegato.present? %>
-                                        <div class="user-info" style="font-size: 20px;">
-                                            <%= link_to 'SCARICA ALLEGATO', materiale.allegato, target: "_blank" %>
-                                        </div>
+                                        <% if materiale.prezzo > 0 %>
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to 'Accedi per scaricare! Materiale a pagamento.', root_path%>
+                                            </div>
+                                        <% else %>
+                                            <div class="user-info" style="font-size: 20px;">
+                                                <%= link_to 'Scarica allegato', materiale.allegato, target: "_blank", download: true %>
+                                            </div>
+                                        <% end %>
                                     <% else %>
                                         <div class="user-info" style="font-size: 20px; color: red;">
                                             Nessun allegato disponibile
