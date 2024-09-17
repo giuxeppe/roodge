@@ -135,11 +135,13 @@
                                             <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
                                                 
                                             <% else %>
-                                                <%= form_with url: approve_material_path, method: :post do %>
-                                                    <%= hidden_field_tag :material_id, materiale.id %>
-                                                    <%= hidden_field_tag :user_id, @user.id %>
-                                                    <%= hidden_field_tag :room_id, @room.id %>
-                                                    <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+                                                <% if materiale.in_approvazione == 0 %>
+                                                    <%= form_with url: approve_material_path, method: :post do %>
+                                                        <%= hidden_field_tag :material_id, materiale.id %>
+                                                        <%= hidden_field_tag :user_name, materiale.proprietario %>
+                                                        <%= hidden_field_tag :room_id, @room.id %>
+                                                        <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+                                                    <% end %>
                                                 <% end %>
                                             <% end %>
                                         <% end %>
@@ -280,11 +282,13 @@
                                             <% if materiale.approvato == 1 || current_user.nome_utente == materiale.proprietario %>
                                                 
                                             <% else %>
-                                                <%= form_with url: approve_material_path, method: :post do %>
-                                                    <%= hidden_field_tag :material_id, materiale.id %>
-                                                    <%= hidden_field_tag :user_id, @user.id %>
-                                                    <%= hidden_field_tag :room_id, @room.id %>
-                                                    <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+                                                <% if materiale.in_approvazione == 0 %>
+                                                    <%= form_with url: approve_material_path, method: :post do %>
+                                                        <%= hidden_field_tag :material_id, materiale.id %>
+                                                        <%= hidden_field_tag :user_name, materiale.proprietario %>
+                                                        <%= hidden_field_tag :room_id, @room.id %>
+                                                        <%= submit_tag "Approva materiale", class: "btn btn-success" %>
+                                                    <% end %>
                                                 <% end %>
                                             <% end %>
                                         <% end %>
