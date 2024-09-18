@@ -59,7 +59,7 @@
 
                                     <% if pin_displayed == false %>
                                         <% @st_rooms.each do |st_room| %>
-                                            <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
+                                            <% if st_room.studente == materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
                                                 <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
                                                     <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
                                                 <% end %>
@@ -132,7 +132,7 @@
 
                                     <% if pin_displayed == false %>
                                         <% @st_rooms.each do |st_room| %>
-                                            <% if st_room.studente = materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
+                                            <% if st_room.studente == materiale.proprietario && st_room.room.to_s == @room.id.to_s %>
                                                 <% if st_room.approvazioni > 2 && st_room.approvazioni < 10 %>
                                                     <div class="yellow-pin" style="display: inline-block; width: 20px; height: 20px; background-color: yellow; border-radius: 50%;"></div>
                                                 <% end %>
